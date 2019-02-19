@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HSM
 {
-    public State<HSMAgent> currentState;
+    public SuperState currentState;
     public HSMAgent Agent;
 
     public HSM(HSMAgent agent)
@@ -29,8 +29,12 @@ public class HSM
             if (transition.Condition.Invoke())
             {
                 currentState.ExitState(Agent);
-                currentState = transition.targetState;
+                currentState = (SuperState)transition.targetState;
                 currentState.EnterState(Agent);
+            }
+            else
+            {
+                currentState.FixedUpdate(Agent);
             }
         }
     }

@@ -8,16 +8,13 @@ public struct Transition //Holds the state transition condition and the target s
     public delegate bool condition();
     public condition Condition;
     public State<HSMAgent> targetState;
+    
 }
-public class State<HSMAgent>
+public abstract class State<HSMAgent>
 {
     public List<Transition> transitions;
-
-    public virtual void Start() { }
-
-
-    public virtual void EnterState(HSMAgent agent) { }
-    public virtual void Update(HSMAgent agent) { }
-  
-    public virtual void ExitState(HSMAgent agent) { }
+    public int stateLevel;
+    public abstract void EnterState(HSMAgent agent);
+    public abstract void Update(HSMAgent agent);
+    public abstract void ExitState(HSMAgent agent);
 }
