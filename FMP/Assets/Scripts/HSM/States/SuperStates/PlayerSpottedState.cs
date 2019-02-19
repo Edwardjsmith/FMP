@@ -6,8 +6,9 @@ public class PlayerSpottedState : SuperState
 {
     private static PlayerSpottedState instance = null;
 
-    private PlayerSpottedState()
+    private PlayerSpottedState() : base()
     {
+        
         if (instance != null)
         {
             return;

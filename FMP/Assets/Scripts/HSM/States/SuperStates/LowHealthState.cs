@@ -6,7 +6,7 @@ public class LowHealthState : SuperState
 { 
     private static LowHealthState instance = null;
 
-    private LowHealthState()
+    private LowHealthState() : base()
     {
         if (instance != null)
         {

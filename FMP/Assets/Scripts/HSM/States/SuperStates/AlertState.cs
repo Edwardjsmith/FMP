@@ -7,7 +7,7 @@ public class AlertState : SuperState
 
     private static AlertState instance = null;
 
-    private AlertState()
+    private AlertState() : base()
     {
         if(instance != null)
         {

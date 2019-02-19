@@ -8,6 +8,11 @@ public class SuperState : State<HSMAgent>
     State<HSMAgent> initialState = null;
     State<HSMAgent> currentState = null;
 
+    public SuperState()
+    {
+        stateLevel = 0;
+    }
+
     public override void EnterState(HSMAgent agent)
     {
         if(currentState == null)
@@ -24,7 +29,11 @@ public class SuperState : State<HSMAgent>
 
     public override void Update(HSMAgent agent)
     {
-        
+        if (currentState == null)
+        {
+            currentState = initialState;
+            currentState.EnterState(agent);
+        }
     }
 
     public void FixedUpdate(HSMAgent agent)
@@ -33,12 +42,7 @@ public class SuperState : State<HSMAgent>
         {
             if (transition.Condition.Invoke())
             {
-                if (currentState.stateLevel == transition.targetState.stateLevel)
-                {
-                    currentState.ExitState(agent);
-                    currentState = transition.targetState;
-                    currentState.EnterState(agent);
-                }
+                if(transitio)
             }
         }
     }

@@ -6,7 +6,7 @@ public class IdleState : SuperState
 {
     private static IdleState instance = null;
 
-    private IdleState()
+    private IdleState() : base()
     {
         if(instance != null)
         {
