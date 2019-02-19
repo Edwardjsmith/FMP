@@ -8,25 +8,30 @@ public class AgentTriggers : MonoBehaviour
 
     public static bool trigger1()
     { 
-        if(counter < 10.0f)
+        if(counter < 20.0f)
         {
-            counter += 1;
+            counter += (1 * Time.deltaTime);
             return false;
         }
         else
         {
             counter = 0;
-            return true;
+            return false;
         }
 
         
+    }
+
+    public static bool isHit()
+    {
+        return true;
     }
 
     public static bool trigger2()
     {
         if (counter < 10.0f)
         {
-            counter += 1;
+            counter += (1 * Time.deltaTime);
             return false;
         }
         else
@@ -40,7 +45,7 @@ public class AgentTriggers : MonoBehaviour
     {
         if (counter < 10.0f)
         {
-            counter += 1;
+            counter += (1 * Time.deltaTime);
             return false;
         }
         else

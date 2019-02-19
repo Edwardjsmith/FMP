@@ -10,7 +10,7 @@ public class HSM
     public HSM(HSMAgent agent)
     {
         Agent = agent;
-        currentState = null;
+        currentState = IdleState.Instance();
     }
 
 	// Update is called once per frame

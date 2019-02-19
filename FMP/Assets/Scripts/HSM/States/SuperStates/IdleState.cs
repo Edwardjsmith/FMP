@@ -18,8 +18,10 @@ public class IdleState : SuperState
         transitions = new List<Transition>();
         Transition transitionToAlert = new Transition();
 
-        transitionToAlert.Condition += AgentTriggers.trigger1;
+        transitionToAlert.Condition += AgentTriggers.isHit;
         transitionToAlert.targetState = AlertState.Instance();
+        transitions.Add(transitionToAlert);
+        initialState = Patrol.Instance();
     
     }
 
@@ -38,7 +40,7 @@ public class IdleState : SuperState
     }
     public override void Update(HSMAgent agent)
     {
-        
+        base.Update(agent);
     }
     public override void ExitState(HSMAgent agent)
     {

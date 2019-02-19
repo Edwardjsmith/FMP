@@ -12,6 +12,10 @@ public struct Transition //Holds the state transition condition and the target s
 }
 public abstract class State<HSMAgent>
 {
+    public State()
+    {
+        stateLevel = 1;
+    }
     public List<Transition> transitions;
     public int stateLevel;
     public abstract void EnterState(HSMAgent agent);

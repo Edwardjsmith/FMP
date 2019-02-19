@@ -4,22 +4,18 @@ using UnityEngine;
 
 public class SuperState : State<HSMAgent>
 {
-    List<State<HSMAgent>> innerStates;
-    State<HSMAgent> initialState = null;
-    State<HSMAgent> currentState = null;
+    protected State<HSMAgent> initialState = null;
+    protected State<HSMAgent> currentState = null;
 
-    public SuperState()
+    public SuperState() : base()
     {
         stateLevel = 0;
+        initialState = Patrol.Instance();
     }
 
     public override void EnterState(HSMAgent agent)
     {
-        if(currentState == null)
-        {
-            currentState = initialState;
-            currentState.EnterState(agent);
-        }
+        
     }
 
     public override void ExitState(HSMAgent agent)
@@ -34,6 +30,8 @@ public class SuperState : State<HSMAgent>
             currentState = initialState;
             currentState.EnterState(agent);
         }
+
+        currentState.Update(agent);
     }
 
     public void FixedUpdate(HSMAgent agent)
@@ -42,7 +40,17 @@ public class SuperState : State<HSMAgent>
         {
             if (transition.Condition.Invoke())
             {
-                if(transitio)
+                if(transition.targetState.stateLevel == currentState.stateLevel)
+                {
+                    currentState.ExitState(agent);
+                    currentState = transition.targetState;
+                    currentState.EnterState(agent);
+                }
+                else
+                {
+                    currentState.ExitState(agent);
+                    currentState = null;
+                }
             }
         }
     }

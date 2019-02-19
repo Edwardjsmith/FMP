@@ -17,6 +17,12 @@ public class AlertState : SuperState
         instance = this;
 
         transitions = new List<Transition>();
+        Transition transitionToIdle = new Transition();
+
+        transitionToIdle.Condition += AgentTriggers.trigger1;
+        transitionToIdle.targetState = AlertState.Instance();
+        transitions.Add(transitionToIdle);
+        initialState = IsHit.Instance();
 
     }
 
@@ -35,7 +41,7 @@ public class AlertState : SuperState
     }
     public override void Update(HSMAgent agent)
     {
-
+        base.Update(agent);
     }
     public override void ExitState(HSMAgent agent)
     {
