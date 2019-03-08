@@ -76,17 +76,18 @@ public class Senses : MonoBehaviour
     public GameObject GetClosestSuitableCover(List<GameObject> obj)
     {
         GameObject tMin = null;
-        //float minDist = Mathf.Infinity;
+        float minDist = Mathf.Infinity;
         Vector3 currentPos = transform.position;
         foreach (GameObject t in obj)
         {
-            //float dist = Vector3.Distance(t.transform.position, currentPos);
+            float dist = Vector3.Distance(t.transform.position, currentPos);
             float enemyDist = Vector3.Distance(t.transform.position, agent.getData().enemyTarget.transform.position);
+      
 
-               if(enemyDist > agent.getData().safeDistance)
+               if(enemyDist > agent.getData().safeDistance && dist < minDist)
                {
                     tMin = t;
-                    //minDist = dist;
+                    minDist = dist;
                }
           
         }
@@ -109,15 +110,21 @@ public class Senses : MonoBehaviour
 
     public void getCover()
     {
-        agent.getData().coverTarget = GetClosestSuitableCover(agent.getSenses().getTarget(cover));
+        if (agent.getData().coverTarget == null)
+        {
+            agent.getData().coverTarget = GetClosestSuitableCover(agent.getSenses().getTarget(cover));
 
-        if (targetDirection(agent.getData().enemyTarget))
-        {
-            agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(1).gameObject;
-        }
-        else
-        {
-            agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(0).gameObject;
+            if (agent.getData().coverTarget != null)
+            {
+                if (targetDirection(agent.getData().enemyTarget))
+                {
+                    agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(1).gameObject;
+                }
+                else
+                {
+                    agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(0).gameObject;
+                }
+            }
         }
     }
 }

@@ -18,13 +18,11 @@ public class Patrol : State<HSMAgent>
 
     public override void EnterState()
     {
-        Debug.Log("Entering inner state patrol");
         agent.getActions().moveTo(agent.patrolTarget);
     }
 
     public override void ExitState()
     {
-        Debug.Log("Exiting inner state patrol");
         agent.patrolTarget = null;
     }
 

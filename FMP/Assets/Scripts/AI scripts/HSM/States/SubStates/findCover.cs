@@ -31,6 +31,11 @@ public class findCover : State<HSMAgent>
 
     public override void Update()
     {
+        if(agent.getData().enemyTarget != null && Vector3.Distance(agent.getData().enemyTarget.transform.position, agent.transform.position) < agent.getData().safeDistance)
+        {
+            agent.getData().coverTarget = null;
+        }
+
         agent.getSenses().getCover();
 
 

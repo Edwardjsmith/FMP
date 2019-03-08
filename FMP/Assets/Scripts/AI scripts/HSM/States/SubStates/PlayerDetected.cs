@@ -20,19 +20,19 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void EnterState()
     {
-        Debug.Log("Entering inner state PlayerDetected");
 
     }
 
     public override void ExitState()
     {
-        Debug.Log("Exiting inner state PlayerDetected");
+        agent.getData().GetAgent().isStopped = false;
     }
 
     public override void Update()
     {
         if(Vector3.Distance(agent.transform.position, agent.getData().enemyTarget.transform.position) < agent.GetWeapon().projectileRange)
         {
+            agent.getData().GetAgent().isStopped = true;
             agent.getActions().Aim();
             if (agent.GetWeapon().enemyInSights())
             {
@@ -41,6 +41,7 @@ public class PlayerDetected : State<HSMAgent>
         }
         else
         {
+            agent.getData().GetAgent().isStopped = false;
             agent.getActions().moveTo(agent.getData().enemyTarget);
         }
     }
