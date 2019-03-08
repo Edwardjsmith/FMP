@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class gameEntity : MonoBehaviour
 {
-    public float speed;
-    public float health;
+    protected float speed;
+    protected float health;
     weaponScript weapon;
+
     // Use this for initialization
-    void Start ()
+    public virtual void Start ()
     {
         if (GetComponentInChildren<weaponScript>())
         {
@@ -22,7 +23,7 @@ public class gameEntity : MonoBehaviour
 		
 	}
 
-    private void HitByShot(float damage)
+    public virtual void HitByShot(float damage)
     {
         health -= damage;
     }

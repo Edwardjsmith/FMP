@@ -6,11 +6,15 @@ public class Senses : MonoBehaviour
 {
     HSMAgent agent;
     public LayerMask otherAgents;
+    public LayerMask cover;
+    List<GameObject> verifiedTargets;
 
-	// Use this for initialization
-	void Start ()
+  
+    // Use this for initialization
+    void Start ()
     {
         agent = GetComponent<HSMAgent>();
+        verifiedTargets = new List<GameObject>();
 	}
 
     public bool verifyTarget(GameObject target)
@@ -23,18 +27,97 @@ public class Senses : MonoBehaviour
         return false;
     }
 
-    public bool getTarget()
+    public List<GameObject> getTarget(LayerMask layer)
     {
-        Collider[] potentialEnemies = Physics.OverlapSphere(transform.position, agent.getData().sightRange, otherAgents);
+        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, agent.getData().sightRange, layer);
 
-        foreach(Collider col in potentialEnemies)
+        verifiedTargets.Clear();
+        foreach(Collider col in potentialTargets)
         {
             if(col.gameObject != gameObject)
             {
-                return verifyTarget(col.gameObject);
+                if(verifyTarget(col.gameObject))
+                {
+                    verifiedTargets.Add(col.gameObject);
+                }
             }
         }
 
-        return false;
+        if(verifiedTargets.Count > 0)
+        {
+            agent.getTransitions().enemyTargetFound = true;
+        }
+        else
+        {
+            agent.getTransitions().enemyTargetFound = false;
+        }
+
+        return verifiedTargets;
+    }
+
+    public GameObject GetClosestObj(List<GameObject> obj)
+    {
+        GameObject tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (GameObject t in obj)
+        {
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        
+        return tMin;
+    }
+
+    public GameObject GetClosestSuitableCover(List<GameObject> obj)
+    {
+        GameObject tMin = null;
+        //float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (GameObject t in obj)
+        {
+            //float dist = Vector3.Distance(t.transform.position, currentPos);
+            float enemyDist = Vector3.Distance(t.transform.position, agent.getData().enemyTarget.transform.position);
+
+               if(enemyDist > agent.getData().safeDistance)
+               {
+                    tMin = t;
+                    //minDist = dist;
+               }
+          
+        }
+        return tMin;
+        }
+
+        
+
+    public bool targetDirection(GameObject target)
+    {
+        if(target.transform.position.z > transform.position.z) //Enemy somewhere in front
+        {
+            return true;
+        }
+        else //Enemy somewhere behind
+        {
+            return false;
+        }
+    }
+
+    public void getCover()
+    {
+        agent.getData().coverTarget = GetClosestSuitableCover(agent.getSenses().getTarget(cover));
+
+        if (targetDirection(agent.getData().enemyTarget))
+        {
+            agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(1).gameObject;
+        }
+        else
+        {
+            agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(0).gameObject;
+        }
     }
 }

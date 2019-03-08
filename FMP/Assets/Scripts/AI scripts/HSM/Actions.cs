@@ -6,6 +6,13 @@ using UnityEngine.AI;
 public class Actions : MonoBehaviour
 {
     HSMAgent agent;
+
+    float rateOfFire = 0.0f;
+    float reloadTime = 3.0f;
+
+    public int fireCounter = 0;
+
+    public bool reloading = false;
     private void Start()
     {
         agent = GetComponent<HSMAgent>();
@@ -14,7 +21,7 @@ public class Actions : MonoBehaviour
     public bool moveTo(GameObject target)
     {
         agent.getData().GetAgent().destination = target.transform.position;
-        if (transform.position != target.transform.position)
+        if (Vector3.Distance(transform.position, target.transform.position) > 1.0f)
         {
             return false;
         }
@@ -22,47 +29,50 @@ public class Actions : MonoBehaviour
         return true;
     }
 
-    public bool Shoot(GameObject target)
+    public void Shoot(GameObject target)
     {
-        if (Vector3.Distance(transform.position, target.transform.position) < agent.getData().weaponRange)
+        if (Vector3.Distance(transform.position, target.transform.position) < agent.GetWeapon().projectileRange)
         {
-            agent.GetWeapon().Fire();
-            return true;
-        }
-
-        return false;
-    }
-
-    Transform GetClosest(Transform[] obj, string tag)
-    {
-        Transform tMin = null;
-        float minDist = Mathf.Infinity;
-        Vector3 currentPos = transform.position;
-        foreach (Transform t in obj)
-        {
-            if (t.tag == tag)
+            if (agent.GetWeapon().ammo > 0)
             {
-                float dist = Vector3.Distance(t.position, currentPos);
-                if (dist < minDist)
+                if (rateOfFire <= 0)
                 {
-                    tMin = t;
-                    minDist = dist;
+                    agent.GetWeapon().Fire();
+                    Debug.Log("Fire!");
+                    rateOfFire = 1.0f;
+                    fireCounter++;
                 }
+                rateOfFire -= Time.deltaTime;
+            }
+            else
+            {
+                reload();
             }
         }
-        return tMin;
     }
 
-    public bool takeCover(GameObject target)
+    public void reload()
     {
-        moveTo(target);
-
-        if(Vector3.Distance(transform.position, target.transform.position) < 1)
+        reloadTime -= Time.deltaTime;
+        reloading = true;
+        if(reloadTime <= 0)
         {
-
+            reloadTime = 3.0f;
+            agent.GetWeapon().ammo = 10;
+            reloading = false;
         }
+    }
 
-        return false; 
+    public void Aim()
+    {
+        transform.LookAt(new Vector3(agent.getData().enemyTarget.transform.position.x, transform.position.y, agent.getData().enemyTarget.transform.position.z));
+        transform.GetChild(0).transform.LookAt(agent.getData().enemyTarget.transform.position);
+    }
+
+
+    public bool takeCover()
+    {
+        return moveTo(agent.getData().coverTarget);
     }
 
 }

@@ -11,26 +11,37 @@ public class IdleState : SuperState
         States.Add("Guard", new Guard(agent));
 
         transitions = new List<Transition>();
-        Transition transitionToAlert = new Transition();
+        Transition transitionToAlertEnemySpotted = new Transition();
 
-        transitionToAlert.Condition += agent.getSenses().getTarget;
-        transitionToAlert.targetState = "Alert";
-        transitions.Add(transitionToAlert);
-        initialState = new Patrol(agent);
+        transitionToAlertEnemySpotted.Condition += agent.getTransitions().getEnemyTargetFound;
+        transitionToAlertEnemySpotted.targetState = "Alert";
+        transitions.Add(transitionToAlertEnemySpotted);
+
+        Transition transitionToAlertHit = new Transition();
+        transitionToAlertHit.Condition += agent.getTransitions().isHit;
+        transitionToAlertHit.targetState = "Alert";
+        transitions.Add(transitionToAlertHit);
+
+        initialState = States["Patrol"];
     
     }
 
     public override void EnterState()
     {
-        Debug.Log("Entering idle");
+        
     }
     public override void Update()
     {
         base.Update();
+
+        if (agent.getSenses().getTarget(agent.getSenses().otherAgents).Count > 0)
+        {
+            agent.getData().enemyTarget = agent.getSenses().GetClosestObj(agent.getSenses().getTarget(agent.getSenses().otherAgents));
+        }
     }
     public override void ExitState()
     {
-        Debug.Log("Exiting idle");
+        agent.getTransitions().amHit = false;
     }
 
 }

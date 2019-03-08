@@ -22,6 +22,16 @@ public class HSM
         currentState = States["Idle"];
     }
 
+    public string currentSuperState()
+    {
+        return "Current super state: " + currentState.ToString();
+    }
+
+    public string currentSubState()
+    {
+        return "Current sub state: " + currentState.getCurrentSubState();
+    }
+
 	// Update is called once per frame
 	public void Update ()
     {

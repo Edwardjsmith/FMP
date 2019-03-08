@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class AlertState : SuperState
 {
-
-
-
     public AlertState(HSMAgent agent) : base(agent)
     {
 
@@ -14,18 +11,24 @@ public class AlertState : SuperState
         Transition transitionToIdle = new Transition();
 
         States.Add("Player detected", new PlayerDetected(agent));
+        States.Add("FindCover", new findCover(agent));
 
-        // transitionToIdle.Condition += AgentTriggers.trigger1;
+        transitionToIdle.Condition += agent.getTransitions().enemyLost;
         transitionToIdle.targetState = "Idle";
         transitions.Add(transitionToIdle);
-        initialState = States["Player detected"];
-
     }
 
 
     public override void EnterState()
     {
-        Debug.Log("Entering alert");
+        if(agent.getTransitions().isHit())
+        {
+            currentState = States["FindCover"];
+        }
+        else
+        {
+            currentState = States["Player detected"];
+        }
     }
     public override void Update()
     {
@@ -33,6 +36,6 @@ public class AlertState : SuperState
     }
     public override void ExitState()
     {
-        Debug.Log("Exiting alert");
+        
     }
 }

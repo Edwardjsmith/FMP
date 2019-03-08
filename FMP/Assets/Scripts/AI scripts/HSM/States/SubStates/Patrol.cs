@@ -25,6 +25,7 @@ public class Patrol : State<HSMAgent>
     public override void ExitState()
     {
         Debug.Log("Exiting inner state patrol");
+        agent.patrolTarget = null;
     }
 
     public override void Update()

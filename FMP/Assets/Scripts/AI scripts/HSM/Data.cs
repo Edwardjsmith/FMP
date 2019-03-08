@@ -7,14 +7,14 @@ public class Data : MonoBehaviour
 {
     NavMeshAgent agent;
 
-    public float weaponRange;
     public float sightRange;
     public float fieldOfView;
     public float health;
     public float speed;
 
     public float safeDistance;
-    
+    public GameObject enemyTarget;
+    public GameObject coverTarget;
 
 	// Use this for initialization
 	void Start ()

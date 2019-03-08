@@ -13,6 +13,11 @@ public class SuperState : State<HSMAgent>
         //initialState = Patrol.Instance(agent);
     }
 
+    public string getCurrentSubState()
+    {
+        return currentState.ToString();
+    }
+
     public override void EnterState()
     {
         
