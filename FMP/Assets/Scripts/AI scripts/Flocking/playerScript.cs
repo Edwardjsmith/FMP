@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerScript : flockEntity
 {
     Animator anim;
+    bool turning = false;
 	// Use this for initialization
 	void Start ()
     {
@@ -22,4 +23,5 @@ public class playerScript : flockEntity
 
         transform.Rotate(x, y, 0);
 	}
+
 }

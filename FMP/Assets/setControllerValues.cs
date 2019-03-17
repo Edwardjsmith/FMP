@@ -14,7 +14,9 @@ public class setControllerValues : MonoBehaviour
     {
         foreach(GameObject agent in otherAI)
         {
-            Instantiate(agent, transform);
+            Instantiate(agent, new Vector3(Random.Range(-flockRange, flockRange),
+                        transform.position.y,
+                            Random.Range(-flockRange, flockRange)), Quaternion.identity);
         }
     }
 }

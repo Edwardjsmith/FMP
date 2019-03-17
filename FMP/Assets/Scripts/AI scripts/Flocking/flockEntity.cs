@@ -5,14 +5,7 @@ using UnityEngine;
 public class flockEntity : MonoBehaviour
 {
     public float speed = 15.0f;
-    protected float rotationSpeed = 10.0f;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected float rotationSpeed = 1.0f;
+    protected float range = 100;
+
 }

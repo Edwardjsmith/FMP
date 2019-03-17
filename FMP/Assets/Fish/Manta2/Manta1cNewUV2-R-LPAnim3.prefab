@@ -140,6 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000011756770424}
   - component: {fileID: 95000012924714412}
+  - component: {fileID: 114486651347697426}
   m_Layer: 0
   m_Name: Manta1cNewUV2-R-LPAnim3
   m_TagString: Untagged
@@ -501,8 +502,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011254385124}
-  m_LocalRotation: {x: -0.0001082731, y: -0.000115003764, z: -0.7280917, w: 0.6854797}
-  m_LocalPosition: {x: -30.58, y: 8, z: 17.67}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.76590216, y: 0.76590186, z: 0.76590186}
   m_Children:
   - {fileID: 4000010492701036}
@@ -660,15 +661,28 @@ Animator:
   m_GameObject: {fileID: 1000011254385124}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 915a7b9537460e844a1d39f46b800b6c, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8dee24ad38a10eb459c59d24e00dd734, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114486651347697426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011254385124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2678cfcfc215da84498e7f34d0df3921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  target: {x: 0, y: 0, z: 0}
 --- !u!137 &137000011276756410
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

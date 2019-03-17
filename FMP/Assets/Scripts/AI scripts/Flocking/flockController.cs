@@ -19,11 +19,16 @@ public class flockController : MonoBehaviour
 
     public GameObject[] waypoints;
 
-    float updateTimer = 5.0f;
+    float updateTimer = 10.0f;
     float seperationDistance;
 
-	// Use this for initialization
-	void Start ()
+    public Vector3 averagePos = Vector3.zero;
+    public Vector3 seperation = Vector3.zero;
+    public Vector3 averageHeading = Vector3.zero;
+    public float averageSpeed = 0.1f;
+
+    // Use this for initialization
+    void Start ()
     {
         values = FindObjectOfType<setControllerValues>();
         flockRange = values.flockRange;
@@ -33,8 +38,8 @@ public class flockController : MonoBehaviour
 
         for(int i = 0; i < flockPopulation; i++)
         {
-            Vector3 pos = new Vector3(Random.Range(transform.position.x -flockRange / 4, transform.position.x + flockRange / 4),
-                                        Random.Range(transform.position.y, transform.position.y + flockRange / 4),
+            Vector3 pos = new Vector3(Random.Range(transform.position.x - flockRange / 4, transform.position.x + flockRange / 4),
+                                        Random.Range(5, 15),
                                         Random.Range(transform.position.z - flockRange / 4, transform.position.z + flockRange / 4));
 
             flockAgents[i] = Instantiate(fishPrefab[Random.Range(0, fishPrefab.Length - 1)], pos, new Quaternion(transform.rotation.x, Random.Range(0, 360), transform.rotation.z, 0));
@@ -44,22 +49,46 @@ public class flockController : MonoBehaviour
         totalAgents = flockAgents.Concat(values.otherAI).ToArray();
 
         goalPos = new Vector3(Random.Range(-flockRange, flockRange),
-                        transform.position.y,
+                        Random.Range(-flockRange, flockRange),
                             Random.Range(-flockRange, flockRange));
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        if (updateTimer <= 0 || Vector3.Distance(flockAgents[0].transform.position, goalPos) < 1)
+        
+        if (updateTimer <= 0 || Vector3.Distance(transform.position, goalPos) < 1)
         {
             goalPos = new Vector3(Random.Range(-flockRange, flockRange),
-                        transform.position.y,
+                        Random.Range(-flockRange, flockRange),
                             Random.Range(-flockRange, flockRange));
-            updateTimer = 5.0f;
+            updateTimer = 10.0f;
         }
 
+        
         updateTimer -= Time.deltaTime;
 	}
+
+    private void FixedUpdate()
+    {
+        GameObject lastObj = null;
+        averageSpeed = 0;
+        averagePos = Vector3.zero;
+        foreach (GameObject go in flockAgents)
+        {
+            averagePos = (averagePos + go.transform.position) + new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1);
+            averageSpeed = averageSpeed + go.GetComponent<flockBehaviour>().speed;
+            if (lastObj != null)
+            {
+                seperation = seperation + (lastObj.transform.position - go.transform.position);
+            }
+            lastObj = go;
+        }
+
+
+        averagePos = transform.position = averagePos / (flockAgents.Length - 1);
+        averageSpeed = averageSpeed / (flockAgents.Length - 1);
+        seperation = seperation / (flockAgents.Length - 1);
+    }
 }
 
