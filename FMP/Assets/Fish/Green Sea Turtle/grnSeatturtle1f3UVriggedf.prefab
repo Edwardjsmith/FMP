@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 54321714579708082}
   m_Layer: 0
   m_Name: grnSeatturtle1f3UVriggedf
-  m_TagString: Untagged
+  m_TagString: entity
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -768,6 +768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2678cfcfc215da84498e7f34d0df3921, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 5
+  target: {x: 0, y: 0, z: 0}
 --- !u!137 &137000010910527112
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

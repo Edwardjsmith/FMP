@@ -3,13 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HSMAgent : gameEntity
+public class HSMAgent : baseAI
 {
     HSM hsm;
-
-    Actions agentActions;
-    Senses agentSenses;
-    Data agentData;
     Transitions stateTransitions;
 
     public GameObject patrolTarget;
@@ -20,13 +16,8 @@ public class HSMAgent : gameEntity
 	public override void Start ()
     {
         base.Start();
-        agentActions = GetComponent<Actions>();
-        agentSenses = GetComponent<Senses>();
-        agentData = GetComponent<Data>();
         stateTransitions = GetComponent<Transitions>();
         hsm = new HSM(this);
-        health = agentData.health;
-        speed = agentData.speed;
 	}
 	
 	// Update is called once per frame
@@ -44,23 +35,8 @@ public class HSMAgent : gameEntity
     }
     private void updatePath(GameObject path)
     {
-        
-            patrolTarget = path;
-            getActions().moveTo(patrolTarget);
-        
-    }
-
-    public Actions getActions()
-    {
-        return agentActions;
-    }
-    public Senses getSenses()
-    {
-        return agentSenses;
-    }
-    public Data getData()
-    {
-        return agentData;
+        patrolTarget = path;
+        getActions().moveTo(patrolTarget);
     }
 
     public Transitions getTransitions()

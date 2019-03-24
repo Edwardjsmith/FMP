@@ -11,21 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1000013873084852}
   m_IsPrefabParent: 1
---- !u!1 &1000010323819198
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4000011280451662}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1000010846993240
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,7 +223,7 @@ Transform:
   m_LocalScale: {x: 100.00001, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 4000014086671706}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000010371876776
 Transform:
@@ -267,19 +252,6 @@ Transform:
   m_Father: {fileID: 4000010057151062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4000011280451662
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010323819198}
-  m_LocalRotation: {x: 0.21061137, y: 0.90524006, z: -0.089281626, w: -0.35806713}
-  m_LocalPosition: {x: -7.4811316, y: 5.343665, z: 6.5076394}
-  m_LocalScale: {x: 100, y: 100, z: 100}
-  m_Children: []
-  m_Father: {fileID: 4000014086671706}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000011896710724
 Transform:
   m_ObjectHideFlags: 1
@@ -291,7 +263,7 @@ Transform:
   m_LocalScale: {x: 99.999985, y: 100, z: 99.999985}
   m_Children: []
   m_Father: {fileID: 4000014086671706}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4000012567160732
 Transform:
@@ -346,7 +318,6 @@ Transform:
   m_LocalScale: {x: 0.8230475, y: 0.8230474, z: 0.8230474}
   m_Children:
   - {fileID: 4000013344297868}
-  - {fileID: 4000011280451662}
   - {fileID: 4000010185036076}
   - {fileID: 4000011896710724}
   - {fileID: 4997036592234430}
@@ -364,7 +335,7 @@ Transform:
   m_LocalScale: {x: 1.2149967, y: 1.2149968, z: 1.2149968}
   m_Children: []
   m_Father: {fileID: 4000014086671706}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!20 &20657094814315646
 Camera:
@@ -466,6 +437,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  cameras: []
 --- !u!124 &124907610052357586
 Behaviour:
   m_ObjectHideFlags: 1

@@ -10,16 +10,16 @@ public struct Transition //Holds the state transition condition and the target s
     public string targetState;
     
 }
-public abstract class State<HSMAgent>
+public abstract class State<baseAI>
 {
-    protected HSMAgent agent;
-    public SortedDictionary<string, State<HSMAgent>> States;
+    protected baseAI agent;
+    public SortedDictionary<string, State<baseAI>> States;
 
-    public State(HSMAgent Agent)
+    public State(baseAI Agent)
     {
         stateLevel = 1;
         agent = Agent;
-        States = new SortedDictionary<string, State<HSMAgent>>();
+        States = new SortedDictionary<string, State<baseAI>>();
     }
     public List<Transition> transitions;
     public int stateLevel;

@@ -9,6 +9,7 @@ TagManager:
   - Waypoint
   - controllerBounds
   - Bounds
+  - door
   layers:
   - Default
   - TransparentFX

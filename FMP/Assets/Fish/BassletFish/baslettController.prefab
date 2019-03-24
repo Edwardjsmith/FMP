@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1533408392188520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -16.35, y: 3.5, z: -4.97}
+  m_LocalPosition: {x: -16.35, y: 17.44, z: -4.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -56,5 +56,9 @@ MonoBehaviour:
   flockRange: 0
   flockAgents: []
   totalAgents: []
-  goalPos: {x: 0, y: 0, z: 0}
-  seperationDistance: 1
+  targetPos: {x: 0, y: 0, z: 0}
+  waypoints: []
+  averagePos: {x: 0, y: 0, z: 0}
+  seperation: {x: 0, y: 0, z: 0}
+  averageHeading: {x: 0, y: 0, z: 0}
+  averageSpeed: 0.1

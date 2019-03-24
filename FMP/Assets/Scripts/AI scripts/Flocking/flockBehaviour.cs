@@ -23,7 +23,7 @@ public class flockBehaviour : flockEntity
     // Update is called once per frame
     void Update()
     {
-        targetPos = controller.goalPos;
+        targetPos = controller.targetPos;
         anim.speed = speed / 3;
         roam();
     }
@@ -38,7 +38,7 @@ public class flockBehaviour : flockEntity
         }
         else
         {
-            if (Random.Range(0, 10) < 1)
+            if (Random.Range(0, 5) < 1)
             {
                 flock();
             }
@@ -49,7 +49,7 @@ public class flockBehaviour : flockEntity
     void flock()
     {
         averagePos = controller.averagePos + (targetPos - transform.position);
-        speed = 6.0f;
+        speed = 3.0f;
 
         Vector3 direction = (averagePos + controller.seperation) - transform.position;
 
@@ -66,6 +66,9 @@ public class flockBehaviour : flockEntity
         if (other.tag != "flock")
         {
             rotationTarget = transform.position - other.gameObject.transform.position;
+            float scaredSpeed = speed * 2;
+            speed = scaredSpeed;
+            rotationSpeed = 5;
             turning = true;
         }
     }
@@ -73,6 +76,8 @@ public class flockBehaviour : flockEntity
     {
         if (other.tag != "flock")
         {
+            rotationSpeed = 1;
+            speed = 3.0f;
             turning = false;
         }
     }

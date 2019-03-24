@@ -15,7 +15,7 @@ public class flockController : MonoBehaviour
 
     public GameObject[] flockAgents;
     public GameObject[] totalAgents;
-    public Vector3 goalPos = Vector3.zero;
+    public Vector3 targetPos = Vector3.zero;
 
     public GameObject[] waypoints;
 
@@ -26,6 +26,8 @@ public class flockController : MonoBehaviour
     public Vector3 seperation = Vector3.zero;
     public Vector3 averageHeading = Vector3.zero;
     public float averageSpeed = 0.1f;
+
+    Camera cam;
 
     // Use this for initialization
     void Start ()
@@ -48,7 +50,7 @@ public class flockController : MonoBehaviour
 
         totalAgents = flockAgents.Concat(values.otherAI).ToArray();
 
-        goalPos = new Vector3(Random.Range(-flockRange, flockRange),
+        targetPos = new Vector3(Random.Range(-flockRange, flockRange),
                         Random.Range(-flockRange, flockRange),
                             Random.Range(-flockRange, flockRange));
     }
@@ -57,15 +59,16 @@ public class flockController : MonoBehaviour
 	void Update ()
     {
         
-        if (updateTimer <= 0 || Vector3.Distance(transform.position, goalPos) < 1)
+        if (updateTimer <= 0 || Vector3.Distance(transform.position, targetPos) < 1)
         {
-            goalPos = new Vector3(Random.Range(-flockRange, flockRange),
+            targetPos = new Vector3(Random.Range(-flockRange, flockRange),
                         Random.Range(-flockRange, flockRange),
                             Random.Range(-flockRange, flockRange));
             updateTimer = 10.0f;
         }
 
-        
+        transform.position = flockAgents[0].transform.position;
+        flockAgents[0].GetComponent<Renderer>().enabled = false;
         updateTimer -= Time.deltaTime;
 	}
 
@@ -76,7 +79,7 @@ public class flockController : MonoBehaviour
         averagePos = Vector3.zero;
         foreach (GameObject go in flockAgents)
         {
-            averagePos = (averagePos + go.transform.position) + new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1);
+            averagePos = (averagePos + go.transform.position) + (new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1) * Random.Range(1, 6));
             averageSpeed = averageSpeed + go.GetComponent<flockBehaviour>().speed;
             if (lastObj != null)
             {
@@ -85,8 +88,8 @@ public class flockController : MonoBehaviour
             lastObj = go;
         }
 
-
-        averagePos = transform.position = averagePos / (flockAgents.Length - 1);
+        
+        averagePos = averagePos / (flockAgents.Length - 1);
         averageSpeed = averageSpeed / (flockAgents.Length - 1);
         seperation = seperation / (flockAgents.Length - 1);
     }
