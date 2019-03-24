@@ -18,17 +18,17 @@ namespace BehaviourTree
 
         protected taskState state;
         public List<Task> childTasks;
-        protected agentActions botActions;
+        protected baseAI bot;
 
-        public Task(agentActions bot, Vector3 pos, bool trueOrFalse)
+        public Task(baseAI bot, Vector3 pos, bool trueOrFalse)
         {
-            botActions = bot;
+            this.bot = bot;
             childTasks = new List<Task>();
         }
 
-        public Task(agentActions bot)
+        public Task(baseAI bot)
         {
-            botActions = bot;
+            this.bot = bot;
             childTasks = new List<Task>();
         }
 
@@ -76,16 +76,6 @@ namespace BehaviourTree
             childTasks.Insert(index, task);
         }
 
-        public void addChild(int index, Task task, Vector3 pos)
-        {
-            childTasks.Insert(index, task);
-        }
-
-        public void addChild(int index, Task task, bool trueOrFalse)
-        {
-            childTasks.Insert(index, task);
-        }
-
         public virtual void runTask()
         {
            
@@ -99,7 +89,7 @@ namespace BehaviourTree
 
     class Selector : Task
     {
-        public Selector(agentActions bot) : base(bot, Vector3.zero, false)
+        public Selector(baseAI bot) : base(bot)
         {
 
         }
@@ -114,6 +104,10 @@ namespace BehaviourTree
                 {
                     Succeed();
                 }
+                else
+                {
+                    continue;
+                }
             }
             Fail();
         }
@@ -121,7 +115,7 @@ namespace BehaviourTree
 
     public class Repeat : Task
     {
-        public Repeat(agentActions bot) : base(bot)
+        public Repeat(baseAI bot) : base(bot)
         {
           
         }
@@ -138,7 +132,7 @@ namespace BehaviourTree
 
     public class Sequence : Task
     {
-        public Sequence(agentActions bot) : base(bot, Vector3.zero, false)
+        public Sequence(baseAI bot) : base(bot)
         {
 
         }
@@ -152,9 +146,13 @@ namespace BehaviourTree
                 if(t.isFailure())
                 {
                     Fail();
+                    break;
                 }
             }
-            Succeed();
+            if (isFailure())
+            {
+                Succeed();
+            }
         }
     }
 

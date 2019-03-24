@@ -6,20 +6,32 @@ using BehaviourTree;
 
 
 public class behaviourTreeAI : baseAI
-{ 
-    Repeat root;
-    Selector selector;
+{
+
+    public GameObject Player = null;
+    public LayerMask player;
+    public LayerMask door;
+    
+    Selector root;
+    Sequence playerSpotted;
     public override void Start()
     {
         base.Start();
-        root = new Repeat(getActions());
-        selector = new Selector(getActions());
-        selector.addChild(0, new RandomMove(getActions()));
-        root.addChild(0, selector);
+        getData().enemyTarget = Player;
+        playerSpotted = new Sequence(this);
+        playerSpotted.addChild(0, new TargetSpotted(this, player));
+        playerSpotted.addChild(1, new Move(this));
+        playerSpotted.addChild(2, new TargetInRange(this));
+        playerSpotted.addChild(3, new Attack(this));
+
+
+        root = new Selector(this);
+        root.addChild(0, playerSpotted);
+        root.addChild(1, new RandomMove(this));
     }
     void Update()
-    {
-        if (root.returnState() == Task.taskState.NotSet)
+    { 
+        if(root.returnState() == Task.taskState.NotSet)
         {
             root.Start();
         }

@@ -68,7 +68,7 @@ public class goapGoal
     }
 }
 
-/*public class worldState
+public class worldState
 {
     public float calculateDiscontentment(goapAction action, goapGoal[] goals)
     {
@@ -93,5 +93,5 @@ public class goapGoal
     {
 
     }
-}*/
+}
 

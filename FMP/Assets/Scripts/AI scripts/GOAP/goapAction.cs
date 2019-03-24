@@ -2,7 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class goapAction
+public class goapAction : MonoBehaviour
+{
+    public float cost;
+    public float getDuration()
+    {
+        return 0.0f;
+    }
+    public float getGoalChange(goapGoal goal)
+    {
+        return goal.change;
+    }
+}
+
+/*public abstract class goapAction
 {
     public float cost = 0;
 
@@ -39,4 +52,4 @@ public abstract class goapAction
     {
         effects.Add(new KeyValuePair<string, object>(name, value));
     }
-}
+}*/

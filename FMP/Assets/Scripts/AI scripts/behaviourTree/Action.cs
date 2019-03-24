@@ -4,20 +4,39 @@ using UnityEngine;
 using BehaviourTree;
 public class Action : Task
 {
-    public Action(agentActions bot) : base(bot, Vector3.zero, false)
+    public Action(baseAI bot) : base(bot)
     {
         
     }
 }
 
+public class Attack : Task
+{
+    public Attack(baseAI bot) : base(bot)
+    {
+    }
+
+    public override void runTask()
+    {
+        if(Vector3.Distance(bot.transform.position, bot.getData().enemyTarget.transform.position) < bot.getData().attackDistance)
+        {
+            Debug.Log("Attack!");
+            Succeed();
+        }
+        else
+        {
+            Debug.Log("Attack failed");
+            Fail();
+        }
+    }
+}
+
 public class Move : Action
 {
-    protected Vector3 targetPos;
     protected bool targetSet = false;
     protected float distanceLeeway;
-    public Move(agentActions bot, Vector3 target) : base(bot)
+    public Move(baseAI bot) : base(bot)
     {
-        targetPos = target;
         distanceLeeway = 1.0f;
     }
 
@@ -27,12 +46,19 @@ public class Move : Action
         {
             if (!targetSet)
             {
-                botActions.moveTo(targetPos);
-                targetSet = true;
+                if (bot.getData().enemyTarget != null)
+                {
+                    bot.getActions().moveTo(bot.getData().enemyTarget);
+                    targetSet = true;
+                }
+                else
+                {
+                    Fail();
+                }
             }
             else
             {
-                if (Vector3.Distance(botActions.transform.position, targetPos) < distanceLeeway)
+                if (Vector3.Distance(bot.transform.position, bot.getData().enemyTarget.transform.position) < distanceLeeway)
                 {
                     targetSet = false;
                     Succeed();
@@ -44,7 +70,8 @@ public class Move : Action
 
     public class RandomMove : Move
     {
-        public RandomMove(agentActions bot) : base(bot, Vector3.zero)
+        Vector3 targetPos;
+        public RandomMove(baseAI bot) : base(bot)
         {
             distanceLeeway = 5.0f;
         }
@@ -55,13 +82,13 @@ public class Move : Action
             {
                 if (!targetSet)
                 {
-                    targetPos = botActions.moveToRandom();
-                    botActions.moveTo(targetPos);
+                    targetPos = bot.getActions().moveToRandom();
+                    bot.getActions().moveTo(targetPos);
                     targetSet = true;
                 }
                 else
                 {
-                    if (Vector3.Distance(botActions.transform.position, targetPos) < distanceLeeway)
+                    if (Vector3.Distance(bot.transform.position, targetPos) < distanceLeeway)
                     {
                         targetSet = false;
                         Succeed();

@@ -5,15 +5,41 @@ using BehaviourTree;
 public class Condition : Task
 {
 
-    public Condition(agentActions bot) : base(bot)
+    public Condition(baseAI bot) : base(bot)
     {
         
     }
 }
 
-public class PlayerSpotted : Task
+public class TargetSpotted : Task
 {
-    public PlayerSpotted(agentActions bot) : base(bot)
+    LayerMask layer;
+    public TargetSpotted(baseAI bot, LayerMask layer) : base(bot)
+    {
+        this.layer = layer;
+    }
+
+    public override void runTask()
+    {
+        if (isRunning())
+        {
+            if(bot.getSenses().getTarget(layer).Count > 0)
+            {
+                bot.getData().enemyTarget = bot.getSenses().getTarget(layer)[0];
+                Succeed();
+            }
+            else
+            {
+                Fail();
+            }
+            
+        }
+    }
+}
+
+public class TargetInRange : Task
+{
+    public TargetInRange(baseAI bot) : base(bot)
     {
 
     }
@@ -22,13 +48,13 @@ public class PlayerSpotted : Task
     {
         if (isRunning())
         {
-            //if(botActions.)
+            if(Vector3.Distance(bot.getData().enemyTarget.transform.position, bot.transform.position) < bot.getData().attackDistance)
             {
-              
+                Succeed();
             }
-            //else
+            else
             {
-                
+                Fail();
             }
         }
     }

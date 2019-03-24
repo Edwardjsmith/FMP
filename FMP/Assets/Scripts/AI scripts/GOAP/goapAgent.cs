@@ -5,11 +5,12 @@ using UnityEngine;
 public class goapAgent : baseAI
 {
     FSM fsm;
-
+    goapAction[] actions;
     // Use this for initialization
     public override void Start ()
     {
         fsm = new FSM(this);
+        actions = GetComponents<goapAction>();
 	}
 	
 	// Update is called once per frame

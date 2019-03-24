@@ -69092,6 +69092,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1269372845048472, guid: 996a3e54bd15e4744ba6922fd791be04, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 996a3e54bd15e4744ba6922fd791be04, type: 2}
   m_IsPrefabParent: 0
@@ -99056,6 +99060,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e4f93c667f69d8409eaeb18fc461118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  player:
+    serializedVersion: 2
+    m_Bits: 2048
+  door:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!195 &1571541912
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -99186,10 +99197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6a967734bc7f50438a0a056948f3b31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightRange: 0
+  sightRange: 20
   fieldOfView: 0
   health: 0
   speed: 0
+  attackDistance: 1
   safeDistance: 0
   enemyTarget: {fileID: 0}
   coverTarget: {fileID: 0}

@@ -11,6 +11,7 @@ public class Data : MonoBehaviour
     public float fieldOfView;
     public float health;
     public float speed;
+    public float attackDistance;
 
     public float safeDistance;
     public GameObject enemyTarget;
