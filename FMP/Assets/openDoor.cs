@@ -17,5 +17,6 @@ public class openDoor : MonoBehaviour {
     {
         anim.Play("Door");
         isOpen = true;
+        gameObject.layer = 0;
     }
 }

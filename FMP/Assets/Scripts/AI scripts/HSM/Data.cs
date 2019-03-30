@@ -14,8 +14,13 @@ public class Data : MonoBehaviour
     public float attackDistance;
 
     public float safeDistance;
+
     public GameObject enemyTarget;
     public GameObject coverTarget;
+
+    public GameObject doorTarget;
+
+    public GameObject potentialTarget;
 
 	// Use this for initialization
 	void Start ()

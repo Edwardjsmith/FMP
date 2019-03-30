@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Senses : MonoBehaviour
 {
-    HSMAgent agent;
+    baseAI agent;
     public LayerMask otherAgents;
     public LayerMask cover;
     List<GameObject> verifiedTargets;
@@ -13,7 +13,7 @@ public class Senses : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        agent = GetComponent<HSMAgent>();
+        agent = GetComponent<baseAI>();
         verifiedTargets = new List<GameObject>();
 	}
 
@@ -42,7 +42,7 @@ public class Senses : MonoBehaviour
                 }
             }
         }
-        if (GetComponent<HSMAgent>())
+        /*if (GetComponent<HSMAgent>())
         {
             if (verifiedTargets.Count > 0)
             {
@@ -52,7 +52,7 @@ public class Senses : MonoBehaviour
             {
                 agent.getTransitions().enemyTargetFound = false;
             }
-        }
+        }*/
 
         return verifiedTargets;
     }

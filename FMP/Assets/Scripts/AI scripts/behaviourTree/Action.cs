@@ -12,13 +12,16 @@ public class Action : Task
 
 public class Attack : Task
 {
-    public Attack(baseAI bot) : base(bot)
+    GameObject target;
+    public Attack(baseAI bot, GameObject target) : base(bot)
     {
+        this.target = target;
     }
 
     public override void runTask()
     {
-        if(Vector3.Distance(bot.transform.position, bot.getData().enemyTarget.transform.position) < bot.getData().attackDistance)
+        Debug.Log("Checking attack");
+        if (Vector3.Distance(bot.transform.position, target.transform.position) < bot.getData().attackDistance)
         {
             Debug.Log("Attack!");
             Succeed();
@@ -31,70 +34,93 @@ public class Attack : Task
     }
 }
 
+public class OpenDoor : Task
+{
+    public OpenDoor(baseAI bot) : base(bot)
+    {
+        
+    }
+
+    public override void runTask()
+    {
+        Debug.Log("Checking door");
+        if (Vector3.Distance(bot.transform.position, bot.getData().doorTarget.transform.position) < bot.getData().attackDistance)
+        {
+            Debug.Log("Open!");
+            bot.getData().doorTarget.SendMessage("OpenDoor");
+            bot.getData().doorTarget = null;
+            Succeed();
+        }
+        else
+        {
+            Debug.Log("Open failed!");
+            Fail();
+        }
+    }
+}
+
 public class Move : Action
 {
-    protected bool targetSet = false;
     protected float distanceLeeway;
-    public Move(baseAI bot) : base(bot)
+    GameObject target;
+    public Move(baseAI bot, GameObject target) : base(bot)
     {
-        distanceLeeway = 1.0f;
+        distanceLeeway = 5.0f;
+        this.target = target;
     }
 
     public override void runTask()
     {
         if (isRunning())
         {
-            if (!targetSet)
             {
-                if (bot.getData().enemyTarget != null)
+                bot.getActions().moveTo(target);
+                Debug.Log(target);
+                if (Vector3.Distance(bot.transform.position, new Vector3(target.transform.position.x, bot.transform.position.y, target.transform.position.z)) < distanceLeeway)
                 {
-                    bot.getActions().moveTo(bot.getData().enemyTarget);
-                    targetSet = true;
-                }
-                else
-                {
-                    Fail();
-                }
-            }
-            else
-            {
-                if (Vector3.Distance(bot.transform.position, bot.getData().enemyTarget.transform.position) < distanceLeeway)
-                {
-                    targetSet = false;
+                    Debug.Log("Successfully moved to target");
                     Succeed();
                 }
+                
             }
         }
     }
 }
 
-    public class RandomMove : Move
+    public class RandomMove : Action
     {
         Vector3 targetPos;
-        public RandomMove(baseAI bot) : base(bot)
+    protected bool targetSet = false;
+    protected float distanceLeeway;
+
+    public RandomMove(baseAI bot) : base(bot)
         {
-            distanceLeeway = 5.0f;
+            distanceLeeway = 10.0f;
         }
 
         public override void runTask()
         {
             if (isRunning())
             {
-                if (!targetSet)
+            if (!targetSet)
+            {
+                targetPos = bot.getActions().moveToRandom();
+                targetSet = true;
+            }
+            //else
+            {
+                bot.getActions().moveTo(targetPos);
+
+                if (Vector3.Distance(bot.transform.position, new Vector3(targetPos.x, bot.transform.position.y, targetPos.z)) < distanceLeeway)
                 {
-                    targetPos = bot.getActions().moveToRandom();
-                    bot.getActions().moveTo(targetPos);
-                    targetSet = true;
-                }
-                else
-                {
-                    if (Vector3.Distance(bot.transform.position, targetPos) < distanceLeeway)
-                    {
-                        targetSet = false;
-                        Succeed();
-                    }
+                    targetSet = false;
+                    Succeed();
                 }
             }
+            }
+        
+        
+        Debug.Log("Random move" + " " + targetPos);
         }
     }
 

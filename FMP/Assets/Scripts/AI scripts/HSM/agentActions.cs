@@ -19,6 +19,7 @@ public class agentActions : MonoBehaviour
 
     public bool moveTo(GameObject target)
     {
+
         agent.getData().GetAgent().destination = target.transform.position;
         if (Vector3.Distance(transform.position, target.transform.position) > 1.0f)
         {
@@ -30,17 +31,24 @@ public class agentActions : MonoBehaviour
 
     public Vector3 moveToRandom()
     {
-        Vector3 randomMove = Random.insideUnitSphere * 20;
+        Vector3 randomMove = Random.insideUnitSphere * 100;
         randomMove += transform.position;
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomMove, out hit, 20, 1);
 
-        return hit.position;
+        if (NavMesh.SamplePosition(randomMove, out hit, 100, 1))
+        {
+            return hit.position;
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
     public bool moveTo(Vector3 target)
     {
         agent.getData().GetAgent().destination = target;
+        Debug.Log(target);
         if (Vector3.Distance(transform.position, target) > 1.0f)
         {
             return false;
