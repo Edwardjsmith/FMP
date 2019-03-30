@@ -109,7 +109,6 @@ namespace BehaviourTree
                     continue;
                 }
             }
-            Fail();
         }
     }
 
@@ -149,7 +148,7 @@ namespace BehaviourTree
                     break;
                 }
             }
-            if (isFailure())
+            if (!isFailure())
             {
                 Succeed();
             }

@@ -29,14 +29,14 @@ public class agentActions : MonoBehaviour
         return true;
     }
 
-    public Vector3 moveToRandom()
+    public Vector3 moveToRandom(Vector3 seed)
     {
-        Vector3 randomMove = Random.insideUnitSphere * 100;
-        randomMove += transform.position;
+        Vector3 randomMove = Random.insideUnitSphere * 10;
+        randomMove += seed;
 
         NavMeshHit hit;
 
-        if (NavMesh.SamplePosition(randomMove, out hit, 100, 1))
+        if (NavMesh.SamplePosition(randomMove, out hit, 10, 1))
         {
             return hit.position;
         }

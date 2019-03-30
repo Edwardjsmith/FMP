@@ -43,7 +43,7 @@ public class behaviourTreeAI : baseAI
 
         randomMove = new Selector(this);
         randomMove.addChild(0, doorBlock);
-        randomMove.addChild(1, new RandomMove(this));
+        randomMove.addChild(1, new RandomMove(this, Player));
 
         playerSpotted.addChild(0, new TargetSpotted(this, player, Player));
         playerSpotted.addChild(1, dealWithPlayer);
@@ -58,7 +58,7 @@ public class behaviourTreeAI : baseAI
         doorBlock.addChild(0, new checkRay(this, door, doors));
         doorBlock.addChild(1, new OpenDoor(this));
 
-        dealWithPlayer.addChild(1, new Move(this, Player));
+        dealWithPlayer.addChild(2, new Move(this, Player));
 
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);

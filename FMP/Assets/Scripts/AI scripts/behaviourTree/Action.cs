@@ -89,13 +89,15 @@ public class Move : Action
 
     public class RandomMove : Action
     {
-        Vector3 targetPos;
+    Vector3 targetPos;
     protected bool targetSet = false;
     protected float distanceLeeway;
+    GameObject seed;
 
-    public RandomMove(baseAI bot) : base(bot)
+    public RandomMove(baseAI bot, GameObject seed) : base(bot)
         {
-            distanceLeeway = 10.0f;
+            distanceLeeway = 1.0f;
+        this.seed = seed;
         }
 
         public override void runTask()
@@ -104,7 +106,7 @@ public class Move : Action
             {
             if (!targetSet)
             {
-                targetPos = bot.getActions().moveToRandom();
+                targetPos = bot.getActions().moveToRandom(seed.transform.position);
                 targetSet = true;
             }
             //else

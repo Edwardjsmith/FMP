@@ -25,6 +25,7 @@ public class checkRay : Task
         if (isRunning())
         {
             RaycastHit hit;
+            
             Debug.DrawLine(bot.transform.position, bot.transform.forward, Color.red);
             if(Physics.Linecast(bot.transform.position, bot.transform.forward, out hit, layer))
             {
@@ -34,13 +35,19 @@ public class checkRay : Task
                     {
                         bot.getData().doorTarget = obj;
                         Succeed();
+                        break;
                     }
                     else
                     {
                         Fail();
+                        Debug.Log("Ray failed");
                     }
                 }
                 
+            }
+            else
+            {
+                Fail();
             }
           
         }
@@ -61,18 +68,25 @@ public class TargetSpotted : Task
     {
         if (isRunning())
         {
-            foreach (GameObject go in bot.getSenses().getTarget(layer))
+            if (bot.getSenses().getTarget(layer).Count > 0)
             {
-                if (go == target)
+                foreach (GameObject go in bot.getSenses().getTarget(layer))
                 {
-                    Debug.Log("Target spotted");
-                    Debug.Log(target);
-                    Succeed();
+                    if (go == target)
+                    {
+                        Debug.Log("Target spotted");
+                        Debug.Log(target);
+                        Succeed();
+                    }
+                    else
+                    {
+                        Fail();
+                    }
                 }
-                else
-                {
-                    Fail();
-                }
+            }
+            else
+            {
+                Fail();
             }
             
         }
@@ -124,6 +138,7 @@ public class TargetInRange : Task
         if (isRunning())
         {
             Debug.Log("Checking in range");
+            Debug.Log(target);
             if(Vector3.Distance(target.transform.position, bot.transform.position) < bot.getData().attackDistance)
             {
                 Succeed();
