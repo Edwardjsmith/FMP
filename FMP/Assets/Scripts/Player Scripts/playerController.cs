@@ -22,6 +22,11 @@ public class playerController : gameEntity
         rotateView();
         movement();
     }
+
+    public void GameOver()
+    {
+        Debug.Log("Game over");
+    }
     private void Update()
     {
         
@@ -55,8 +60,8 @@ public class playerController : gameEntity
 
     void rotateView()
     {
-        float rotX = -Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
-        float rotY = -Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
+        float rotX = -Input.GetAxis("Mouse X") * Sensitivity * 3 * Time.deltaTime;
+        float rotY = -Input.GetAxis("Mouse Y") * Sensitivity * 3 * Time.deltaTime;
 
         xAxisClamp -= rotY;
 

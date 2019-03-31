@@ -31,12 +31,12 @@ public class agentActions : MonoBehaviour
 
     public Vector3 moveToRandom(Vector3 seed)
     {
-        Vector3 randomMove = Random.insideUnitSphere * 10;
+        Vector3 randomMove = Random.insideUnitSphere * 100;
         randomMove += seed;
 
         NavMeshHit hit;
 
-        if (NavMesh.SamplePosition(randomMove, out hit, 10, 1))
+        if (NavMesh.SamplePosition(randomMove, out hit, 100, 1))
         {
             return hit.position;
         }

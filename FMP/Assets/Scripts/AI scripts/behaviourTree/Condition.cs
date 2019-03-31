@@ -8,53 +8,74 @@ public class Condition : Task
     {
         
     }
-}
 
-public class checkRay : Task
-{
-    LayerMask layer;
-    GameObject[] targets;
-    public checkRay(baseAI bot, LayerMask layer, GameObject[] targets) : base(bot)
+    public virtual taskState checkCondition()
     {
-        this.layer = layer;
-        this.targets = targets;
+        return state;
     }
 
-    public override void runTask()
+    public override taskState evaluateTask()
     {
-        if (isRunning())
+        switch (checkCondition())
         {
-            RaycastHit hit;
-            
-            Debug.DrawLine(bot.transform.position, bot.transform.forward, Color.red);
-            if(Physics.Linecast(bot.transform.position, bot.transform.forward, out hit, layer))
-            {
-                foreach(GameObject obj in targets)
-                {
-                    if(hit.collider.gameObject == obj)
-                    {
-                        bot.getData().doorTarget = obj;
-                        Succeed();
-                        break;
-                    }
-                    else
-                    {
-                        Fail();
-                        Debug.Log("Ray failed");
-                    }
-                }
-                
-            }
-            else
-            {
-                Fail();
-            }
-          
+            case taskState.Success:
+                return state = taskState.Success;
+
+            case taskState.Failure:
+                return state = taskState.Failure;
+
+            case taskState.Running:
+                return state = taskState.Running;
+
+            default:
+                return state = taskState.Failure;
+
         }
     }
 }
 
-public class TargetSpotted : Task
+public class checkRay : Condition
+{
+    LayerMask layer;
+    GameObject[] targets;
+    float distance;
+    public checkRay(baseAI bot, LayerMask layer, GameObject[] targets, float distance) : base(bot)
+    {
+        this.layer = layer;
+        this.targets = targets;
+        this.distance = distance;
+    }
+
+    public override taskState checkCondition()
+    {
+        RaycastHit hit;
+        Debug.Log(distance);
+        Debug.DrawRay(new Vector3(bot.transform.position.x, bot.transform.position.y + 2, bot.transform.position.z), bot.transform.forward * distance, Color.red);
+        if (Physics.Raycast(bot.transform.position, bot.transform.forward * distance, out hit, layer))
+        {
+            foreach (GameObject obj in targets)
+            {
+                if (hit.collider.gameObject == obj)
+                {
+                    bot.getData().doorTarget = obj;
+                    Succeed();
+                    return state;
+                }
+            }
+
+            Fail();
+            return state;
+
+        }
+        else
+        {
+            Fail();
+            return state;
+        }
+    }
+}
+
+public class TargetSpotted : Condition
 {
     LayerMask layer;
     GameObject target;
@@ -64,36 +85,27 @@ public class TargetSpotted : Task
         this.target = target;
     }
 
-    public override void runTask()
+    public override taskState checkCondition()
     {
-        if (isRunning())
+        if (bot.getSenses().getTarget(layer).Count > 0)
         {
-            if (bot.getSenses().getTarget(layer).Count > 0)
+            foreach (GameObject go in bot.getSenses().getTarget(layer))
             {
-                foreach (GameObject go in bot.getSenses().getTarget(layer))
-                {
-                    if (go == target)
-                    {
-                        Debug.Log("Target spotted");
-                        Debug.Log(target);
-                        Succeed();
-                    }
-                    else
-                    {
-                        Fail();
-                    }
-                }
+                Succeed();
+                return state;
             }
-            else
-            {
-                Fail();
-            }
-            
+            Fail();
+            return state;
+        }
+        else
+        {
+            Fail();
+            return state;
         }
     }
 }
 
-public class isDoorOpen : Task
+public class isDoorOpen : Condition
 {
     openDoor target;
     public isDoorOpen(baseAI bot, openDoor target) : base(bot)
@@ -101,31 +113,31 @@ public class isDoorOpen : Task
         this.target = target;
     }
 
-    public override void runTask()
+    public override taskState checkCondition()
     {
-       if (isRunning())
+        Debug.Log("Query door");
+        if (target != null)
         {
-            Debug.Log("Query door");
-            if (target != null)
+            if (!target.isOpen)
             {
-                if (!target.isOpen)
-                {
-                    bot.getData().enemyTarget = target.gameObject;
-                    Succeed();
-                }
-                else
-                {
-                    Fail();
-                }
+                bot.getData().enemyTarget = target.gameObject;
+                Succeed();
+                return state;
             }
             else
             {
                 Fail();
+                return state;
             }
+        }
+        else
+        {
+            Fail();
+            return state;
         }
     }
 }
-public class TargetInRange : Task
+public class TargetInRange : Condition
 {
     GameObject target;
     public TargetInRange(baseAI bot, GameObject target) : base(bot)
@@ -133,20 +145,19 @@ public class TargetInRange : Task
         this.target = target;
     }
 
-    public override void runTask()
+    public override taskState checkCondition()
     {
-        if (isRunning())
+        Debug.Log("Checking in range");
+        Debug.Log(target);
+        if (Vector3.Distance(target.transform.position, bot.transform.position) < bot.getData().attackDistance)
         {
-            Debug.Log("Checking in range");
-            Debug.Log(target);
-            if(Vector3.Distance(target.transform.position, bot.transform.position) < bot.getData().attackDistance)
-            {
-                Succeed();
-            }
-            else
-            {
-                Fail();
-            }
+            Succeed();
+            return state;
+        }
+        else
+        {
+            Fail();
+            return state;
         }
     }
 }

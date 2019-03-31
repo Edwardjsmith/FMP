@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class baseAI : gameEntity {
 
     agentActions actions;
     Senses senses;
     Data data;
+    protected Animator anim;
     // Use this for initialization
     public override void Start ()
     {
@@ -28,5 +27,10 @@ public class baseAI : gameEntity {
     public Data getData()
     {
         return data;
+    }
+
+    public Animator getAnim()
+    {
+        return anim;
     }
 }

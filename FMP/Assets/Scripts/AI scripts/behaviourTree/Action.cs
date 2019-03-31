@@ -8,55 +8,97 @@ public class Action : Task
     {
         
     }
+
+    public virtual taskState performAction()
+    {
+        return state;
+    }
+
+    public override taskState evaluateTask()
+    {
+        switch(performAction())
+        {
+            case taskState.Success:
+                return state = taskState.Success;
+
+            case taskState.Failure:
+                return state = taskState.Failure;
+
+            case taskState.Running:
+                return state = taskState.Running;
+
+            default:
+                return state = taskState.Failure;
+
+        }
+    }
+
 }
 
-public class Attack : Task
+public class Attack : Action
 {
+    float timer = 0;
     GameObject target;
     public Attack(baseAI bot, GameObject target) : base(bot)
     {
         this.target = target;
     }
 
-    public override void runTask()
+    public override taskState performAction()
     {
         Debug.Log("Checking attack");
+        timer += Time.deltaTime;
         if (Vector3.Distance(bot.transform.position, target.transform.position) < bot.getData().attackDistance)
         {
-            Debug.Log("Attack!");
-            Succeed();
+            bot.getAnim().Play("Attack");
+            AnimatorClipInfo[] info = bot.getAnim().GetCurrentAnimatorClipInfo(0);
+            float clipTime = info[0].clip.length;
+            Debug.Log(target);
+            Run(); 
+            if(timer >= clipTime)
+            {
+                timer = 0;
+                Succeed();
+                target.SendMessage("GameOver");
+            }
+            
+            return state;
         }
         else
         {
             Debug.Log("Attack failed");
             Fail();
+            return state;
         }
     }
 }
 
-public class OpenDoor : Task
+public class OpenDoor : Action
 {
     public OpenDoor(baseAI bot) : base(bot)
     {
         
     }
 
-    public override void runTask()
+    public override taskState performAction()
     {
         Debug.Log("Checking door");
-        if (Vector3.Distance(bot.transform.position, bot.getData().doorTarget.transform.position) < bot.getData().attackDistance)
+        if (Vector3.Distance(bot.transform.position, bot.getData().doorTarget.transform.position) < bot.getData().doorOpenRange)
         {
             Debug.Log("Open!");
             bot.getData().doorTarget.SendMessage("OpenDoor");
             bot.getData().doorTarget = null;
             Succeed();
+            return state;
         }
         else
         {
             Debug.Log("Open failed!");
             Fail();
+            return state;
         }
     }
+
 }
 
 public class Move : Action
@@ -69,60 +111,60 @@ public class Move : Action
         this.target = target;
     }
 
-    public override void runTask()
+    public override taskState performAction()
     {
-        if (isRunning())
+        Run();
+        //bot.getAnim().Play("Walk");
+        bot.getActions().moveTo(target);
+
+        if (Vector3.Distance(bot.transform.position, new Vector3(target.transform.position.x, bot.transform.position.y, target.transform.position.z)) < distanceLeeway)
         {
-            {
-                bot.getActions().moveTo(target);
-                Debug.Log(target);
-                if (Vector3.Distance(bot.transform.position, new Vector3(target.transform.position.x, bot.transform.position.y, target.transform.position.z)) < distanceLeeway)
-                {
-                    Debug.Log("Successfully moved to target");
-                    Succeed();
-                }
-                
-            }
+            Debug.Log("Successfully moved to target");
+            Succeed();
         }
+
+        return state;
     }
 }
-
-    public class RandomMove : Action
-    {
+public class RandomMove : Action
+{
     Vector3 targetPos;
     protected bool targetSet = false;
     protected float distanceLeeway;
-    GameObject seed;
+    Point[] seed;
 
-    public RandomMove(baseAI bot, GameObject seed) : base(bot)
-        {
-            distanceLeeway = 1.0f;
+    public RandomMove(baseAI bot, Point[] seed) : base(bot)
+    {
+        distanceLeeway = 2.0f;
         this.seed = seed;
-        }
-
-        public override void runTask()
-        {
-            if (isRunning())
-            {
-            if (!targetSet)
-            {
-                targetPos = bot.getActions().moveToRandom(seed.transform.position);
-                targetSet = true;
-            }
-            //else
-            {
-                bot.getActions().moveTo(targetPos);
-
-                if (Vector3.Distance(bot.transform.position, new Vector3(targetPos.x, bot.transform.position.y, targetPos.z)) < distanceLeeway)
-                {
-                    targetSet = false;
-                    Succeed();
-                }
-            }
-            }
-        
-        
-        Debug.Log("Random move" + " " + targetPos);
-        }
     }
+
+    public override taskState performAction()
+    {
+        Debug.Log("Random move" + " " + targetPos);
+        Run();
+        //bot.getAnim().Play("Walk");
+        if (!targetSet)
+        {
+            targetPos = seed[Random.Range(0, seed.Length - 1)].transform.position;
+            targetSet = true;
+        }
+
+        bot.getActions().moveTo(targetPos);
+
+        if (Vector3.Distance(bot.transform.position, new Vector3(targetPos.x, bot.transform.position.y, targetPos.z)) < distanceLeeway)
+        {
+            targetSet = false;
+            Succeed();
+        }
+
+        return state;
+    }
+}
+
+
+
+
+
+
 

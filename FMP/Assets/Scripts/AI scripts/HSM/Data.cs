@@ -12,6 +12,7 @@ public class Data : MonoBehaviour
     public float health;
     public float speed;
     public float attackDistance;
+    public float doorOpenRange;
 
     public float safeDistance;
 

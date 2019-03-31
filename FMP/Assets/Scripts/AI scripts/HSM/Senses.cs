@@ -36,7 +36,7 @@ public class Senses : MonoBehaviour
         {
             if(col.gameObject != gameObject)
             {
-                if(verifyTarget(col.gameObject))
+                //if(verifyTarget(col.gameObject))
                 {
                     verifiedTargets.Add(col.gameObject);
                 }

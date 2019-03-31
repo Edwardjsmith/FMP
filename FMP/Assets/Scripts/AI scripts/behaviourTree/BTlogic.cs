@@ -5,8 +5,8 @@ using UnityEngine;
 
 
 namespace BehaviourTree
-{ 
-   public class Task
+{
+    public class Task
     {
         public enum taskState
         {
@@ -66,7 +66,7 @@ namespace BehaviourTree
             return state.Equals(taskState.Running);
         }
 
-        public taskState returnState()
+        public taskState currentState()
         {
             return state;
         }
@@ -76,9 +76,9 @@ namespace BehaviourTree
             childTasks.Insert(index, task);
         }
 
-        public virtual void runTask()
+        public virtual taskState evaluateTask()
         {
-           
+            return state;
         }
 
         public virtual void reset()
@@ -87,6 +87,7 @@ namespace BehaviourTree
         }
     }
 
+
     class Selector : Task
     {
         public Selector(baseAI bot) : base(bot)
@@ -94,65 +95,69 @@ namespace BehaviourTree
 
         }
 
-        public override void runTask()
-        {
-            foreach(Task t in childTasks)
-            {
-                t.Start();
-                t.runTask();
-                if(t.isRunning())
-                {
-                    Succeed();
-                }
-                else
-                {
-                    continue;
-                }
-            }
-        }
-    }
-
-    public class Repeat : Task
-    {
-        public Repeat(baseAI bot) : base(bot)
-        {
-          
-        }
-
-        public override void runTask()
+        public override taskState evaluateTask()
         {
             foreach (Task t in childTasks)
             {
-                t.Start();
-                t.runTask();
+                t.evaluateTask();
+                switch (t.currentState())
+                {
+                    case taskState.Failure:
+                        continue;
+                    case taskState.Success:
+                        return state = taskState.Success;
+                    case taskState.Running:
+                        return state = taskState.Running;
+                    default:
+                        continue;
+                }
             }
+            return state = taskState.Failure;
         }
     }
 
     public class Sequence : Task
     {
+        bool childRunning = false;
         public Sequence(baseAI bot) : base(bot)
         {
 
         }
 
-        public override void runTask()
+        public override taskState evaluateTask()
         {
+            
             foreach (Task t in childTasks)
             {
-                t.Start();
-                t.runTask();
-                if(t.isFailure())
+                t.evaluateTask();
+                switch (t.currentState())
                 {
-                    Fail();
-                    break;
+                    case taskState.Failure:
+                        Fail();
+                        return currentState();
+
+                    case taskState.Success:
+                        continue;
+
+                    case taskState.Running:
+                        childRunning = true;
+                        continue;
+
+                    default:
+                        Succeed();
+                        return currentState();
                 }
             }
-            if (!isFailure())
-            {
-                Succeed();
-            }
+
+            return state = childRunning ? taskState.Running : taskState.Success;
         }
     }
-
 }
+
+            
+        
+    
+
+    
+
+
