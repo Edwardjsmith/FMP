@@ -8,6 +8,7 @@ public class playerController : gameEntity
     Camera view;
 
     public float Sensitivity;
+    public float moveSpeed;
     float xAxisClamp = 0.0f;
     
 
@@ -15,17 +16,24 @@ public class playerController : gameEntity
     {
         Controller = GetComponent<CharacterController>();
         view = GetComponentInChildren<Camera>();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void LateUpdate()
     {
         rotateView();
         movement();
+
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     public void GameOver()
     {
         Debug.Log("Game over");
+        Application.Quit();
     }
     private void Update()
     {
@@ -40,8 +48,8 @@ public class playerController : gameEntity
 
     void movement()
     {
-        float horizontal = Input.GetAxis("Horizontal") * Sensitivity * Time.deltaTime;
-        float vertical = Input.GetAxis("Vertical") * Sensitivity * Time.deltaTime;
+        float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
+        float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
 
         //Movement
@@ -60,8 +68,8 @@ public class playerController : gameEntity
 
     void rotateView()
     {
-        float rotX = -Input.GetAxis("Mouse X") * Sensitivity * 3 * Time.deltaTime;
-        float rotY = -Input.GetAxis("Mouse Y") * Sensitivity * 3 * Time.deltaTime;
+        float rotX = -Input.GetAxis("Mouse X") * Sensitivity * Time.deltaTime;
+        float rotY = -Input.GetAxis("Mouse Y") * Sensitivity * Time.deltaTime;
 
         xAxisClamp -= rotY;
 

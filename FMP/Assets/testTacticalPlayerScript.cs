@@ -21,6 +21,10 @@ public class testTacticalPlayerScript : MonoBehaviour
 	void LateUpdate ()
     {
         Movement();
+        if(Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     private void Movement()

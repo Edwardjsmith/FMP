@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour {
 
-    const float range = 0.2f;
+    const float range = 0.22f;
     GameObject target;
 
     GameObject turret;
@@ -19,10 +19,10 @@ public class Turret : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 direction = turret.transform.position - target.transform.position;
+        /*Vector3 direction =  target.transform.position - turret.transform.position;
  
         Quaternion lookRotation = Quaternion.LookRotation(direction);
-        Vector3 rot = lookRotation.eulerAngles;
-        turret.transform.rotation = Quaternion.Euler(0, rot.y, 0);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, 100 * Time.deltaTime);*/
+       
 	}
 }

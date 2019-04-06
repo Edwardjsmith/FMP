@@ -68808,6 +68808,11 @@ Prefab:
     - target: {fileID: 114215044644039766, guid: 996a3e54bd15e4744ba6922fd791be04,
         type: 2}
       propertyPath: Sensitivity
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114215044644039766, guid: 996a3e54bd15e4744ba6922fd791be04,
+        type: 2}
+      propertyPath: moveSpeed
       value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents:

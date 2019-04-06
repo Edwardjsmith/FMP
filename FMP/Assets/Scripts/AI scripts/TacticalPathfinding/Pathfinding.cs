@@ -1,8 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using Unity.Collections;
+using Unity.Jobs;
+using UnityEngine.Jobs;
 using UnityEngine;
-using System.Threading;
+using System.Collections.Generic;
+using System.Collections;
 
+
+struct findPathJob : IJobParallelFor
+{
+    public void Execute(int i)
+    {
+
+    }
+}
 public class Pathfinding : MonoBehaviour
 {
     public Grid grid;
@@ -21,7 +31,15 @@ public class Pathfinding : MonoBehaviour
     {
         if (!pathFound)
         {
-            target = targetObj[Random.Range(0, targetObj.Length - 1)].transform.position;
+            Vector3 newTarget;
+            do
+            {
+                newTarget = targetObj[Random.Range(0, targetObj.Length - 1)].transform.position;
+
+            } while (newTarget == target);
+
+
+            target = newTarget;
             findPath(transform.position, target);
             pathFound = true;
         }
