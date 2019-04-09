@@ -45,7 +45,7 @@ public class HSM
     {
         foreach (Transition transition in currentState.transitions) //Go through each transition to see if any have been triggered
         {
-            if (transition.Condition != null && transition.Condition.Invoke())
+            if (transition.Condition == true)
             {
                 currentState.ExitState();
                 currentState = States[transition.targetState];
