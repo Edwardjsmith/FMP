@@ -22,7 +22,7 @@ public abstract class goapAction : MonoBehaviour
     public virtual void reset()
     {
         inRange = false;
-        target = null;
+        //target = null;
     }
 
     public int getCost()

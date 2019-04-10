@@ -5,8 +5,8 @@ public class dropOffWood : goapAction
     GameObject dropOff;
     public dropOffWood() : base()
     {
-        //addPrecondition("hasWood", true);
-        addEffect("hasWood", false);
+        addPrecondition("hasWood", true);
+        //addEffect("hasWood", false);
         addEffect("taskComplete", true);
     }
     private void Start()
@@ -21,12 +21,19 @@ public class dropOffWood : goapAction
 
     public override bool executeAction(goapAgent agent)
     {
-        return agent.hasWood = false;
+        if (inRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override bool taskComplete(goapAgent agent)
     {
-        return !agent.hasWood;
+        return executeAction(agent);
     }
 
     public override bool testAction(goapAgent agent)

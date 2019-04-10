@@ -5,7 +5,7 @@ public class pickUpAxe : goapAction
 
     public pickUpAxe() : base()
     {
-        //addPrecondition("hasAxe", false);
+        addPrecondition("hasAxe", false);
         addEffect("hasAxe", true);
     }
     private void Start()
@@ -14,12 +14,20 @@ public class pickUpAxe : goapAction
     }
     public override bool checkTarget(goapAgent agent)
     {
+        //target = axe;
         return true;
     }
 
     public override bool executeAction(goapAgent agent)
     {
-        return true;
+        if(inRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override bool taskComplete(goapAgent agent)

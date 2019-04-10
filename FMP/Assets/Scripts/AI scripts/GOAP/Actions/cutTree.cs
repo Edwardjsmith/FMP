@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class cutTree : goapAction
 {
@@ -25,12 +24,19 @@ public class cutTree : goapAction
 
     public override bool executeAction(goapAgent agent)
     {
-        return agent.hasWood = true;
+        if (inRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public override bool taskComplete(goapAgent agent)
     {
-        return agent.hasWood;
+        return executeAction(agent);
     }
 
     public override bool testAction(goapAgent agent)

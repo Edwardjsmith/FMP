@@ -13,12 +13,12 @@ public class IdleState : SuperState
         transitions = new List<Transition>();
         Transition transitionToAlertEnemySpotted = new Transition();
 
-        transitionToAlertEnemySpotted.Condition = agent.getTransitions().getEnemyTargetFound();
+        transitionToAlertEnemySpotted.Condition = agent.getTransitions().getEnemyTargetFound;
         transitionToAlertEnemySpotted.targetState = "Alert";
         transitions.Add(transitionToAlertEnemySpotted);
 
         Transition transitionToAlertHit = new Transition();
-        transitionToAlertHit.Condition = agent.getTransitions().isHit();
+        transitionToAlertHit.Condition = agent.getTransitions().isHit;
         transitionToAlertHit.targetState = "Alert";
         transitions.Add(transitionToAlertHit);
 

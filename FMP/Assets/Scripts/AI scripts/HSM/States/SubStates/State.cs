@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 public struct Transition //Holds the state transition condition and the target state
 {
-    //public delegate bool condition();
-    public bool Condition;
+    public delegate bool condition();
+    public condition Condition;
     public string targetState;
     
 }

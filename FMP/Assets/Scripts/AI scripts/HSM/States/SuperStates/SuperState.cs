@@ -43,7 +43,7 @@ public class SuperState : State<HSMAgent>
     {
         foreach(Transition transition in currentState.transitions)
         {
-            if (transition.Condition == true)
+            if (transition.Condition.Invoke())
             {
                 if(States[transition.targetState].stateLevel == currentState.stateLevel)
                 {

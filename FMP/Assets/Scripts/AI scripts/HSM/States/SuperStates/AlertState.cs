@@ -13,7 +13,7 @@ public class AlertState : SuperState
         States.Add("Player detected", new PlayerDetected(agent));
         States.Add("FindCover", new findCover(agent));
 
-        transitionToIdle.Condition = agent.getTransitions().enemyLost();
+        transitionToIdle.Condition = agent.getTransitions().enemyLost;
         transitionToIdle.targetState = "Idle";
         transitions.Add(transitionToIdle);
     }

@@ -20,7 +20,7 @@ public class goapPlanner
         }
         createNodes(actions);
 
-        
+
         goapNode startNode = new goapNode(worldState, null);
         goapNode targetNode = new goapNode(goalState, null);
         bool succeed = buildPath(startNode, targetNode);
@@ -30,24 +30,19 @@ public class goapPlanner
             return null;
         }
 
-        goapNode cheapestNode = null;
+        Queue<goapAction> plan = new Queue<goapAction>();
         foreach (goapNode node in path)
         {
-            if (cheapestNode == null)
+            if (node.action != null)
             {
-                cheapestNode = node;
+                plan.Enqueue(node.action);
+            }
+            else
+            {
+                continue;
             }
         }
 
-        Queue<goapAction> plan = new Queue<goapAction>();
-        while (cheapestNode != null)
-        {
-            if (cheapestNode.getNodeAction() != null)
-            {
-                plan.Enqueue(cheapestNode.getNodeAction());
-                cheapestNode = cheapestNode.getParent();
-            }
-        }
         return plan;
     }
 
@@ -65,7 +60,7 @@ public class goapPlanner
     {
         goapNode current = targetNode;
         path = new List<goapNode>();
-        while (current != startNode)
+        while (current != null)
         {
             path.Add(current);
             current = current.parent;
@@ -77,7 +72,7 @@ public class goapPlanner
     protected bool buildPath(goapNode startNode, goapNode targetNode)
     {
         List<goapNode> openSet = new List<goapNode>();
-        HashSet<goapNode> closedSet = new HashSet<goapNode>(); 
+        HashSet<goapNode> closedSet = new HashSet<goapNode>();
 
         openSet.Add(startNode);
         while(openSet.Count > 0)
@@ -120,7 +115,7 @@ public class goapPlanner
                     neighbour.setCost(newCost);
                     neighbour.parent = currentNode;
 
-                    if(!openSet.Contains(neighbour))
+                    //if(!openSet.Contains(neighbour))
                     {
                         openSet.Add(neighbour);
                     }
@@ -153,6 +148,7 @@ public class goapPlanner
 
     List<goapNode> getNext(goapNode current)
     {
+        Debug.Log(current.action);
         List<goapNode> next = new List<goapNode>();
 
         foreach(goapNode node in nodes)
@@ -161,10 +157,13 @@ public class goapPlanner
             {
                 foreach (KeyValuePair<string, bool> currentPrecondition in current.getNodeState())
                 {
-                    if (currentPrecondition.Equals(effect))
+                    KeyValuePair<string, bool> currentPreconditionInverse = new KeyValuePair<string, bool>(currentPrecondition.Key, !currentPrecondition.Value);
+                    
+                    if (effect.Equals(currentPreconditionInverse))
                     {
-                        if (node != current)
+                        //if (node != current)
                         {
+                            current.parent = node;
                             next.Add(node);
                         }
                     }

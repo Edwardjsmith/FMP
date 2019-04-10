@@ -12,7 +12,7 @@ public class findCover : State<HSMAgent>
         transitions = new List<Transition>();
         Transition transitionToPlayerDetected = new Transition();
 
-        transitionToPlayerDetected.Condition = agent.getTransitions().inCover();
+        transitionToPlayerDetected.Condition = agent.getTransitions().inCover;
         transitionToPlayerDetected.targetState = "Player detected";
         transitions.Add(transitionToPlayerDetected);
 

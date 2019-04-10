@@ -10,7 +10,7 @@ public class Patrol : State<HSMAgent>
         transitions = new List<Transition>();
         Transition transitionToGuard = new Transition();
 
-        transitionToGuard.Condition = agent.getTransitions().TransitionToGuard();
+        transitionToGuard.Condition = agent.getTransitions().TransitionToGuard;
         transitionToGuard.targetState = "Guard";
         transitions.Add(transitionToGuard);
     }

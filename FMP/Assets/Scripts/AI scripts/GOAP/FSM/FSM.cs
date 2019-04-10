@@ -32,7 +32,7 @@ public class FSM
     {
         foreach (Transition transition in currentState.transitions) //Go through each transition to see if any have been triggered
         {
-            if (transition.Condition == true)
+            if (transition.Condition.Invoke())
             {
                 currentState.ExitState();
                 currentState = States[transition.targetState];
@@ -52,7 +52,7 @@ public class FSMIdle : State<goapAgent>
         transitions = new List<Transition>();
         Transition transitionToAction = new Transition();
 
-        transitionToAction.Condition = hasPlan == true;
+        transitionToAction.Condition = checkPlan;
         transitionToAction.targetState = "Action";
         transitions.Add(transitionToAction);
     }
@@ -66,6 +66,10 @@ public class FSMIdle : State<goapAgent>
         hasPlan = false;
     }
 
+    bool checkPlan()
+    {
+        return hasPlan;
+    }
     public override void Update()
     {
         if (plan != null)
@@ -94,15 +98,25 @@ public class FSMMoveTo : State<goapAgent>
         transitions = new List<Transition>();
         Transition transitionToIdle = new Transition();
 
-        transitionToIdle.Condition = noTarget == true;
+        transitionToIdle.Condition = checkTargetNull;
         transitionToIdle.targetState = "Idle";
         transitions.Add(transitionToIdle);
 
         Transition transitionToAction = new Transition();
 
-        transitionToAction.Condition = atTarget == true;
+        transitionToAction.Condition = checkTargetArrive;
         transitionToAction.targetState = "Action";
         transitions.Add(transitionToAction);
+    }
+
+    bool checkTargetNull()
+    {
+        return noTarget;
+    }
+
+    bool checkTargetArrive()
+    {
+        return atTarget;
     }
     public override void EnterState()
     {
@@ -121,7 +135,9 @@ public class FSMMoveTo : State<goapAgent>
 
     public override void Update()
     {
-        atTarget = agent.getActions().moveTo(currentAction.target);
+        Debug.Log(currentAction.target);
+        Debug.Log("Agent " + agent);
+        currentAction.inRange = atTarget = agent.getActions().moveTo(currentAction.target);
     }
 }
 
@@ -135,15 +151,25 @@ public class FSMPerformAction : State<goapAgent>
         transitions = new List<Transition>();
         Transition transitionToMove = new Transition();
 
-        transitionToMove.Condition = needMove == true;
+        transitionToMove.Condition = checkMoveNeed;
         transitionToMove.targetState = "Move";
         transitions.Add(transitionToMove);
 
         Transition transitionToIdle = new Transition();
 
-        transitionToIdle.Condition = noPlan == true;
+        transitionToIdle.Condition = checkPlan;
         transitionToIdle.targetState = "Idle";
         transitions.Add(transitionToIdle);
+    }
+
+    bool checkPlan()
+    {
+        return noPlan;
+    }
+
+    bool checkMoveNeed()
+    {
+        return needMove;
     }
     public override void EnterState()
     {
@@ -181,6 +207,7 @@ public class FSMPerformAction : State<goapAgent>
         if(currentAction.inRange)
         {
             currentAction.executeAction(agent);
+            Debug.Log("Action executed");
         }
         else
         {
