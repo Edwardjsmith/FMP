@@ -88,7 +88,7 @@ public class goapPlanner
                 }
             }
 
-            foreach (goapNode neighbour in getNext(agent, actions))
+            goapNode neighbour = getNext(agent, actions);
             {
                 if (closedSet.Contains(neighbour))
                 {
@@ -109,27 +109,29 @@ public class goapPlanner
         return false;
     }
 
-    List<goapNode> getNext(goapAgent agent, List<goapAction> actions)
+    goapNode getNext(goapAgent agent, List<goapAction> actions)
     {
 
         List<goapNode> next = new List<goapNode>();
 
         foreach (goapAction action in actions)
         {
-            foreach (KeyValuePair<string, bool> preEffect in action.getPreconditions())
+            foreach (KeyValuePair<string, bool> preEffect in action.getPreEffects())
             {
                 foreach (KeyValuePair<string, bool> worldState in agent.getWorldState())
                 {
                     if (preEffect.Equals(worldState))
                     {
-                        goapNode node = new goapNode(action.getEffects(), action);
+                        
                         agent.setWorldState(action.getEffects());
-                        next.Add(node);
+                        return new goapNode(action.getEffects(), action);
+                        //next.Add(node);
                     }
                 }
             }
         }
-        return next;
+
+        return null;
     }
 }
 public class goapNode

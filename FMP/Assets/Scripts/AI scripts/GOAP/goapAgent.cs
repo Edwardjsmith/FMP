@@ -15,6 +15,7 @@ public class goapAgent : baseAI
     public bool taskComplete = false;
 
     HashSet<KeyValuePair<string, bool>> worldstate;
+    HashSet<KeyValuePair<string, bool>> goalstate;
 
     // Use this for initialization
     public override void Start () 
@@ -24,6 +25,8 @@ public class goapAgent : baseAI
         avaliableActions = attachedActions.ToList();
         worldstate = new HashSet<KeyValuePair<string, bool>>();
         worldstate.Add(new KeyValuePair<string, bool>("hasAxe", false));
+        goalstate = new HashSet<KeyValuePair<string, bool>>();
+        goalstate.Add(new KeyValuePair<string, bool>("taskComplete", true));
         planner = new goapPlanner();
         fsm = new FSM(this);
         
@@ -50,10 +53,8 @@ public class goapAgent : baseAI
         worldstate = state;
     }
 
-    public HashSet<KeyValuePair<string, bool>> createGoal()
+    public HashSet<KeyValuePair<string, bool>> getGoal()
     {
-        HashSet<KeyValuePair<string, bool>> goal = new HashSet<KeyValuePair<string, bool>>();
-        goal.Add(new KeyValuePair<string, bool>("taskComplete", true));
-        return goal;
+        return goalstate;
     }
 }
