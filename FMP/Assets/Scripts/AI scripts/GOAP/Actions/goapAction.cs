@@ -7,6 +7,7 @@ public abstract class goapAction : MonoBehaviour
 
     private HashSet<KeyValuePair<string, bool>> preconditions;
     private HashSet<KeyValuePair<string, bool>> effects;
+    private HashSet<KeyValuePair<string, bool>> preEffects;
 
     public GameObject target;
 
@@ -16,7 +17,8 @@ public abstract class goapAction : MonoBehaviour
     {
         preconditions = new HashSet<KeyValuePair<string, bool>>();
         effects = new HashSet<KeyValuePair<string, bool>>();
-        addPrecondition("taskComplete", false);
+        preEffects = new HashSet<KeyValuePair<string, bool>>();
+        //addPrecondition("taskComplete", false);
     }
 
     public virtual void reset()
@@ -45,6 +47,12 @@ public abstract class goapAction : MonoBehaviour
     public void addEffect(string name, bool value)
     {
         effects.Add(new KeyValuePair<string, bool>(name, value));
+        preEffects.Add(new KeyValuePair<string, bool>(name, !value));
+    }
+
+    public void addPreEffect(string name, bool value)
+    {
+        preEffects.Add(new KeyValuePair<string, bool>(name, value));
     }
 
     public HashSet<KeyValuePair<string, bool>> getPreconditions()
@@ -55,4 +63,10 @@ public abstract class goapAction : MonoBehaviour
     {
         return effects;
     }
+
+    public HashSet<KeyValuePair<string, bool>> getPreEffects()
+    {
+        return preEffects;
+    }
+        
 }

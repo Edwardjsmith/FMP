@@ -14,8 +14,6 @@ public class Grid : MonoBehaviour
 
     public GameObject tile;
 
-    int turretPop = 8;
-
     public LayerMask enemy;
     public LayerMask wall;
 

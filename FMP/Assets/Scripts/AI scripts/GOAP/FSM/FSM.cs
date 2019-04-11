@@ -58,7 +58,7 @@ public class FSMIdle : State<goapAgent>
     }
     public override void EnterState()
     {
-        plan = agent.planner.plan(agent, agent.avaliableActions, agent.worldState(), agent.createGoal());
+        plan = agent.planner.plan(agent, agent.avaliableActions, agent.getWorldState(), agent.createGoal());
     }
 
     public override void ExitState()

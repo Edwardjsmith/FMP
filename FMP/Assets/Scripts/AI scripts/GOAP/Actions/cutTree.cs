@@ -9,6 +9,8 @@ public class cutTree : goapAction
         //addPrecondition("hasWood", false);
         addPrecondition("hasAxe", true);
         addEffect("hasWood", true);
+        //addPreEffect("hasAxe", true);
+        
     }
 
     private void Start()

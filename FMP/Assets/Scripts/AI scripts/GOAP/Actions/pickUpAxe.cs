@@ -5,8 +5,10 @@ public class pickUpAxe : goapAction
 
     public pickUpAxe() : base()
     {
+        //addPrecondition("hasWood", false);
         addPrecondition("hasAxe", false);
         addEffect("hasAxe", true);
+        //addEffect("taskComplete", false);
     }
     private void Start()
     {

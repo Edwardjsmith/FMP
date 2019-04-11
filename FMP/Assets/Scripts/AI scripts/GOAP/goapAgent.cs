@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-public class goapAgent : baseAI, IGOAP
+public class goapAgent : baseAI
 {
     FSM fsm;
     public goapAction[] attachedActions;
@@ -14,14 +14,19 @@ public class goapAgent : baseAI, IGOAP
     public bool hasWood = false;
     public bool taskComplete = false;
 
+    HashSet<KeyValuePair<string, bool>> worldstate;
+
     // Use this for initialization
     public override void Start () 
     {
         base.Start();
         attachedActions = GetComponents<goapAction>();
         avaliableActions = attachedActions.ToList();
+        worldstate = new HashSet<KeyValuePair<string, bool>>();
+        worldstate.Add(new KeyValuePair<string, bool>("hasAxe", false));
         planner = new goapPlanner();
         fsm = new FSM(this);
+        
 	}
 	
 	// Update is called once per frame
@@ -35,17 +40,20 @@ public class goapAgent : baseAI, IGOAP
         fsm.LateUpdate();
     }
 
-    public HashSet<KeyValuePair<string, bool>> worldState()
+    public HashSet<KeyValuePair<string, bool>> getWorldState()
     {
-        HashSet<KeyValuePair<string, bool>> data = new HashSet<KeyValuePair<string, bool>>();
-        data.Add(new KeyValuePair<string, bool>("hasWood", false));
-        return data;
+        return worldstate;
+    }
+
+    public void setWorldState(HashSet<KeyValuePair<string, bool>> state)
+    {
+        worldstate = state;
     }
 
     public HashSet<KeyValuePair<string, bool>> createGoal()
     {
         HashSet<KeyValuePair<string, bool>> goal = new HashSet<KeyValuePair<string, bool>>();
-        goal.Add(new KeyValuePair<string, bool>("hasWood", true));
+        goal.Add(new KeyValuePair<string, bool>("taskComplete", true));
         return goal;
     }
 }

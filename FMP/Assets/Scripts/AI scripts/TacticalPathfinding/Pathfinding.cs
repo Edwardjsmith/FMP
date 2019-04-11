@@ -49,17 +49,17 @@ public class Pathfinding : MonoBehaviour
     {
         if (grid != null)
         {
-            foreach (Node n in grid.worldGrid)
+            foreach (Node node in grid.worldGrid)
             {
-                n.rend.material.color = (n.enemyLineOfSight) ? Color.red : Color.white;
+                node.rend.material.color = (node.enemyLineOfSight) ? Color.red : Color.white;
 
-                if (!n.walkable) n.rend.material.color = Color.yellow;
+                if (!node.walkable) node.rend.material.color = Color.yellow;
 
                 if (newPath != null)
                 {
-                    if (newPath.Contains(n))
+                    if (newPath.Contains(node))
                     {
-                        n.rend.material.color = Color.blue;
+                        node.rend.material.color = Color.blue;
                     }
                 }
             }
