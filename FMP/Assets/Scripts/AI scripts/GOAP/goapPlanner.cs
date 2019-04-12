@@ -67,7 +67,7 @@ public class goapPlanner
 
             for (int i = 1; i < openSet.Count; i++)
             {
-                if (openSet[i].runningCost() <= currentNode.runningCost())
+                if (openSet[i].runningCost() <= currentNode.runningCost() && openSet[i].action.getEffects() == currentNode.action.getEffects())
                 {
                     currentNode = openSet[i];
                 }
@@ -82,7 +82,6 @@ public class goapPlanner
                 {
                     if (effect.Equals(condition))
                     {
-                        //startNode.parent = currentNode;
                         return retracePath(startNode, targetNode);
                     }
                 }
@@ -122,10 +121,8 @@ public class goapPlanner
                 {
                     if (preEffect.Equals(worldState))
                     {
-                        
                         agent.setWorldState(action.getEffects());
                         return new goapNode(action.getEffects(), action);
-                        //next.Add(node);
                     }
                 }
             }
@@ -140,10 +137,9 @@ public class goapNode
     int cost;
     HashSet<KeyValuePair<string, bool>> state;
     public goapAction action;
-    public bool conditionSatisfied = false;
+
     public goapNode(HashSet<KeyValuePair<string, bool>> state, goapAction action)
     {
-        //cost = action.getCost();
         this.state = state;
         this.action = action;
     }

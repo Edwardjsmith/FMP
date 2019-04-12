@@ -58,6 +58,15 @@ public class FSMIdle : State<goapAgent>
     }
     public override void EnterState()
     {
+        if(agent.hasTool())
+        {
+            agent.setWorldState(agent.hasToolState);
+        }
+        else
+        {
+            agent.setWorldState(agent.noToolState);
+        }
+
         plan = agent.planner.plan(agent, agent.avaliableActions, agent.getWorldState(), agent.getGoal());
     }
 
@@ -76,13 +85,11 @@ public class FSMIdle : State<goapAgent>
         {
             Debug.Log("Plan created");
             agent.currentActions = plan;
-            //agent.planFound(agent.createGoal(), plan);
             hasPlan = true;
         }
         else
         {
             Debug.Log("Plan could not be created. Try again");
-            //plan = agent.planner.plan(agent, agent.avaliableActions, agent.worldState(), agent.createGoal());
         }
     }
 }
@@ -121,10 +128,12 @@ public class FSMMoveTo : State<goapAgent>
     public override void EnterState()
     {
         currentAction = agent.currentActions.Peek();
+        agent.getAnim().Play("Walk");
         if(currentAction.target == null)
         {
             noTarget = true;
         }
+
     }
 
     public override void ExitState()

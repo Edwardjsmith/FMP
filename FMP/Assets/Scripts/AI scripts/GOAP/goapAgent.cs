@@ -1,4 +1,4 @@
-﻿
+﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,20 +16,30 @@ public class goapAgent : baseAI
 
     HashSet<KeyValuePair<string, bool>> worldstate;
     HashSet<KeyValuePair<string, bool>> goalstate;
+    public HashSet<KeyValuePair<string, bool>> hasToolState;
+    public HashSet<KeyValuePair<string, bool>> noToolState;
 
+
+    public GameObject tool;
+    public int toolDurability;
     // Use this for initialization
     public override void Start () 
     {
         base.Start();
+        tool.SetActive(false);
+        anim = GetComponentInChildren<Animator>();
         attachedActions = GetComponents<goapAction>();
         avaliableActions = attachedActions.ToList();
-        worldstate = new HashSet<KeyValuePair<string, bool>>();
-        worldstate.Add(new KeyValuePair<string, bool>("hasAxe", false));
+
+        hasToolState = new HashSet<KeyValuePair<string, bool>>();
+        hasToolState.Add(new KeyValuePair<string, bool>("hasAxe", true));
+        noToolState = new HashSet<KeyValuePair<string, bool>>();
+        noToolState.Add(new KeyValuePair<string, bool>("hasAxe", false));
+
         goalstate = new HashSet<KeyValuePair<string, bool>>();
         goalstate.Add(new KeyValuePair<string, bool>("taskComplete", true));
         planner = new goapPlanner();
         fsm = new FSM(this);
-        
 	}
 	
 	// Update is called once per frame
@@ -41,6 +51,18 @@ public class goapAgent : baseAI
     private void LateUpdate()
     {
         fsm.LateUpdate();
+    }
+
+    public bool hasTool()
+    {
+        if(tool.activeSelf)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public HashSet<KeyValuePair<string, bool>> getWorldState()

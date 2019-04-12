@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class dropOffWood : goapAction
 {
@@ -24,6 +25,8 @@ public class dropOffWood : goapAction
     {
         if (inRange)
         {
+            
+            agent.setWorldState(agent.hasToolState);
             return true;
         }
         else

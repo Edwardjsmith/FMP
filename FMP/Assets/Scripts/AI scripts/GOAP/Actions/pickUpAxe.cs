@@ -5,10 +5,7 @@ public class pickUpAxe : goapAction
 
     public pickUpAxe() : base()
     {
-        //addPrecondition("hasWood", false);
-        addPrecondition("hasAxe", false);
         addEffect("hasAxe", true);
-        //addEffect("taskComplete", false);
     }
     private void Start()
     {
@@ -24,6 +21,7 @@ public class pickUpAxe : goapAction
     {
         if(inRange)
         {
+            agent.tool.SetActive(true);
             return true;
         }
         else

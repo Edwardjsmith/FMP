@@ -20,7 +20,7 @@ public class agentActions : MonoBehaviour
     public bool moveTo(GameObject target)
     {
         agent.getData().GetAgent().destination = target.transform.position;
-        if (Vector3.Distance(transform.position, target.transform.position) > 1.0f)
+        if (Vector3.Distance(transform.position, target.transform.position) > 1.5f)
         {
             return false;
         }

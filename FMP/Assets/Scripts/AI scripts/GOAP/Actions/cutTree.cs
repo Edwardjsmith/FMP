@@ -3,14 +3,12 @@
 public class cutTree : goapAction
 {
     GameObject[] trees;
-    
+    float cutTime = 8.0f;
     public cutTree() : base()
     {
-        //addPrecondition("hasWood", false);
         addPrecondition("hasAxe", true);
         addEffect("hasWood", true);
         addPreEffect("hasAxe", true);
-        
     }
 
     private void Start()
@@ -26,9 +24,26 @@ public class cutTree : goapAction
 
     public override bool executeAction(goapAgent agent)
     {
+        cutTime -= Time.deltaTime;
         if (inRange)
         {
-            return true;
+            
+            agent.getAnim().Play("Attack");
+            if (cutTime <= 0)
+            {
+                cutTime = 8.0f;
+
+                if(Random.Range(0, 50) < 1)
+                {
+                    agent.tool.SetActive(false);
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
