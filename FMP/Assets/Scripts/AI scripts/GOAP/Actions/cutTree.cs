@@ -27,13 +27,11 @@ public class cutTree : goapAction
         cutTime -= Time.deltaTime;
         if (inRange)
         {
-            
             agent.getAnim().Play("Attack");
             if (cutTime <= 0)
             {
                 cutTime = 8.0f;
-
-                if(Random.Range(0, 50) < 1)
+                if (Random.Range(0, 3) < 1)
                 {
                     agent.tool.SetActive(false);
                 }

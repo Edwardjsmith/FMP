@@ -23,6 +23,7 @@ public class playerScript : flockEntity
     {
         anim = GetComponent<Animator>();
         anim.Play("Swim");
+        speed = 10.0f;
     }
 	
 	// Update is called once per frame
