@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class FSM
 {
     public State<goapAgent> currentState;
     goapAgent agent;
-
     public SortedDictionary<string, State<goapAgent>> States;
 
     public FSM(goapAgent bot)
@@ -216,7 +216,6 @@ public class FSMPerformAction : State<goapAgent>
         if(currentAction.inRange)
         {
             currentAction.executeAction(agent);
-            Debug.Log("Action executed");
         }
         else
         {

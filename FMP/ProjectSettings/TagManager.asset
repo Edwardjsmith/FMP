@@ -15,6 +15,7 @@ TagManager:
   - Wall
   - point
   - Tree
+  - Guard
   layers:
   - Default
   - TransparentFX

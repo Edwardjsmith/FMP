@@ -492,6 +492,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1143606714458498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4615608706078208}
+  - component: {fileID: 23631315642505594}
+  - component: {fileID: 102152543658004798}
+  - component: {fileID: 114869327018734900}
+  m_Layer: 0
+  m_Name: Plan
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1145457034799732
 GameObject:
   m_ObjectHideFlags: 1
@@ -4187,10 +4205,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850035588545084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -34, y: 0.5, z: -46}
+  m_LocalPosition: {x: -5, y: 0.5, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4243483780545434}
+  - {fileID: 4615608706078208}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4644,6 +4663,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4173513371962770}
   m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4615608706078208
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143606714458498}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4398546503576588}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4621311028217168
 Transform:
@@ -7698,6 +7730,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &23631315642505594
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143606714458498}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23631380587614994
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -10019,6 +10086,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!102 &102152543658004798
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143606714458498}
+  m_Text: 
+  m_OffsetZ: 0
+  m_CharacterSize: 1
+  m_LineSpacing: 1
+  m_Anchor: 1
+  m_Alignment: 1
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!114 &114074795790716256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10033,6 +10121,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   inRange: 0
+  actionName: Chop tree
 --- !u!114 &114233087736137670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10064,6 +10153,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   inRange: 0
+  actionName: Pick up wood axe
 --- !u!114 &114367532732241596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10078,6 +10168,7 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   inRange: 0
+  actionName: Drop off wood
 --- !u!114 &114374565274159560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10094,7 +10185,6 @@ MonoBehaviour:
   hasWood: 0
   taskComplete: 0
   tool: {fileID: 1588825441590360}
-  toolDurability: 0
 --- !u!114 &114513640748103608
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10130,6 +10220,17 @@ MonoBehaviour:
   coverTarget: {fileID: 0}
   doorTarget: {fileID: 0}
   potentialTarget: {fileID: 0}
+--- !u!114 &114869327018734900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143606714458498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d841f706a2c8a242b34451744931aee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!136 &136636872861754336
 CapsuleCollider:
   m_ObjectHideFlags: 1

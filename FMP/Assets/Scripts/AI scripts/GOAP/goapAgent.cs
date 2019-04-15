@@ -21,7 +21,6 @@ public class goapAgent : baseAI
 
 
     public GameObject tool;
-    public int toolDurability;
     // Use this for initialization
     public override void Start () 
     {
@@ -70,6 +69,7 @@ public class goapAgent : baseAI
         return worldstate;
     }
 
+    
     public void setWorldState(HashSet<KeyValuePair<string, bool>> state)
     {
         worldstate = state;

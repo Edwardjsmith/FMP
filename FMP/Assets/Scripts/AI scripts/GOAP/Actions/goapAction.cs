@@ -12,6 +12,7 @@ public abstract class goapAction : MonoBehaviour
     public GameObject target;
 
     public bool inRange = false;
+    public string actionName;
 
     public goapAction()
     {
@@ -34,7 +35,6 @@ public abstract class goapAction : MonoBehaviour
 
     public abstract bool taskComplete(goapAgent agent);
 
-    public abstract bool testAction(goapAgent agent);
     public abstract bool executeAction(goapAgent agent);
 
     public abstract bool checkTarget(goapAgent agent);

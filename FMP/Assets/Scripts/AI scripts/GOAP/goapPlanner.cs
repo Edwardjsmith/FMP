@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
-using UnityEngine;
+
 
 public class goapPlanner
 {
-    List<goapNode> path;
+    List<goapNode> completePlan;
 
     public Queue<goapAction> plan(goapAgent agent, List<goapAction> actions, HashSet<KeyValuePair<string, bool>> worldState, HashSet<KeyValuePair<string, bool>> goalState)
     {
@@ -28,7 +28,7 @@ public class goapPlanner
         }
 
         Queue<goapAction> plan = new Queue<goapAction>();
-        foreach (goapNode node in path)
+        foreach (goapNode node in completePlan)
         {
             if (node.action != null)
             {
@@ -43,13 +43,18 @@ public class goapPlanner
         return plan;
     }
 
+    public List<goapNode> getPlan()
+    {
+        return completePlan;
+    }
+
     bool retracePath(goapNode startNode, goapNode targetNode)
     {
         goapNode current = startNode;
-        path = new List<goapNode>();
+        completePlan = new List<goapNode>();
         while (current != null)
         {
-            path.Add(current);
+            completePlan.Add(current);
             current = current.parent;
         }
 
