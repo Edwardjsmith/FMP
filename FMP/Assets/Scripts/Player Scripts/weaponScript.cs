@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class weaponScript : MonoBehaviour
 {
@@ -7,23 +6,29 @@ public class weaponScript : MonoBehaviour
     public float projectileRange;
     public int ammo;
     public float scaleLimit;
-
     bool enemyInSight = false;
+    public LayerMask targetLayer;
+    public GameObject parent;
 
+    AudioSource gunshot;
+
+    float rateOfFire = 0;
     // Use this for initialization
     void Start ()
     {
+        gunshot = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.DrawRay(transform.parent.position, transform.parent.forward * projectileRange, Color.red);
+        rateOfFire -= Time.deltaTime;
+        Debug.DrawRay(parent.transform.position, parent.transform.forward * projectileRange, Color.red);
 
         RaycastHit hitTarget;
-        if (Physics.Raycast(transform.parent.position, transform.parent.forward, out hitTarget))
+        if (Physics.Raycast(parent.transform.position, parent.transform.forward, out hitTarget, targetLayer))
         {
-            enemyInSight = hitTarget.transform.tag == "entity" ? true : false;
+            enemyInSight = hitTarget.collider ? true : false;
         }
 	}
 
@@ -32,17 +37,27 @@ public class weaponScript : MonoBehaviour
         return enemyInSight;
     }
 
-    public void Fire()
+    public bool Fire()
     {
-        Vector3 direction = Random.insideUnitCircle * scaleLimit;
-        RaycastHit hitTarget;
-        if (Physics.Raycast(transform.position, transform.forward + direction, out hitTarget))
+        if (rateOfFire <= 0)
         {
-            if(hitTarget.transform.tag == "Entity")
+            Vector3 direction = Random.insideUnitCircle * scaleLimit;
+            RaycastHit hitTarget;
+            gunshot.Play();
+            rateOfFire = 2.0f;
+            if (Physics.Raycast(parent.transform.position, parent.transform.forward + direction, out hitTarget, targetLayer))
             {
-                GameObject go = hitTarget.transform.gameObject;
-                go.SendMessage("HitByShot", 1);
+                if (hitTarget.transform.tag == "entity" && hitTarget.collider.name != transform.parent.name)
+                {
+                    GameObject go = hitTarget.transform.gameObject;
+                    Debug.Log(hitTarget.collider.name);
+                    //Debug.Log("Hit");
+
+                    go.SendMessage("HitByShot");
+                }
             }
         }
+        return true;
+        
     }
 }

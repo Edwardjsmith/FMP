@@ -20,7 +20,7 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void EnterState()
     {
-        agent.getAnim().Play("walkAim");
+        //agent.getAnim().Play("walkAim");
     }
 
     public override void ExitState()

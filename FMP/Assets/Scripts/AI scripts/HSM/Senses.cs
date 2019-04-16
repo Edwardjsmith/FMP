@@ -118,14 +118,16 @@ public class Senses : MonoBehaviour
 
             if (agent.getData().coverTarget != null)
             {
-                if (targetDirection(agent.getData().enemyTarget))
+                agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(Random.Range(0, agent.getData().coverTarget.transform.childCount)).gameObject;
+
+                /*if (targetDirection(agent.getData().enemyTarget))
                 {
                     agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(1).gameObject;
                 }
                 else
                 {
                     agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(0).gameObject;
-                }
+                }*/
             }
         }
     }

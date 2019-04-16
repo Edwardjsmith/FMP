@@ -16,6 +16,7 @@ TagManager:
   - point
   - Tree
   - Guard
+  - Fire
   layers:
   - Default
   - TransparentFX

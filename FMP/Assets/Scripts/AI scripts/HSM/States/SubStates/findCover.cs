@@ -14,14 +14,15 @@ public class findCover : State<HSMAgent>
 
         transitionToPlayerDetected.Condition = agent.getTransitions().inCover;
         transitionToPlayerDetected.targetState = "Player detected";
-        transitions.Add(transitionToPlayerDetected);
+        //transitions.Add(transitionToPlayerDetected);
 
     }
 
 
     public override void EnterState()
     {
-        
+        agent.getAnim().Play("Run");
+        agent.getSenses().getCover();
     }
 
     public override void ExitState()
@@ -31,17 +32,8 @@ public class findCover : State<HSMAgent>
 
     public override void Update()
     {
-        if(agent.getData().enemyTarget != null && Vector3.Distance(agent.getData().enemyTarget.transform.position, agent.transform.position) < agent.getData().safeDistance)
-        {
-            agent.getData().coverTarget = null;
-        }
-
-        agent.getSenses().getCover();
-
-
         if (agent.getActions().takeCover())
         {
-            agent.getAnim().Play("crouchAim");
             if (agent.GetWeapon().ammo < 5)
             {
                 agent.getActions().reload();
@@ -50,6 +42,7 @@ public class findCover : State<HSMAgent>
             if (!agent.getActions().reloading)
             {
                 agent.getTransitions().covered = true;
+                agent.getAnim().Play("crouchAim");
             }
         }
 

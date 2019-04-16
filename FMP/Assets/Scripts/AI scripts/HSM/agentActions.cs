@@ -19,6 +19,7 @@ public class agentActions : MonoBehaviour
 
     public bool moveTo(GameObject target)
     {
+        Debug.Log(target);
         agent.getData().GetAgent().destination = target.transform.position;
         if (Vector3.Distance(transform.position, target.transform.position) > 1.5f)
         {
@@ -63,14 +64,12 @@ public class agentActions : MonoBehaviour
         {
             if (agent.GetWeapon().ammo > 0)
             {
-                if (rateOfFire <= 0)
+                if (agent.GetWeapon().Fire())
                 {
-                    agent.GetWeapon().Fire();
                     Debug.Log("Fire!");
-                    rateOfFire = 1.0f;
                     fireCounter++;
                 }
-                rateOfFire -= Time.deltaTime;
+                
             }
             else
             {

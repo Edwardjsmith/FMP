@@ -22,10 +22,6 @@ public class gameEntity : MonoBehaviour
 		
 	}
 
-    public virtual void HitByShot(float damage)
-    {
-        health -= damage;
-    }
 
     public weaponScript GetWeapon()
     {

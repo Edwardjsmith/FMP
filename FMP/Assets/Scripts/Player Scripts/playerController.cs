@@ -8,8 +8,17 @@ public class playerController : gameEntity
     public float Sensitivity;
     public float moveSpeed;
     float xAxisClamp = 0.0f;
-    
 
+    Animator anim;
+
+    public override void Start()
+    {
+        base.Start();
+        if(GetComponentInChildren<Animator>())
+        {
+            anim = GetComponentInChildren<Animator>();
+        }
+    }
     private void Awake()
     {
         Controller = GetComponent<CharacterController>();
@@ -39,8 +48,12 @@ public class playerController : gameEntity
 
         if(Input.GetMouseButton(0))
         {
-            //GetWeapon().Fire();
-            //Debug.Log("Fire");
+            if (GetWeapon() != null)
+            {
+                anim.Play("aimIdle");
+                GetWeapon().Fire();
+                Debug.Log("Fire");
+            }
         }
     }
 
@@ -49,6 +62,14 @@ public class playerController : gameEntity
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
+        if(vertical > 0)
+        {
+            anim.Play("Run");
+        }
+        else
+        {
+            anim.Play("aimIdle");
+        }
 
         //Movement
 

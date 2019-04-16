@@ -28,8 +28,11 @@ public class HSMAgent : baseAI
     }
     private void updatePath(GameObject path)
     {
-        patrolTarget = path;
-        getActions().moveTo(patrolTarget);
+        if (hsm.currentState == hsm.States["Idle"])
+        {
+            patrolTarget = path;
+            getActions().moveTo(patrolTarget);
+        }
     }
 
     public Transitions getTransitions()
@@ -37,9 +40,8 @@ public class HSMAgent : baseAI
         return stateTransitions;
     }
 
-    public override void HitByShot(float damage)
+    void HitByShot()
     {
-        base.HitByShot(damage);
         getTransitions().amHit = true;
     }
 

@@ -35,7 +35,8 @@ public class Transitions : MonoBehaviour
     {
         if(isHit())
         {
-            return isHit();
+            amHit = false;
+            return true;
         }
         else
         {
