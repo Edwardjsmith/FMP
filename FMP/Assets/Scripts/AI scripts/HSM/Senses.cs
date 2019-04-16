@@ -42,17 +42,17 @@ public class Senses : MonoBehaviour
                 }
             }
         }
-        /*if (GetComponent<HSMAgent>())
+        if (GetComponent<HSMAgent>())
         {
             if (verifiedTargets.Count > 0)
             {
-                agent.getTransitions().enemyTargetFound = true;
+                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = true;
             }
             else
             {
-                agent.getTransitions().enemyTargetFound = false;
+                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = false;
             }
-        }*/
+        }
 
         return verifiedTargets;
     }

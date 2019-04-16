@@ -21,6 +21,7 @@ public class Guard : State<HSMAgent>
     public override void EnterState()
     {
         Debug.Log("Entering inner state guard");
+        agent.getAnim().Play("Idle");
         agent.getData().GetAgent().isStopped = true;
     }
 

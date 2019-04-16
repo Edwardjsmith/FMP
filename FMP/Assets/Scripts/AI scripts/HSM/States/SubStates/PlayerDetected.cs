@@ -20,7 +20,7 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void EnterState()
     {
-
+        agent.getAnim().Play("walkAim");
     }
 
     public override void ExitState()
@@ -30,10 +30,12 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void Update()
     {
+        Debug.Log(agent.GetWeapon());
         if(Vector3.Distance(agent.transform.position, agent.getData().enemyTarget.transform.position) < agent.GetWeapon().projectileRange)
         {
             agent.getData().GetAgent().isStopped = true;
             agent.getActions().Aim();
+            agent.getAnim().Play("aimIdle");
             if (agent.GetWeapon().enemyInSights())
             {
                 agent.getActions().Shoot(agent.getData().enemyTarget);
@@ -43,6 +45,7 @@ public class PlayerDetected : State<HSMAgent>
         {
             agent.getData().GetAgent().isStopped = false;
             agent.getActions().moveTo(agent.getData().enemyTarget);
+            agent.getAnim().Play("walkAim");
         }
     }
 }

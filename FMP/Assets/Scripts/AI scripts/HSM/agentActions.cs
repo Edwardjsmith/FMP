@@ -95,6 +95,7 @@ public class agentActions : MonoBehaviour
     {
         transform.LookAt(new Vector3(agent.getData().enemyTarget.transform.position.x, transform.position.y, agent.getData().enemyTarget.transform.position.z));
         transform.GetChild(0).transform.LookAt(agent.getData().enemyTarget.transform.position);
+        
     }
 
 

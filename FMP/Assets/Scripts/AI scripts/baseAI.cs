@@ -9,6 +9,7 @@ public class baseAI : gameEntity {
     // Use this for initialization
     public override void Start ()
     {
+        base.Start();
         actions = GetComponent<agentActions>();
         senses = GetComponent<Senses>();
         data = GetComponent<Data>();

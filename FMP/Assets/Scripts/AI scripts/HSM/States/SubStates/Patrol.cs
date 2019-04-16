@@ -18,6 +18,7 @@ public class Patrol : State<HSMAgent>
 
     public override void EnterState()
     {
+        agent.getAnim().Play("Walk");
         agent.getActions().moveTo(agent.patrolTarget);
     }
 

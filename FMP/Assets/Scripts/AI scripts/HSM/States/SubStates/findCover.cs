@@ -41,6 +41,7 @@ public class findCover : State<HSMAgent>
 
         if (agent.getActions().takeCover())
         {
+            agent.getAnim().Play("crouchAim");
             if (agent.GetWeapon().ammo < 5)
             {
                 agent.getActions().reload();
