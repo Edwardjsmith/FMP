@@ -20,6 +20,7 @@ public abstract class State<baseAI>
         stateLevel = 1;
         agent = Agent;
         States = new SortedDictionary<string, State<baseAI>>();
+        transitions = new List<Transition>();
     }
     public List<Transition> transitions;
     public int stateLevel;

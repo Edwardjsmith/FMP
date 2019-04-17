@@ -8,6 +8,9 @@ public class billboard : MonoBehaviour
     string goapPlan;
     int count = 0;
 
+
+    public enum type { goap, HSM};
+    public type Type;
     // Use this for initialization
     void Start ()
     {
@@ -19,35 +22,39 @@ public class billboard : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if(agent.currentActions.Count > 0)
+        if (Type == type.goap)
         {
-            if (count > agent.currentActions.Count)
+            if (agent.currentActions.Count > 0)
             {
-                goapPlan = "";
+                if (count > agent.currentActions.Count)
+                {
+                    goapPlan = "";
+                    count = 0;
+                }
+
+                foreach (goapAction node in agent.currentActions)
+                {
+                    if (count < agent.currentActions.Count)
+                    {
+                        goapPlan += node.actionName + " -> ";
+                        count++;
+                    }
+                    else
+                    {
+
+                        break;
+                    }
+                }
+            }
+            else
+            {
                 count = 0;
+                goapPlan = "Planning...";
             }
 
-            foreach(goapAction node in agent.currentActions)
-            {
-                if (count < agent.currentActions.Count)
-                {
-                    goapPlan += node.actionName + " -> ";
-                    count++;
-                }
-                else
-                {
-
-                    break;
-                }
-            }
-        }
-        else
-        {
-            count = 0;
-            goapPlan = "Planning...";
+            text.text = goapPlan;
         }
 
-        text.text = goapPlan;
         transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, cam.transform.rotation * Vector3.up);
 	}
 }

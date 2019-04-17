@@ -2,14 +2,18 @@
 using UnityEngine;
 
 
+
 public class HSMAgent : baseAI
 {
     HSM hsm;
     Transitions stateTransitions;
     public GameObject patrolTarget;
 
-	// Use this for initialization
-	public override void Start ()
+    public TextMesh subState;
+    public TextMesh superState;
+
+    // Use this for initialization
+    public override void Start ()
     {
         base.Start();
         anim = GetComponentInChildren<Animator>();
@@ -21,6 +25,8 @@ public class HSMAgent : baseAI
 	void Update ()
     {
         hsm.Update();
+        subState.text = hsm.currentSubState().ToString();
+        superState.text = hsm.currentSuperState().ToString();
 	}
     private void LateUpdate()
     {

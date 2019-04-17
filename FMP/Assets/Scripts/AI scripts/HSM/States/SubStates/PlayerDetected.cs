@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class PlayerDetected : State<HSMAgent>
@@ -7,12 +6,12 @@ public class PlayerDetected : State<HSMAgent>
 
     public PlayerDetected(HSMAgent agent) : base(agent)
     {
-        transitions = new List<Transition>();
         Transition transitionToCover = new Transition();
 
         transitionToCover.Condition = agent.getTransitions().requireCover;
         transitionToCover.targetState = "FindCover";
         transitions.Add(transitionToCover);
+
 
     }
 
@@ -20,7 +19,7 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void EnterState()
     {
-        //agent.getAnim().Play("walkAim");
+        agent.getAnim().Play("walkAim");
     }
 
     public override void ExitState()
@@ -30,7 +29,6 @@ public class PlayerDetected : State<HSMAgent>
 
     public override void Update()
     {
-        Debug.Log(agent.GetWeapon());
         if(Vector3.Distance(agent.transform.position, agent.getData().enemyTarget.transform.position) < agent.GetWeapon().projectileRange)
         {
             agent.getData().GetAgent().isStopped = true;

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class Transitions : MonoBehaviour
@@ -40,7 +39,7 @@ public class Transitions : MonoBehaviour
         }
         else
         {
-             if(agent.getActions().fireCounter >= 2)
+             if(agent.getActions().fireCounter >= 8)
             {
                 agent.getActions().fireCounter = 0;
                 return true;

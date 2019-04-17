@@ -17,6 +17,7 @@ TagManager:
   - Tree
   - Guard
   - Fire
+  - Cover
   layers:
   - Default
   - TransparentFX

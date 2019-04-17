@@ -6,11 +6,7 @@ using UnityEngine.AI;
 public class agentActions : MonoBehaviour
 {
     baseAI agent;
-
-    float rateOfFire = 0.0f;
-    float reloadTime = 3.0f;
     public int fireCounter = 0;
-    public bool reloading = false;
 
     private void Start()
     {
@@ -19,7 +15,6 @@ public class agentActions : MonoBehaviour
 
     public bool moveTo(GameObject target)
     {
-        Debug.Log(target);
         agent.getData().GetAgent().destination = target.transform.position;
         if (Vector3.Distance(transform.position, target.transform.position) > 1.5f)
         {
@@ -49,7 +44,7 @@ public class agentActions : MonoBehaviour
     {
         agent.getData().GetAgent().destination = target;
         Debug.Log(target);
-        if (Vector3.Distance(transform.position, target) > 1.0f)
+        if (Vector3.Distance(transform.position, target) > 1.5f)
         {
             return false;
         }
@@ -73,22 +68,12 @@ public class agentActions : MonoBehaviour
             }
             else
             {
-                reload();
+                agent.GetWeapon().reload(agent);
             }
         }
     }
 
-    public void reload()
-    {
-        reloadTime -= Time.deltaTime;
-        reloading = true;
-        if(reloadTime <= 0)
-        {
-            reloadTime = 3.0f;
-            agent.GetWeapon().ammo = 10;
-            reloading = false;
-        }
-    }
+    
 
     public void Aim()
     {

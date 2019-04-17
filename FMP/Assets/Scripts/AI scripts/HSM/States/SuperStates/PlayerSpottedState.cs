@@ -6,7 +6,7 @@ public class PlayerSpottedState : SuperState
 {
     public PlayerSpottedState(HSMAgent agent) : base(agent)
     {
-        transitions = new List<Transition>();
+
     }
 
 

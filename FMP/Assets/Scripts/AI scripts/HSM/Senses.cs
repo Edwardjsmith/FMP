@@ -29,7 +29,37 @@ public class Senses : MonoBehaviour
 
     public List<GameObject> getTarget(LayerMask layer)
     {
-        Collider[] potentialTargets = Physics.OverlapSphere(transform.position, agent.getData().sightRange, layer);
+        Collider[] potentialTargets = Physics.OverlapSphere(agent.transform.position, agent.getData().sightRange, layer);
+
+        verifiedTargets.Clear();
+        foreach (Collider col in potentialTargets)
+        {
+            if (col.gameObject != gameObject)
+            {
+                if (verifyTarget(col.gameObject))
+                {
+                    verifiedTargets.Add(col.gameObject);
+                }
+            }
+        }
+        if (GetComponent<HSMAgent>())
+        {
+            if (verifiedTargets.Count > 0)
+            {
+                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = true;
+            }
+            else
+            {
+                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = false;
+            }
+        }
+
+        return verifiedTargets;
+    }
+
+    public List<GameObject> getTarget(LayerMask layer, Vector3 checkPos)
+    {
+        Collider[] potentialTargets = Physics.OverlapSphere(checkPos, agent.getData().sightRange, layer);
 
         verifiedTargets.Clear();
         foreach(Collider col in potentialTargets)
@@ -75,11 +105,11 @@ public class Senses : MonoBehaviour
         return tMin;
     }
 
-    public GameObject GetClosestSuitableCover(List<GameObject> obj)
+    public GameObject GetClosestSuitableCover(List<GameObject> obj, Vector3 pos)
     {
         GameObject tMin = null;
         float minDist = Mathf.Infinity;
-        Vector3 currentPos = transform.position;
+        Vector3 currentPos = pos;
         foreach (GameObject t in obj)
         {
             float dist = Vector3.Distance(t.transform.position, currentPos);
@@ -95,40 +125,43 @@ public class Senses : MonoBehaviour
         }
         return tMin;
         }
-
-        
-
-    public bool targetDirection(GameObject target)
+    public GameObject GetFlankSuitableCover(List<GameObject> obj, Vector3 pos)
     {
-        if(target.transform.position.z > transform.position.z) //Enemy somewhere in front
+        GameObject tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = pos;
+        float currentDist = Vector3.Distance(pos, agent.getData().enemyTarget.transform.position);
+
+        foreach (GameObject t in obj)
         {
-            return true;
+            float dist = Vector3.Distance(t.transform.position, currentPos);
+            float enemyDist = Vector3.Distance(t.transform.position, agent.getData().enemyTarget.transform.position);
+
+            if (dist < minDist && enemyDist < currentDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+
         }
-        else //Enemy somewhere behind
-        {
-            return false;
-        }
+        return tMin;
+    }
+
+    public void getCoverFlank(Vector3 position)
+    {
+        agent.getData().coverTarget = GetFlankSuitableCover(agent.getSenses().getTarget(cover), position).transform.position;
+
+        Vector3 targetDir = agent.getData().enemyTarget.transform.position - agent.getData().coverTarget;
+
+        agent.getData().coverTarget = agent.getData().coverTarget + (targetDir.normalized * -1f);
     }
 
     public void getCover()
     {
-        if (agent.getData().coverTarget == null)
-        {
-            agent.getData().coverTarget = GetClosestSuitableCover(agent.getSenses().getTarget(cover));
+        agent.getData().coverTarget = GetClosestSuitableCover(agent.getData().getCover(), agent.transform.position).transform.position;
 
-            if (agent.getData().coverTarget != null)
-            {
-                agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(Random.Range(0, agent.getData().coverTarget.transform.childCount)).gameObject;
+        Vector3 targetDir = agent.getData().enemyTarget.transform.position - agent.getData().coverTarget;
 
-                /*if (targetDirection(agent.getData().enemyTarget))
-                {
-                    agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(1).gameObject;
-                }
-                else
-                {
-                    agent.getData().coverTarget = agent.getData().coverTarget.transform.GetChild(0).gameObject;
-                }*/
-            }
-        }
+        agent.getData().coverTarget = agent.getData().coverTarget + (targetDir.normalized * -1f);
     }
 }

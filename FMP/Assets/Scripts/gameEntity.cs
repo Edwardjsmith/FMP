@@ -7,12 +7,18 @@ public class gameEntity : MonoBehaviour
     protected float health;
     weaponScript weapon;
 
+    Animator anim;
     // Use this for initialization
     public virtual void Start ()
     {
         if (GetComponentInChildren<weaponScript>())
         {
             weapon = GetComponentInChildren<weaponScript>();
+        }
+
+        if (GetComponentInChildren<Animator>())
+        {
+            anim = GetComponentInChildren<Animator>();
         }
     }
 	
@@ -26,5 +32,10 @@ public class gameEntity : MonoBehaviour
     public weaponScript GetWeapon()
     {
         return weapon;
+    }
+
+    public Animator getAnim()
+    {
+        return anim;
     }
 }

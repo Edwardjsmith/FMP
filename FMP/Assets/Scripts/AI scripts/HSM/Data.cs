@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,22 +18,37 @@ public class Data : MonoBehaviour
     public float safeDistance;
 
     public GameObject enemyTarget;
-    public GameObject coverTarget;
+    public Vector3 coverTarget;
 
     public GameObject doorTarget;
 
     public GameObject potentialTarget;
 
-	// Use this for initialization
-	void Start ()
+    public float runSpeed;
+    public float walkSpeed;
+
+    List<GameObject> cover;
+    GameObject[] findCover;
+
+    // Use this for initialization
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-	}
+        findCover = GameObject.FindGameObjectsWithTag("Cover");
+        cover = findCover.ToList();
+
+        walkSpeed = runSpeed = agent.speed;
+    }
+
+    public List<GameObject> getCover()
+    {
+        return cover;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+        agent.speed = speed;
 	}
 
     public NavMeshAgent GetAgent()

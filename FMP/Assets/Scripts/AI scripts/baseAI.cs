@@ -29,9 +29,4 @@ public class baseAI : gameEntity {
     {
         return data;
     }
-
-    public Animator getAnim()
-    {
-        return anim;
-    }
 }

@@ -9,15 +9,10 @@ public class playerController : gameEntity
     public float moveSpeed;
     float xAxisClamp = 0.0f;
 
-    Animator anim;
-
     public override void Start()
     {
         base.Start();
-        if(GetComponentInChildren<Animator>())
-        {
-            anim = GetComponentInChildren<Animator>();
-        }
+   
     }
     private void Awake()
     {
@@ -44,17 +39,17 @@ public class playerController : gameEntity
     }
     private void Update()
     {
-        
-
-        if(Input.GetMouseButton(0))
-        {
             if (GetWeapon() != null)
             {
-                anim.Play("aimIdle");
-                GetWeapon().Fire();
-                Debug.Log("Fire");
+                if (Input.GetMouseButton(0) && GetWeapon().ammo > 0 && !GetWeapon().reloading)
+                {
+                    GetWeapon().Fire();
+                }
+                else if(GetWeapon().ammo <= 0)
+                {
+                    GetWeapon().reload(this);
+                }
             }
-        }
     }
 
     void movement()
@@ -62,13 +57,23 @@ public class playerController : gameEntity
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
-        if(vertical > 0)
+        if (vertical > 0)
         {
-            anim.Play("Run");
+            getAnim().Play("walkAim");
         }
-        else
+
+        if(horizontal < 0)
         {
-            anim.Play("aimIdle");
+            getAnim().Play("moveLeft");
+        }
+        else if(horizontal > 0)
+        {
+            getAnim().Play("moveRight");
+        }
+        
+        if(vertical == 0 && horizontal == 0)
+        {
+            getAnim().Play("aimIdle");
         }
 
         //Movement
