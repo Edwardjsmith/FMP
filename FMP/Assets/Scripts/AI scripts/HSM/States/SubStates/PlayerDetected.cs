@@ -11,20 +11,19 @@ public class PlayerDetected : State<HSMAgent>
         transitionToCover.Condition = agent.getTransitions().requireCover;
         transitionToCover.targetState = "FindCover";
         transitions.Add(transitionToCover);
-
-
     }
 
 
 
     public override void EnterState()
     {
-        agent.getAnim().Play("walkAim");
+        //agent.getAnim().Play("walkAim");
     }
 
     public override void ExitState()
     {
         agent.getData().GetAgent().isStopped = false;
+        agent.getAnim().SetBool("transitionToShooting", false);
     }
 
     public override void Update()
@@ -33,7 +32,7 @@ public class PlayerDetected : State<HSMAgent>
         {
             agent.getData().GetAgent().isStopped = true;
             agent.getActions().Aim();
-            agent.getAnim().Play("aimIdle");
+            agent.getAnim().SetBool("transitionToShooting", true);
             if (agent.GetWeapon().enemyInSights())
             {
                 agent.getActions().Shoot(agent.getData().enemyTarget);
@@ -43,7 +42,6 @@ public class PlayerDetected : State<HSMAgent>
         {
             agent.getData().GetAgent().isStopped = false;
             agent.getActions().moveTo(agent.getData().enemyTarget);
-            agent.getAnim().Play("walkAim");
         }
     }
 }

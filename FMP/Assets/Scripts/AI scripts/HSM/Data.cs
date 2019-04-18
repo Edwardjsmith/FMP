@@ -24,8 +24,8 @@ public class Data : MonoBehaviour
 
     public GameObject potentialTarget;
 
-    public float runSpeed;
-    public float walkSpeed;
+    public float runSpeed = 4f;
+    public float walkSpeed = 2f;
 
     List<GameObject> cover;
     GameObject[] findCover;
@@ -37,7 +37,7 @@ public class Data : MonoBehaviour
         findCover = GameObject.FindGameObjectsWithTag("Cover");
         cover = findCover.ToList();
 
-        walkSpeed = runSpeed = agent.speed;
+        speed = walkSpeed;
     }
 
     public List<GameObject> getCover()

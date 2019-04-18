@@ -14,8 +14,8 @@ public class findCover : State<HSMAgent>
 
     public override void EnterState()
     {
-        agent.getAnim().Play("Run");
-        agent.getData().speed = agent.getData().runSpeed;
+
+        agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getSenses().getCover();
     }
 
@@ -29,7 +29,7 @@ public class findCover : State<HSMAgent>
         if (agent.getActions().takeCover())
         {
             agent.getTransitions().covered = true;
-            agent.getAnim().Play("crouchAim");
+            agent.getAnim().SetBool("transitionToCrouch", true);
         }
 
     }

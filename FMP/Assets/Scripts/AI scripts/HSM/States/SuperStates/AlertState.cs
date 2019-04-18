@@ -29,6 +29,8 @@ public class AlertState : SuperState
         {
             currentState = States["Player detected"];
         }
+
+        //agent.getData().speed = agent.getData().walkSpeed;
     }
     public override void Update()
     {

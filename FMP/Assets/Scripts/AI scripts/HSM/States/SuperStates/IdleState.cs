@@ -28,7 +28,8 @@ public class IdleState : SuperState
 
     public override void EnterState()
     {
-        
+        agent.getAnim().SetBool("transitionToCrouch", false);
+        agent.getData().speed = agent.getData().walkSpeed;
     }
     public override void Update()
     {

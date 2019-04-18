@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class Transitions : MonoBehaviour
 {
-    float timer = 10.0f;
+    float guardTimer = 10.0f;
     public bool enemyTargetFound = false;
 
     public bool amHit = false;
     public bool covered = false;
 
+    float coverTimer = 1.5f;
     HSMAgent agent;
 
     private void Start()
@@ -17,11 +18,11 @@ public class Transitions : MonoBehaviour
     }
     public bool TransitionToGuard()
     {
-        timer -= Time.deltaTime;
+        guardTimer -= Time.deltaTime;
 
-        if(timer <= 0)
+        if(guardTimer <= 0)
         {
-            timer = 10.0f;
+            guardTimer = 10.0f;
             return true;
         }
         else
@@ -39,11 +40,12 @@ public class Transitions : MonoBehaviour
         }
         else
         {
-             if(agent.getActions().fireCounter >= 8)
+            if(coverTimer <= 0)
             {
-                agent.getActions().fireCounter = 0;
+                coverTimer = 1.5f;
                 return true;
             }
+            coverTimer -= Time.deltaTime;
         }
 
         return false;

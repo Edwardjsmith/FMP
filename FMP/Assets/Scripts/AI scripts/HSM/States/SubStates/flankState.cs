@@ -19,9 +19,7 @@ public class flankState : State<HSMAgent>
     }
     public override void EnterState()
     {
-        agent.getAnim().Play("Run");
-        agent.getData().speed = agent.getData().runSpeed;
-        
+        agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getSenses().getCoverFlank(agent.transform.position);
     }
 
@@ -35,7 +33,7 @@ public class flankState : State<HSMAgent>
         if (agent.getActions().takeCover())
         {
             agent.getTransitions().covered = true;
-            agent.getAnim().Play("crouchAim");
+            agent.getAnim().SetBool("transitionToCrouch", true);
         }
     }
 }

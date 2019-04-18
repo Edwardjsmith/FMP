@@ -5,7 +5,7 @@ using UnityEngine;
 public class shortRangedAttack : State<HSMAgent>
 {
     bool run = false;
-    float timer = 1.0f;
+    float timer = 1.5f;
     public shortRangedAttack(HSMAgent bot) : base(bot)
     {
         transitions = new List<Transition>();
@@ -23,13 +23,14 @@ public class shortRangedAttack : State<HSMAgent>
     }
     public override void EnterState()
     {
-        agent.getAnim().Play("Run");
-        agent.getData().speed = agent.getData().runSpeed;
+        agent.getAnim().SetBool("transitionToCrouch", false);
+        agent.getAnim().SetBool("transitionToShooting", true);
     }
 
     public override void ExitState()
     {
         run = false;
+        agent.getAnim().SetBool("transitionToShooting", false);
     }
 
     public override void Update()
@@ -39,10 +40,8 @@ public class shortRangedAttack : State<HSMAgent>
 
         if (agent.getActions().moveTo(target))
         {
+            agent.getActions().Aim();
             agent.getActions().Shoot(agent.getData().enemyTarget);
-            agent.getAnim().Play("singleShot");
-            agent.getActions().Shoot(agent.getData().enemyTarget);
-
             if (timer <= 0)
             {
                 run = true;

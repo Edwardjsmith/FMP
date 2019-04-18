@@ -27,9 +27,13 @@ public class HSMAgent : baseAI
         hsm.Update();
         subState.text = hsm.currentSubState().ToString();
         superState.text = hsm.currentSuperState().ToString();
+
+        
 	}
     private void LateUpdate()
     {
+        getAnim().SetFloat("velY", getData().GetAgent().velocity.z);
+        getAnim().SetFloat("velX", getData().GetAgent().velocity.x);
         hsm.LateUpdate();
     }
     private void updatePath(GameObject path)
