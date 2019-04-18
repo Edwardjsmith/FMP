@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class Grid : MonoBehaviour
 {
@@ -17,8 +17,12 @@ public class Grid : MonoBehaviour
     public LayerMask enemy;
     public LayerMask wall;
 
+    int xPos, zPos;
+
+
     private void Start()
     {
+        
         gridWorldSize = new Vector2(transform.localScale.x - 1, transform.localScale.z - 1); //Sizes the grid depending on the size of the floor
 
         nodeDiameter = nodeRadius * 2;
@@ -38,8 +42,8 @@ public class Grid : MonoBehaviour
     }
     public Node nodeFromWorldPoint(Vector3 worldPos)
     {
-        float percentX = (worldPos.x - transform.position.x) / gridWorldSize.x + 0.5f - (nodeRadius / gridWorldSize.x);
-        float percentY = (worldPos.z - transform.position.z) / gridWorldSize.y + 0.5f - (nodeRadius / gridWorldSize.y);
+        float percentX = (worldPos.x - xPos) / gridWorldSize.x + 0.5f - (nodeRadius / gridWorldSize.x);
+        float percentY = (worldPos.z - zPos) / gridWorldSize.y + 0.5f - (nodeRadius / gridWorldSize.y);
 
         percentX = Mathf.Clamp01(percentX);
         percentY = Mathf.Clamp01(percentY);
@@ -77,8 +81,41 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
+    void calculateNodeFCost()
+    {
+        foreach (Node n in worldGrid)
+        {
+            n.tacticalCost = 0;
+            n.enemyLineOfSight = false;
+            n.hit = Physics.OverlapSphere(n.worldPos, 0.1f, enemy);
+
+            foreach (Collider h in n.hit)
+            {
+                if (h.tag == "enemy")
+                {
+                    RaycastHit hitInfo;
+                    if (Physics.Linecast(n.worldPos, h.transform.position, out hitInfo, wall))
+                    {
+                        if (hitInfo.transform.name != "Wall")
+                        {
+                            float proximity = Vector3.Distance(n.worldPos, h.transform.position);
+                            n.tacticalCost += n.tacticalModifier / proximity;
+                            n.enemyLineOfSight = true;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        calculateNodeFCost();
+    }
     void createGrid()
     {
+        xPos = (int)transform.position.x;
+        zPos = (int)transform.position.z;
         worldGrid = new Node[gridSizeX, gridSizeY];
 
         worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 //Gives bottom left corner of world

@@ -21,13 +21,17 @@ public class Node  : IHeapItem<Node>
 
     int heapIndex;
     public bool enemyLineOfSight = false;
-    const int tacticalModifier = 100;
+    public int tacticalModifier = 100;
 
     public GameObject tile;
     public Renderer rend;
 
     public LayerMask wall;
     public LayerMask enemy;
+
+    public Collider[] hit;
+
+    public List<Enemy> enemies;
     public Node(bool _walkable, Vector3 _worldPos, int _gridX, int _gridY)
     {
         walkable = _walkable;
@@ -35,21 +39,28 @@ public class Node  : IHeapItem<Node>
 
         gridX = _gridX;
         gridY = _gridY;
+        enemies = new List<Enemy>();
 
+    }
+
+    public struct Enemy
+    {
+        public Vector3 pos;
+        public string name;
     }
 
     public int fCost()
     {
-        tacticalCost = 0;
+        /*tacticalCost = 0;
         enemyLineOfSight = false;
 
-        Collider[] hit = Physics.OverlapSphere(worldPos, 1f, enemy);
+        Collider[] hit = Physics.OverlapSphere(worldPos, 0.1f, enemy);
         foreach (Collider h in hit)
         {
             if (h.tag == "enemy")
             {
                 RaycastHit hitInfo;
-                if (Physics.Linecast(worldPos, h.transform.position, out hitInfo, wall))
+                if(Physics.Linecast(worldPos, h.transform.position, out hitInfo, wall))
                 {
                     if (hitInfo.transform.name != "Wall" &&  hitInfo.collider != h)
                     {
@@ -60,7 +71,7 @@ public class Node  : IHeapItem<Node>
                 }
             }
 
-        }
+        }*/
 
         return gCost + hCost + (int)tacticalCost;
     }

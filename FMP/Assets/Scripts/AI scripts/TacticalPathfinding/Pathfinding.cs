@@ -1,65 +1,79 @@
-﻿using Unity.Collections;
-using Unity.Jobs;
-using UnityEngine.Jobs;
+﻿
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
-
-struct findPathJob : IJobParallelFor
-{
-    public void Execute(int i)
-    {
-
-    }
-}
 public class Pathfinding : MonoBehaviour
 {
     public Grid grid;
 
     public GameObject[] targetObj;
-    Vector3 target;
+    public Vector3 target;
     public List<Node> newPath;
 
-    public bool pathFound = false;
+    public List<Vector3> targetPositions;
+   
+    public bool threadCreated = false;
+    testTacticalPlayerScript player;
+    Vector3 playerPos;
+
+    public bool createNewPath = true;
+
+    int randomNumber = 0;
+
+    Color red;
+    Color blue;
+    Color yellow;
+    Color clear;
+    float transparency = 0.1f;
+    bool hideMetrics = false;
+
     private void Start()
     {
-        
+        clear = new Color(0, 0, 0, 0);
+
+        player = GetComponentInParent<testTacticalPlayerScript>();
+        playerPos = player.transform.position;
+        targetPositions = new List<Vector3>();
+
+        foreach(GameObject go in targetObj)
+        {
+            targetPositions.Add(go.transform.position);
+        }
+
     }
 
     private void Update()
     {
-        if (!pathFound)
+        playerPos = player.transform.position;
+        randomNumber = Random.Range(0, targetPositions.Count - 1);
+
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector3 newTarget;
-            do
-            {
-                newTarget = targetObj[Random.Range(0, targetObj.Length - 1)].transform.position;
-
-            } while (newTarget == target);
-
-
-            target = newTarget;
-            findPath(transform.position, target);
-            pathFound = true;
+            hideMetrics = !hideMetrics;
         }
+        transparency = hideMetrics ? 0.1f : 0;
     }
 
     private void FixedUpdate()
     {
         if (grid != null)
         {
+            red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
+            blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
+            yellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, transparency);
+
             foreach (Node node in grid.worldGrid)
             {
-                node.rend.material.color = (node.enemyLineOfSight) ? Color.red : Color.white;
+                node.rend.material.color = (node.enemyLineOfSight) ? red : clear;
 
-                if (!node.walkable) node.rend.material.color = Color.yellow;
+                if (!node.walkable) node.rend.material.color = yellow;
 
                 if (newPath != null)
                 {
                     if (newPath.Contains(node))
                     {
-                        node.rend.material.color = Color.blue;
+                        node.rend.material.color = blue;
                     }
                 }
             }
@@ -67,51 +81,75 @@ public class Pathfinding : MonoBehaviour
     }
 
 
-    public void findPath(Vector3 startPos, Vector3 targetPos)
+    public void calculatePath()
     {
-        Node startNode = grid.nodeFromWorldPoint(startPos);
-        Node targetNode = grid.nodeFromWorldPoint(targetPos);
-
-        Heap<Node> openSet = new Heap<Node>(grid.maxSize);
-        HashSet<Node> closedSet = new HashSet<Node>();
-
-        openSet.add(startNode);
-
-        while(openSet.count > 0)
+        while (true)
         {
-            Node currentNode = openSet.removeFirst();
-            closedSet.Add(currentNode);
-
-            if (currentNode == targetNode)
+            if (createNewPath)
             {
-                StartCoroutine(retracePath(startNode, targetNode));
+                createNewPath = false;
+
+                Vector3 newTarget;
+                do
+                {
+                    newTarget = targetPositions[randomNumber];
+
+                } while (newTarget == target);
+
+                target = newTarget;
             }
 
-            foreach (Node neighbour in grid.getNeighbours(currentNode))
-            {
+            Vector3 startPos = playerPos;
+            Vector3 targetPos = target;
 
-                if (!neighbour.walkable || closedSet.Contains(neighbour))
+            Node startNode = grid.nodeFromWorldPoint(startPos);
+            Node targetNode = grid.nodeFromWorldPoint(targetPos);
+
+            List<Node> openSet = new List<Node>();
+            HashSet<Node> closedSet = new HashSet<Node>();
+
+            openSet.Add(startNode);
+
+            while (openSet.Count > 0)
+            {
+                Node currentNode = openSet[0];
+
+                for(int i = 0; i < openSet.Count; i++)
                 {
-                    continue;
+                    if(openSet[i].fCost() < currentNode.fCost() || (openSet[i].fCost() == currentNode.fCost() && openSet[i].hCost < currentNode.hCost))
+                    {
+                        currentNode = openSet[i];
+                    }
                 }
 
-                int newMoveCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour);
+                openSet.Remove(currentNode);
+                closedSet.Add(currentNode);
 
-                if (newMoveCostToNeighbour < neighbour.gCost || !openSet.contains(neighbour))
+                if (currentNode == targetNode)
                 {
-                    neighbour.gCost = newMoveCostToNeighbour;
-                    neighbour.hCost = getDistance(neighbour, targetNode);
+                    retracePath(startNode, targetNode);
+                }
 
-                    neighbour.parent = currentNode;
-
-                    if (!openSet.contains(neighbour))
+                foreach (Node neighbour in grid.getNeighbours(currentNode))
+                {
+                    if (!neighbour.walkable || closedSet.Contains(neighbour))
                     {
-                        openSet.add(neighbour);
-
+                        continue;
                     }
-                    else
+
+                    int newMoveCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour);
+
+                    if (newMoveCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
-                        openSet.updateItem(neighbour);
+                        neighbour.gCost = newMoveCostToNeighbour;
+                        neighbour.hCost = getDistance(neighbour, targetNode);
+
+                        neighbour.parent = currentNode;
+
+                        if (!openSet.Contains(neighbour))
+                        {
+                            openSet.Add(neighbour);
+                        }
                     }
                 }
             }
@@ -120,22 +158,20 @@ public class Pathfinding : MonoBehaviour
 
   
 
-    IEnumerator retracePath(Node start, Node end)
+    void retracePath(Node start, Node end)
     {
         List<Node> path = new List<Node>();
         Node currentNode = end;
 
         while(currentNode != start)
         {
-            //currentNode.worldPos = new Vector3(currentNode.worldPos.x, emp.transform.position.y, currentNode.worldPos.z); 
             path.Add(currentNode);
             currentNode = currentNode.parent;
         }
 
-        yield return null;
-
         path.Reverse();
         newPath = path;
+        player.canMove = true;
     }
 
     int getDistance(Node a, Node b)

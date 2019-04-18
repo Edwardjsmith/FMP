@@ -663,7 +663,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 6185877c-40cf-4940-85ef-3951be0868c3
   projectName: FMP
   organizationId: spottablefiend

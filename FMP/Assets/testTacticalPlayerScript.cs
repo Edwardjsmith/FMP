@@ -1,6 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using System.Threading;
+using System.Collections.Generic;
 
 public class testTacticalPlayerScript : MonoBehaviour
 {
@@ -11,25 +12,35 @@ public class testTacticalPlayerScript : MonoBehaviour
     float maxTurnSpeed = 5;
     float maxMoveSpeed = 5;
 
+    Thread pathfindingThread;
+
+    public bool canMove = false;
     // Use this for initialization
     void Start ()
     {
         pathFinding = GetComponent<Pathfinding>();
-	}
+    }
 	
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        Movement();
-        if(Input.GetKey(KeyCode.Escape))
+        if (!pathFinding.threadCreated)
         {
-            Application.Quit();
+            pathFinding.threadCreated = true;
+            pathfindingThread = new Thread(new ThreadStart(pathFinding.calculatePath));
+            pathfindingThread.Start();
         }
+        Movement();
+    }
+
+    private bool inBounds(int index, List<Node> List)
+    {
+        return (index >= 0) && (index < List.Count);
     }
 
     private void Movement()
     {
-        if (pathFinding.newPath[currentPathPoint].worldPos != null)
+        if(canMove && inBounds(currentPathPoint, pathFinding.newPath))
         {
             followPath = pathFinding.newPath[currentPathPoint].worldPos;
             Vector3 pathPosition = new Vector3(followPath.x, transform.position.y, followPath.z);
@@ -47,14 +58,19 @@ public class testTacticalPlayerScript : MonoBehaviour
                 currentPathPoint = (currentPathPoint + 1) % pathFinding.newPath.Count;
             }
         }
+        else
+        {
+            transform.position += transform.forward * Time.deltaTime * maxMoveSpeed;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "point")
         {
+            canMove = false;
             currentPathPoint = 0;
-            pathFinding.pathFound = false;
+            pathFinding.createNewPath = true;
         }
     }
 }

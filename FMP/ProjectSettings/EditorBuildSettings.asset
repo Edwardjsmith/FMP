@@ -17,7 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Tactical pathfinding/TacticalPathfinding.unity
     guid: e29328f073a9df947b2fcefced990809
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GOAP/GOAP.unity
     guid: 4f6cd22894d9e644cbbe7b112c6aaa77
+  - enabled: 1
+    path: Assets/Scenes/HSM/HSM.unity
+    guid: 7ad91e1d879da3741a242ee33f5dc50e
   m_configObjects: {}
