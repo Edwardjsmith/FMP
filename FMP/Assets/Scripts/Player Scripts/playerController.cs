@@ -57,7 +57,7 @@ public class playerController : gameEntity
         float horizontal = Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime;
         float vertical = Input.GetAxis("Vertical") * moveSpeed * Time.deltaTime;
 
-        if (vertical > 0)
+        /*if (vertical > 0)
         {
             getAnim().Play("walkAim");
         }
@@ -74,7 +74,7 @@ public class playerController : gameEntity
         if(vertical == 0 && horizontal == 0)
         {
             getAnim().Play("aimIdle");
-        }
+        }*/
 
         //Movement
 

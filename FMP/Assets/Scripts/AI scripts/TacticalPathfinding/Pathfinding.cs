@@ -7,7 +7,7 @@ public class Pathfinding : MonoBehaviour
 {
     public Grid grid;
 
-    public GameObject[] targetObj;
+    GameObject[] targetObj;
     public Vector3 target;
     public List<Node> newPath;
 
@@ -31,7 +31,7 @@ public class Pathfinding : MonoBehaviour
     private void Start()
     {
         clear = new Color(0, 0, 0, 0);
-
+        targetObj = GameObject.FindGameObjectsWithTag("point");
         player = GetComponentInParent<testTacticalPlayerScript>();
         playerPos = player.transform.position;
         targetPositions = new List<Vector3>();
@@ -40,6 +40,10 @@ public class Pathfinding : MonoBehaviour
         {
             targetPositions.Add(go.transform.position);
         }
+
+        red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
+        blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
+        yellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, transparency);
 
     }
 
@@ -52,29 +56,34 @@ public class Pathfinding : MonoBehaviour
         {
             hideMetrics = !hideMetrics;
         }
-        transparency = hideMetrics ? 0.1f : 0;
     }
 
     private void FixedUpdate()
     {
         if (grid != null)
         {
-            red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
-            blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
-            yellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, transparency);
-
-            foreach (Node node in grid.worldGrid)
+            if (!hideMetrics)
             {
-                node.rend.material.color = (node.enemyLineOfSight) ? red : clear;
-
-                if (!node.walkable) node.rend.material.color = yellow;
-
-                if (newPath != null)
+                foreach (Node node in grid.worldGrid)
                 {
-                    if (newPath.Contains(node))
+                    node.rend.material.color = (node.enemyLineOfSight) ? red : clear;
+
+                    if (!node.walkable) node.rend.material.color = yellow;
+
+                    if (newPath != null)
                     {
-                        node.rend.material.color = blue;
+                        if (newPath.Contains(node))
+                        {
+                            node.rend.material.color = blue;
+                        }
                     }
+                }
+            }
+            else
+            {
+                foreach(Node n in grid.worldGrid)
+                {
+                    n.rend.material.color = Color.clear;
                 }
             }
         }

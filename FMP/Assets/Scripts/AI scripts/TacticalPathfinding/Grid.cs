@@ -96,7 +96,7 @@ public class Grid : MonoBehaviour
                     RaycastHit hitInfo;
                     if (Physics.Linecast(n.worldPos, h.transform.position, out hitInfo, wall))
                     {
-                        if (hitInfo.transform.name != "Wall")
+                        if (hitInfo.transform.tag != "unwalkable")
                         {
                             float proximity = Vector3.Distance(n.worldPos, h.transform.position);
                             n.tacticalCost += n.tacticalModifier / proximity;
