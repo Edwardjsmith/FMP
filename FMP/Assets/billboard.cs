@@ -24,7 +24,7 @@ public class billboard : MonoBehaviour
     {
         if (Type == type.goap)
         {
-            if (agent.currentActions.Count > 0)
+            if (agent.currentActions != null)
             {
                 if (count > agent.currentActions.Count)
                 {

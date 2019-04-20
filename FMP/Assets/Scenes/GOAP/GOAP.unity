@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 2764872}
   - component: {fileID: 2764874}
   - component: {fileID: 2764873}
+  - component: {fileID: 2764875}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -190,6 +191,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2764871}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &2764875
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2764871}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &3215179
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,6 +214,7 @@ GameObject:
   - component: {fileID: 3215180}
   - component: {fileID: 3215182}
   - component: {fileID: 3215181}
+  - component: {fileID: 3215183}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -267,6 +281,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 3215179}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &3215183
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 3215179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &22317114
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +340,7 @@ GameObject:
   - component: {fileID: 32828331}
   - component: {fileID: 32828333}
   - component: {fileID: 32828332}
+  - component: {fileID: 32828334}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -380,6 +407,59 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 32828330}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &32828334
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 32828330}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
+--- !u!1 &36025467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 36025468}
+  - component: {fileID: 36025469}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &36025468
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36025467}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -14.529999, y: -9.9, z: 53.88}
+  m_LocalScale: {x: 59, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 531491456}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &36025469
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36025467}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &50856705
 Prefab:
   m_ObjectHideFlags: 0
@@ -417,7 +497,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a43f0d6131f84de40b182eb70bb23b87, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: a43f0d6131f84de40b182eb70bb23b87, type: 3}
       propertyPath: m_Name
@@ -471,7 +551,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4218880662296358, guid: f5bf36dba95fbff46bae1cb49fd47e0c, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5bf36dba95fbff46bae1cb49fd47e0c, type: 2}
@@ -487,6 +567,7 @@ GameObject:
   - component: {fileID: 101891803}
   - component: {fileID: 101891805}
   - component: {fileID: 101891804}
+  - component: {fileID: 101891806}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -553,6 +634,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 101891802}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &101891806
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 101891802}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &168199354
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,6 +657,7 @@ GameObject:
   - component: {fileID: 168199355}
   - component: {fileID: 168199357}
   - component: {fileID: 168199356}
+  - component: {fileID: 168199358}
   m_Layer: 0
   m_Name: Mesh1_Plate_River_Corner_Dirt_Model
   m_TagString: Untagged
@@ -631,6 +725,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 168199354}
   m_Mesh: {fileID: 4300000, guid: 93f046ba317f4e04e83de46bb4fe0199, type: 3}
+--- !u!65 &168199358
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 168199354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &278929424
 Prefab:
   m_ObjectHideFlags: 0
@@ -668,7 +774,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 06905b5e993435c4e9526f63c49622e3, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 06905b5e993435c4e9526f63c49622e3, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -718,7 +824,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4218949833316606, guid: 63f9346a30f6dac44920309e6915ef05, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1882488791263928, guid: 63f9346a30f6dac44920309e6915ef05, type: 2}
       propertyPath: m_Name
@@ -743,6 +849,7 @@ GameObject:
   - component: {fileID: 293303989}
   - component: {fileID: 293303991}
   - component: {fileID: 293303990}
+  - component: {fileID: 293303992}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -809,6 +916,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 293303988}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &293303992
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 293303988}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &338613539
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,8 +992,49 @@ Transform:
   - {fileID: 2043426897}
   - {fileID: 168199355}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &359872387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 359872388}
+  - component: {fileID: 359872389}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &359872388
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359872387}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 6.500583, y: -9.9, z: 23.896572}
+  m_LocalScale: {x: 59.00003, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 531491456}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &359872389
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 359872387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &400335373
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,6 +1046,7 @@ GameObject:
   - component: {fileID: 400335374}
   - component: {fileID: 400335376}
   - component: {fileID: 400335375}
+  - component: {fileID: 400335377}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -952,6 +1113,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 400335373}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &400335377
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 400335373}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &408306526
 Prefab:
   m_ObjectHideFlags: 0
@@ -989,7 +1162,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: aec20226064bbcc4d850e8da90e49a4b, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: aec20226064bbcc4d850e8da90e49a4b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1007,6 +1180,38 @@ Transform:
   m_PrefabParentObject: {fileID: 4218949833316606, guid: 63f9346a30f6dac44920309e6915ef05,
     type: 2}
   m_PrefabInternal: {fileID: 1991157338}
+--- !u!1 &531491455
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 531491456}
+  m_Layer: 0
+  m_Name: Bounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &531491456
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 531491455}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.599417, y: 10.691485, z: -42.19657}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1923827795}
+  - {fileID: 36025468}
+  - {fileID: 359872388}
+  - {fileID: 640840069}
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &548409372
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,6 +1223,7 @@ GameObject:
   - component: {fileID: 548409373}
   - component: {fileID: 548409375}
   - component: {fileID: 548409374}
+  - component: {fileID: 548409376}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1084,6 +1290,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 548409372}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &548409376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 548409372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
+--- !u!1 &574510082 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: 637b3bb1a53fd584b8b2f29eddb05290, type: 3}
+  m_PrefabInternal: {fileID: 599465305}
+--- !u!65 &574510086
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 574510082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.060579, y: 8.056876, z: 10.93462}
+  m_Center: {x: 0.05851376, y: 0.0041360864, z: 4.940927}
 --- !u!1001 &599465305
 Prefab:
   m_ObjectHideFlags: 0
@@ -1121,7 +1355,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 637b3bb1a53fd584b8b2f29eddb05290, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 637b3bb1a53fd584b8b2f29eddb05290, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -1134,6 +1368,47 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 637b3bb1a53fd584b8b2f29eddb05290, type: 3}
   m_IsPrefabParent: 0
+--- !u!1 &640840068
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 640840069}
+  - component: {fileID: 640840070}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640840069
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 640840068}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -41.599426, y: -9.9, z: 24.696571}
+  m_LocalScale: {x: 59.00006, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 531491456}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!65 &640840070
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 640840068}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &701529540 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1957587940616716, guid: f5bf36dba95fbff46bae1cb49fd47e0c,
@@ -1150,6 +1425,7 @@ GameObject:
   - component: {fileID: 714633956}
   - component: {fileID: 714633958}
   - component: {fileID: 714633957}
+  - component: {fileID: 714633959}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1216,6 +1492,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714633955}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &714633959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 714633955}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &717168547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1227,6 +1515,7 @@ GameObject:
   - component: {fileID: 717168548}
   - component: {fileID: 717168550}
   - component: {fileID: 717168549}
+  - component: {fileID: 717168551}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1293,6 +1582,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 717168547}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &717168551
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 717168547}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &727622867
 Prefab:
   m_ObjectHideFlags: 0
@@ -1330,7 +1631,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4778770165356640, guid: 5608ad562d40ef742b3d6fad717a1053, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114844730757921068, guid: 5608ad562d40ef742b3d6fad717a1053,
         type: 2}
@@ -1361,6 +1662,7 @@ GameObject:
   - component: {fileID: 738492502}
   - component: {fileID: 738492504}
   - component: {fileID: 738492503}
+  - component: {fileID: 738492505}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1427,6 +1729,95 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 738492501}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &738492505
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 738492501}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
+--- !u!1001 &752613449
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -11.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697159073815908, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697159073815908, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697159073815908, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463112441832868, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697159073815908, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697159073815908, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114769168408306126, guid: bf0bf1c17d1802143aabc32c9ce3214e,
+        type: 2}
+      propertyPath: mouseSensitivity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 54296480374628800, guid: bf0bf1c17d1802143aabc32c9ce3214e,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 54296480374628800, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: bf0bf1c17d1802143aabc32c9ce3214e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &823801178
 GameObject:
   m_ObjectHideFlags: 0
@@ -1549,7 +1940,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &859098086
 GameObject:
@@ -1562,6 +1953,7 @@ GameObject:
   - component: {fileID: 859098087}
   - component: {fileID: 859098089}
   - component: {fileID: 859098088}
+  - component: {fileID: 859098090}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1628,6 +2020,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 859098086}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &859098090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 859098086}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &887369960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1667,7 +2071,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &915973807
 GameObject:
@@ -1680,6 +2084,7 @@ GameObject:
   - component: {fileID: 915973808}
   - component: {fileID: 915973810}
   - component: {fileID: 915973809}
+  - component: {fileID: 915973811}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1746,6 +2151,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 915973807}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &915973811
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 915973807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &920963946
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,6 +2174,7 @@ GameObject:
   - component: {fileID: 920963947}
   - component: {fileID: 920963949}
   - component: {fileID: 920963948}
+  - component: {fileID: 920963950}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1823,6 +2241,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 920963946}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &920963950
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 920963946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &925787062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,6 +2264,7 @@ GameObject:
   - component: {fileID: 925787063}
   - component: {fileID: 925787065}
   - component: {fileID: 925787064}
+  - component: {fileID: 925787066}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -1900,6 +2331,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 925787062}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &925787066
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 925787062}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1004158816
 Prefab:
   m_ObjectHideFlags: 0
@@ -1937,7 +2380,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4052205187966108, guid: fd03d59ba661d8b4baa2fca65a897e3d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd03d59ba661d8b4baa2fca65a897e3d, type: 2}
@@ -1976,6 +2419,7 @@ GameObject:
   - component: {fileID: 1067469615}
   - component: {fileID: 1067469617}
   - component: {fileID: 1067469616}
+  - component: {fileID: 1067469618}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2042,6 +2486,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1067469614}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1067469618
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1067469614}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1112891108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2053,6 +2509,7 @@ GameObject:
   - component: {fileID: 1112891109}
   - component: {fileID: 1112891111}
   - component: {fileID: 1112891110}
+  - component: {fileID: 1112891112}
   m_Layer: 0
   m_Name: Mesh1_Plate_River_Corner_Dirt_Model
   m_TagString: Untagged
@@ -2120,6 +2577,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1112891108}
   m_Mesh: {fileID: 4300000, guid: 93f046ba317f4e04e83de46bb4fe0199, type: 3}
+--- !u!65 &1112891112
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1112891108}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1145984070
 GameObject:
   m_ObjectHideFlags: 0
@@ -2131,6 +2600,7 @@ GameObject:
   - component: {fileID: 1145984071}
   - component: {fileID: 1145984073}
   - component: {fileID: 1145984072}
+  - component: {fileID: 1145984074}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2197,6 +2667,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1145984070}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1145984074
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1145984070}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1149135022
 Prefab:
   m_ObjectHideFlags: 0
@@ -2309,6 +2791,7 @@ GameObject:
   - component: {fileID: 1267321732}
   - component: {fileID: 1267321734}
   - component: {fileID: 1267321733}
+  - component: {fileID: 1267321735}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2375,6 +2858,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1267321731}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1267321735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1267321731}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1351260035
 Prefab:
   m_ObjectHideFlags: 0
@@ -2412,7 +2907,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4218949833316606, guid: 63f9346a30f6dac44920309e6915ef05, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1882488791263928, guid: 63f9346a30f6dac44920309e6915ef05, type: 2}
       propertyPath: m_Name
@@ -2436,6 +2931,7 @@ GameObject:
   - component: {fileID: 1403738142}
   - component: {fileID: 1403738144}
   - component: {fileID: 1403738143}
+  - component: {fileID: 1403738145}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2502,6 +2998,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1403738141}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1403738145
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1403738141}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1422363484 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: a43f0d6131f84de40b182eb70bb23b87, type: 3}
@@ -2597,6 +3105,7 @@ GameObject:
   - component: {fileID: 1629490930}
   - component: {fileID: 1629490932}
   - component: {fileID: 1629490931}
+  - component: {fileID: 1629490933}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2663,6 +3172,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1629490929}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1629490933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1629490929}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1647052942
 Prefab:
   m_ObjectHideFlags: 0
@@ -2700,7 +3221,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4398546503576588, guid: 19b165c7b78b5d548971cbb76ff375ca, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114074795790716256, guid: 19b165c7b78b5d548971cbb76ff375ca,
         type: 2}
@@ -2720,6 +3241,22 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19b165c7b78b5d548971cbb76ff375ca, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1673977859 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 100000, guid: aec20226064bbcc4d850e8da90e49a4b, type: 3}
+  m_PrefabInternal: {fileID: 408306526}
+--- !u!65 &1673977863
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1673977859}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.249701, y: 4.332325, z: 6.4886684}
+  m_Center: {x: -0.028093576, y: 0.04018296, z: 1.5932819}
 --- !u!1 &1675552778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,6 +3268,7 @@ GameObject:
   - component: {fileID: 1675552779}
   - component: {fileID: 1675552781}
   - component: {fileID: 1675552780}
+  - component: {fileID: 1675552782}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2797,87 +3335,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1675552778}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
---- !u!1 &1681154063
-GameObject:
+--- !u!65 &1675552782
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1681154067}
-  - component: {fileID: 1681154066}
-  - component: {fileID: 1681154065}
-  - component: {fileID: 1681154064}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1681154064
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1681154063}
-  m_Enabled: 1
---- !u!124 &1681154065
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1681154063}
-  m_Enabled: 1
---- !u!20 &1681154066
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1681154063}
+  m_GameObject: {fileID: 1675552778}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1681154067
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1681154063}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -9.68, y: 50.57, z: -18.1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1685361216
 GameObject:
   m_ObjectHideFlags: 0
@@ -2889,6 +3358,7 @@ GameObject:
   - component: {fileID: 1685361217}
   - component: {fileID: 1685361219}
   - component: {fileID: 1685361218}
+  - component: {fileID: 1685361220}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -2955,6 +3425,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1685361216}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1685361220
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1685361216}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1692305457
 GameObject:
   m_ObjectHideFlags: 0
@@ -2966,6 +3448,7 @@ GameObject:
   - component: {fileID: 1692305458}
   - component: {fileID: 1692305460}
   - component: {fileID: 1692305459}
+  - component: {fileID: 1692305461}
   m_Layer: 0
   m_Name: Mesh1_Plate_River_Corner_Dirt_Model
   m_TagString: Untagged
@@ -3033,6 +3516,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1692305457}
   m_Mesh: {fileID: 4300000, guid: 93f046ba317f4e04e83de46bb4fe0199, type: 3}
+--- !u!65 &1692305461
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1692305457}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1720843928
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,6 +3539,7 @@ GameObject:
   - component: {fileID: 1720843929}
   - component: {fileID: 1720843931}
   - component: {fileID: 1720843930}
+  - component: {fileID: 1720843932}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3110,6 +3606,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1720843928}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1720843932
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1720843928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1772518372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3121,6 +3629,7 @@ GameObject:
   - component: {fileID: 1772518373}
   - component: {fileID: 1772518375}
   - component: {fileID: 1772518374}
+  - component: {fileID: 1772518376}
   m_Layer: 0
   m_Name: Mesh1_Plate_River_Dirt_Model
   m_TagString: Untagged
@@ -3188,6 +3697,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1772518372}
   m_Mesh: {fileID: 4300000, guid: 3d5f662ee8f060b4aabc729f0a5962c4, type: 3}
+--- !u!65 &1772518376
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1772518372}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1878313873
 GameObject:
   m_ObjectHideFlags: 0
@@ -3199,6 +3720,7 @@ GameObject:
   - component: {fileID: 1878313874}
   - component: {fileID: 1878313876}
   - component: {fileID: 1878313875}
+  - component: {fileID: 1878313877}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3265,6 +3787,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1878313873}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1878313877
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1878313873}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1881767099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3276,6 +3810,7 @@ GameObject:
   - component: {fileID: 1881767100}
   - component: {fileID: 1881767102}
   - component: {fileID: 1881767101}
+  - component: {fileID: 1881767103}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3342,6 +3877,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1881767099}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1881767103
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1881767099}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1883141370
 Prefab:
   m_ObjectHideFlags: 0
@@ -3407,6 +3954,7 @@ GameObject:
   - component: {fileID: 1895738094}
   - component: {fileID: 1895738096}
   - component: {fileID: 1895738095}
+  - component: {fileID: 1895738097}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3473,6 +4021,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1895738093}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1895738097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1895738093}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1921658501
 Prefab:
   m_ObjectHideFlags: 0
@@ -3536,6 +4096,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012519915882, guid: d3c4e6699b284104496fac9fad442a4b,
     type: 2}
   m_PrefabInternal: {fileID: 1921658501}
+--- !u!1 &1923827794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1923827795}
+  - component: {fileID: 1923827796}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1923827795
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1923827794}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.53, y: -9.9, z: -4.29}
+  m_LocalScale: {x: 59, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 531491456}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1923827796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1923827794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1936679511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3547,6 +4148,7 @@ GameObject:
   - component: {fileID: 1936679512}
   - component: {fileID: 1936679514}
   - component: {fileID: 1936679513}
+  - component: {fileID: 1936679515}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3613,6 +4215,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1936679511}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1936679515
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1936679511}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1957471880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,6 +4238,7 @@ GameObject:
   - component: {fileID: 1957471881}
   - component: {fileID: 1957471883}
   - component: {fileID: 1957471882}
+  - component: {fileID: 1957471884}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3690,6 +4305,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1957471880}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1957471884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1957471880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1973699768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3701,6 +4328,7 @@ GameObject:
   - component: {fileID: 1973699769}
   - component: {fileID: 1973699771}
   - component: {fileID: 1973699770}
+  - component: {fileID: 1973699772}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3767,6 +4395,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1973699768}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1973699772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1973699768}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &1983829166
 GameObject:
   m_ObjectHideFlags: 0
@@ -3778,6 +4418,7 @@ GameObject:
   - component: {fileID: 1983829167}
   - component: {fileID: 1983829169}
   - component: {fileID: 1983829168}
+  - component: {fileID: 1983829170}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3844,6 +4485,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1983829166}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &1983829170
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1983829166}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1001 &1991157338
 Prefab:
   m_ObjectHideFlags: 0
@@ -3881,7 +4534,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4218949833316606, guid: 63f9346a30f6dac44920309e6915ef05, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: target
@@ -3929,6 +4582,7 @@ GameObject:
   - component: {fileID: 2043426897}
   - component: {fileID: 2043426899}
   - component: {fileID: 2043426898}
+  - component: {fileID: 2043426900}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -3995,6 +4649,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2043426896}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &2043426900
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2043426896}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &2092675577 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 06905b5e993435c4e9526f63c49622e3, type: 3}
@@ -4026,6 +4692,7 @@ GameObject:
   - component: {fileID: 2093490497}
   - component: {fileID: 2093490499}
   - component: {fileID: 2093490498}
+  - component: {fileID: 2093490500}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -4092,6 +4759,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2093490496}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &2093490500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2093490496}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &2102293132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4103,6 +4782,7 @@ GameObject:
   - component: {fileID: 2102293133}
   - component: {fileID: 2102293135}
   - component: {fileID: 2102293134}
+  - component: {fileID: 2102293136}
   m_Layer: 0
   m_Name: Mesh1_Plate_Grass_Dirt_Model
   m_TagString: Untagged
@@ -4169,6 +4849,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2102293132}
   m_Mesh: {fileID: 4300000, guid: 36d01a7e99983034f9107d2cacf55bbe, type: 3}
+--- !u!65 &2102293136
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2102293132}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 0.3, z: 3}
+  m_Center: {x: -1.5, y: 0.15, z: -1.5}
 --- !u!1 &2107531879
 GameObject:
   m_ObjectHideFlags: 0
@@ -4290,7 +4982,7 @@ Transform:
   m_Children:
   - {fileID: 1921658502}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120652425
 GameObject:
@@ -4355,5 +5047,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
