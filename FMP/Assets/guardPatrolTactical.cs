@@ -13,11 +13,21 @@ public class guardPatrolTactical : MonoBehaviour {
     bool moving = true;
 
     float idleTimer = 2.0f;
+    Animator anim;
 	// Use this for initialization
 	void Start ()
     {
+        anim = GetComponent<Animator>();
         maxMoveSpeed =  2.0f;
         maxTurnSpeed = 10.0f;
+
+        for(int i = 0; i < targets.transform.childCount; i++)
+        {
+            targets.transform.GetChild(i).transform.position =
+                new Vector3(targets.transform.GetChild(i).transform.position.x, transform.position.y, 
+                targets.transform.GetChild(i).transform.position.z);
+        }
+
         targetPos = targets.transform.GetChild(Random.Range(0, targets.transform.childCount)).transform.position;
 	}
 	
@@ -26,6 +36,7 @@ public class guardPatrolTactical : MonoBehaviour {
     {
         if (moving)
         {
+            anim.Play("Walk");
             Vector3 targetDirection = targetPos - transform.position;
             targetDirection = targetDirection.normalized;
 
@@ -42,6 +53,7 @@ public class guardPatrolTactical : MonoBehaviour {
         }
         else
         {
+            anim.Play("Idle");
             if(idleTimer <= 0)
             {
                 moving = true;
@@ -53,6 +65,7 @@ public class guardPatrolTactical : MonoBehaviour {
                 {
                     temp = targetPos = targets.transform.GetChild(Random.Range(0, targets.transform.childCount)).transform.position;
                 } while (temp != targetPos);
+
 
                 targetPos = temp;
             }

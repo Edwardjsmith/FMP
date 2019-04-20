@@ -1,12 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
-using UnityEngine.AI;
 using BehaviourTree;
+using System.Threading;
+
 
 public class behaviourTreeAI : baseAI
 {
-
+    
     public GameObject Player;
     GameObject[] doors;
     public LayerMask player;
@@ -23,6 +23,10 @@ public class behaviourTreeAI : baseAI
 
     Point[] patrolPoints;
 
+    Thread btTree;
+
+    public TextMesh treePosition;
+
     public override void Start()
     {
         base.Start();
@@ -31,13 +35,13 @@ public class behaviourTreeAI : baseAI
         anim = GetComponentInChildren<Animator>();
         doors = GameObject.FindGameObjectsWithTag("door");
 
-        root = new Selector(this);
-        playerSpotted = new Sequence(this);
-        dealWithPlayer = new Selector(this);
-        playerInRange = new Sequence(this);
-        doorBlock = new Sequence(this);
+        root = new Selector(this, "Root");
+        playerSpotted = new Sequence(this, "Player spotted");
+        dealWithPlayer = new Selector(this, "");
+        playerInRange = new Sequence(this, "Checking player range");
+        doorBlock = new Sequence(this, "Door spotted");
 
-        randomMove = new Selector(this);
+        randomMove = new Selector(this, "Patrolling");
         randomMove.addChild(0, doorBlock);
         randomMove.addChild(1, new RandomMove(this, patrolPoints));
 
@@ -62,15 +66,19 @@ public class behaviourTreeAI : baseAI
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);
     }
-    void Update()
-    { 
-        if(root.currentState() == Task.taskState.NotSet)
+
+    void executeTree()
+    {
+        if (root.currentState() == Task.taskState.NotSet)
         {
             root.reset();
         }
 
-        root.evaluateTask();
+        root.evaluateTask(treePosition);
     }
 
-
+    private void FixedUpdate()
+    {
+        executeTree();
+    }
 }

@@ -14,21 +14,25 @@ public class Condition : Task
         return state;
     }
 
-    public override taskState evaluateTask()
+    public override taskState evaluateTask(TextMesh currentComposite)
     {
         switch (checkCondition())
         {
             case taskState.Success:
-                return state = taskState.Success;
+                state = taskState.Success;
+                return state;
 
             case taskState.Failure:
-                return state = taskState.Failure;
+                state = taskState.Failure;
+                return state;
 
             case taskState.Running:
-                return state = taskState.Running;
+                state = taskState.Running;
+                return state;
 
             default:
-                return state = taskState.Failure;
+                state = taskState.Failure;
+                return state;
 
         }
     }
@@ -92,6 +96,7 @@ public class TargetSpotted : Condition
             foreach (GameObject go in bot.getSenses().getTarget(layer))
             {
                 Succeed();
+                Debug.Log(layer);
                 return state;
             }
             Fail();

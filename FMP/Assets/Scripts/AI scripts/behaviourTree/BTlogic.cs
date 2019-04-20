@@ -76,7 +76,7 @@ namespace BehaviourTree
             childTasks.Insert(index, task);
         }
 
-        public virtual taskState evaluateTask()
+        public virtual taskState evaluateTask(TextMesh currentComposite)
         {
             return state;
         }
@@ -90,66 +90,80 @@ namespace BehaviourTree
 
     class Selector : Task
     {
-        public Selector(baseAI bot) : base(bot)
+        public Selector(baseAI bot, string name) : base(bot)
         {
-
+            
         }
 
-        public override taskState evaluateTask()
+        public override taskState evaluateTask(TextMesh currentComposite)
         {
-            foreach (Task t in childTasks)
+            //while (state == taskState.Running)
             {
-                t.evaluateTask();
-                switch (t.currentState())
+                foreach (Task t in childTasks)
                 {
-                    case taskState.Failure:
-                        continue;
-                    case taskState.Success:
-                        return state = taskState.Success;
-                    case taskState.Running:
-                        return state = taskState.Running;
-                    default:
-                        continue;
+                    t.evaluateTask(currentComposite);
+                    switch (t.currentState())
+                    {
+                        case taskState.Failure:
+                            continue;
+                        case taskState.Success:
+                            state = taskState.Success;
+                            return state;
+                        case taskState.Running:
+                            state = taskState.Running;
+                            return state;
+                            
+                            
+                        default:
+                            continue;
+                    }
                 }
+                state = taskState.Failure;
+                return state;
             }
-            return state = taskState.Failure;
+            
         }
     }
 
     public class Sequence : Task
     {
         bool childRunning = false;
-        public Sequence(baseAI bot) : base(bot)
+        string name;
+        public Sequence(baseAI bot, string name) : base(bot)
         {
-
+            this.name = name;
         }
 
-        public override taskState evaluateTask()
+        public override taskState evaluateTask(TextMesh currentComposite)
         {
-            
-            foreach (Task t in childTasks)
+            //while(state != taskState.Failure)
             {
-                t.evaluateTask();
-                switch (t.currentState())
+                foreach (Task t in childTasks)
                 {
-                    case taskState.Failure:
-                        Fail();
-                        return currentState();
+                    t.evaluateTask(currentComposite);
+                    switch (t.currentState())
+                    {
+                        case taskState.Failure:
+                            Fail();
+                            return state;
 
-                    case taskState.Success:
-                        continue;
+                        case taskState.Success:
+                            continue;
 
-                    case taskState.Running:
-                        childRunning = true;
-                        continue;
+                        case taskState.Running:
+                            childRunning = true;
+                            continue;
 
-                    default:
-                        Succeed();
-                        return currentState();
+                        default:
+                            Succeed();
+                            return state;
+
+                    }
                 }
-            }
 
-            return state = childRunning ? taskState.Running : taskState.Success;
+                state = childRunning ? taskState.Running : taskState.Success;
+                return state;
+            }
         }
     }
 }

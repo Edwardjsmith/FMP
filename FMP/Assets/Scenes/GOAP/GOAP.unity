@@ -1959,7 +1959,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCounter: 0
-  reloading: 0
 --- !u!114 &1017019505 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114225317992243922, guid: 63f9346a30f6dac44920309e6915ef05,
@@ -2276,9 +2275,11 @@ MonoBehaviour:
   doorOpenRange: 0
   safeDistance: 0
   enemyTarget: {fileID: 0}
-  coverTarget: {fileID: 0}
+  coverTarget: {x: 0, y: 0, z: 0}
   doorTarget: {fileID: 0}
   potentialTarget: {fileID: 0}
+  runSpeed: 4
+  walkSpeed: 2
 --- !u!114 &1193176191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2291,7 +2292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCounter: 0
-  reloading: 0
 --- !u!114 &1193176194 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114225317992243922, guid: 63f9346a30f6dac44920309e6915ef05,
@@ -2808,7 +2808,6 @@ GameObject:
   - component: {fileID: 1681154066}
   - component: {fileID: 1681154065}
   - component: {fileID: 1681154064}
-  - component: {fileID: 1681154068}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2872,29 +2871,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1681154063}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 16, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -9.68, y: 50.57, z: -18.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1681154068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1681154063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 137d810917fd2fc40aa11bf24e693434, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraSensitivity: 90
-  climbSpeed: 4
-  normalMoveSpeed: 10
-  slowMoveFactor: 0.25
-  fastMoveFactor: 3
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &1685361216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4235,7 +4218,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCounter: 0
-  reloading: 0
 --- !u!114 &2107531882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4255,9 +4237,11 @@ MonoBehaviour:
   doorOpenRange: 0
   safeDistance: 0
   enemyTarget: {fileID: 0}
-  coverTarget: {fileID: 0}
+  coverTarget: {x: 0, y: 0, z: 0}
   doorTarget: {fileID: 0}
   potentialTarget: {fileID: 0}
+  runSpeed: 4
+  walkSpeed: 2
 --- !u!114 &2107531883
 MonoBehaviour:
   m_ObjectHideFlags: 0

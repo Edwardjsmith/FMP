@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Senses : MonoBehaviour
 {
     baseAI agent;
+    HSMAgent hsmagent;
+    bool hsm = false;
     public LayerMask otherAgents;
     public LayerMask cover;
     List<GameObject> verifiedTargets;
@@ -13,7 +15,16 @@ public class Senses : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        agent = GetComponent<baseAI>();
+        if(GetComponent<HSMAgent>())
+        {
+            agent = GetComponent<HSMAgent>();
+            hsmagent = (HSMAgent)agent;
+            hsm = true;
+        }
+        else
+        {
+            agent = GetComponent<baseAI>();
+        }
         verifiedTargets = new List<GameObject>();
 	}
 
@@ -36,21 +47,25 @@ public class Senses : MonoBehaviour
         {
             if (col.gameObject != gameObject)
             {
-                if (verifyTarget(col.gameObject))
+                if (hsm && verifyTarget(col.gameObject))
+                {
+                    verifiedTargets.Add(col.gameObject);
+                }
+                else
                 {
                     verifiedTargets.Add(col.gameObject);
                 }
             }
         }
-        if (GetComponent<HSMAgent>())
+        if (hsm)
         {
             if (verifiedTargets.Count > 0)
             {
-                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = true;
+                hsmagent.getTransitions().enemyTargetFound = true;
             }
             else
             {
-                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = false;
+                hsmagent.getTransitions().enemyTargetFound = false;
             }
         }
 

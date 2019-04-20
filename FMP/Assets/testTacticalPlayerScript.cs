@@ -15,10 +15,13 @@ public class testTacticalPlayerScript : MonoBehaviour
     Thread pathfindingThread;
 
     public bool canMove = false;
+    Animator anim;
     // Use this for initialization
     void Start ()
     {
         pathFinding = GetComponent<Pathfinding>();
+        anim = GetComponentInChildren<Animator>();
+        anim.Play("Walk");
     }
 	
 	// Update is called once per frame
@@ -78,7 +81,15 @@ public class testTacticalPlayerScript : MonoBehaviour
         {
             canMove = false;
             currentPathPoint = 0;
-            pathFinding.createNewPath = true;
+
+            Vector3 newTarget;
+            do
+            {
+                newTarget = pathFinding.targetPositions[Random.Range(0, pathFinding.targetPositions.Count - 1)];
+
+            } while (newTarget == pathFinding.target);
+
+            pathFinding.target = newTarget;
         }
     }
 }

@@ -68,7 +68,6 @@ public class flockController : MonoBehaviour
         }
 
         transform.position = flockAgents[0].transform.position;
-        //flockAgents[0].GetComponent<Renderer>().enabled = false;
         updateTimer -= Time.deltaTime;
 	}
 

@@ -14,21 +14,25 @@ public class Action : Task
         return state;
     }
 
-    public override taskState evaluateTask()
+    public override taskState evaluateTask(TextMesh currentComposite)
     {
         switch(performAction())
         {
             case taskState.Success:
-                return state = taskState.Success;
+                state = taskState.Success;
+                return state;
 
             case taskState.Failure:
-                return state = taskState.Failure;
+                state = taskState.Failure;
+                return state;
 
             case taskState.Running:
-                return state = taskState.Running;
+                state = taskState.Running;
+                return state;
 
             default:
-                return state = taskState.Failure;
+                state = taskState.Failure;
+                return state;
 
         }
     }
@@ -37,7 +41,7 @@ public class Action : Task
 
 public class Attack : Action
 {
-    float timer = 0;
+    float timer = 3.0f;
     GameObject target;
     public Attack(baseAI bot, GameObject target) : base(bot)
     {
@@ -51,18 +55,16 @@ public class Attack : Action
         if (Vector3.Distance(bot.transform.position, target.transform.position) < bot.getData().attackDistance)
         {
             bot.getAnim().Play("Attack");
-            AnimatorClipInfo[] info = bot.getAnim().GetCurrentAnimatorClipInfo(0);
-            float clipTime = info[0].clip.length;
-            Debug.Log(target);
+
             Run(); 
-            if(timer >= clipTime)
+            if(timer <= 0)
             {
-                timer = 0;
+                timer = 3.0f;
                 Succeed();
-                target.SendMessage("GameOver");
             }
-            
+            timer -= Time.deltaTime;
             return state;
+            
         }
         else
         {

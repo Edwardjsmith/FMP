@@ -19,8 +19,6 @@ public class Pathfinding : MonoBehaviour
 
     public bool createNewPath = true;
 
-    int randomNumber = 0;
-
     Color red;
     Color blue;
     Color yellow;
@@ -38,8 +36,11 @@ public class Pathfinding : MonoBehaviour
 
         foreach(GameObject go in targetObj)
         {
+            go.transform.position = new Vector3(go.transform.position.x, transform.position.y, go.transform.position.z);
             targetPositions.Add(go.transform.position);
         }
+
+        target = targetPositions[Random.Range(0, targetPositions.Count - 1)];
 
         red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
         blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
@@ -50,7 +51,6 @@ public class Pathfinding : MonoBehaviour
     private void Update()
     {
         playerPos = player.transform.position;
-        randomNumber = Random.Range(0, targetPositions.Count - 1);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -94,20 +94,6 @@ public class Pathfinding : MonoBehaviour
     {
         while (true)
         {
-            if (createNewPath)
-            {
-                createNewPath = false;
-
-                Vector3 newTarget;
-                do
-                {
-                    newTarget = targetPositions[randomNumber];
-
-                } while (newTarget == target);
-
-                target = newTarget;
-            }
-
             Vector3 startPos = playerPos;
             Vector3 targetPos = target;
 
