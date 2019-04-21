@@ -3,22 +3,34 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public Canvas pauseMenu;
+
+    private static GameManager instance;
+
+    Canvas pauseMenu;
     public static bool mainMenu = true;
     bool paused = false;
     // Use this for initialization
 
+   
+
     private void Awake()
     {
-        Instantiate(pauseMenu);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if(instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        pauseMenu = GetComponentInChildren<Canvas>();
         DontDestroyOnLoad(this);
-        pauseMenu.gameObject.SetActive(false);
-        
     }
     void Start ()
     {
-        
-	}
+        pauseMenu.gameObject.SetActive(false);
+    }
 	
 	// Update is called once per frame
 	void Update ()
