@@ -9,6 +9,7 @@ public class weaponScript : MonoBehaviour
     bool enemyInSight = false;
     public LayerMask targetLayer;
     public GameObject parent;
+    Camera parentCam;
     ParticleSystem muzFLash;
 
     AudioSource gunshot;
@@ -16,11 +17,16 @@ public class weaponScript : MonoBehaviour
     float rateOfFire = 0;
     float reloadTime = 3.0f;
     public bool reloading = false;
-    public LineRenderer laser;
+
+    public RectTransform crosshair;
 
     // Use this for initialization
     void Start ()
     {
+        if(parent.GetComponent<Camera>())
+        {
+            parentCam = parent.GetComponent<Camera>();
+        }
         gunshot = GetComponent<AudioSource>();
         muzFLash = GetComponentInChildren<ParticleSystem>();
 	}
@@ -28,16 +34,16 @@ public class weaponScript : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
         rateOfFire -= Time.deltaTime;
-        
+        Debug.DrawRay(parent.transform.position, parent.transform.forward, Color.red);
 
         RaycastHit hitTarget;
-        if (Physics.Raycast(parent.transform.position, parent.transform.TransformDirection(Vector3.forward), out hitTarget))
+        if (Physics.Raycast(parent.transform.position, parent.transform.forward, out hitTarget))
         {
-            laser.SetPosition(0, parent.transform.position);
-            laser.SetPosition(1, parent.transform.TransformDirection(Vector3.forward) * hitTarget.distance);
-            Debug.DrawRay(parent.transform.position, parent.transform.TransformDirection(Vector3.forward) * hitTarget.distance, Color.red);
+        if (crosshair != null)
+        {
+            crosshair.position = parentCam.WorldToScreenPoint(hitTarget.point);
+        }
             enemyInSight = hitTarget.collider.name == "Player" ? true : false;
         }
 	}
@@ -69,7 +75,7 @@ public class weaponScript : MonoBehaviour
             muzFLash.Play();
             rateOfFire = 0.2f;
             ammo--;
-            if (Physics.Raycast(parent.transform.position, parent.transform.forward + direction, out hitTarget))
+            if (Physics.Raycast(parent.transform.position, parent.transform.forward, out hitTarget))
             {
                 if(hitTarget.collider.name != transform.parent.name)
                 {

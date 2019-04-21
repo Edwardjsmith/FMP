@@ -9,8 +9,6 @@ public class IdleState : SuperState
     {
         States.Add("Patrol", new Patrol(agent));
         States.Add("Guard", new Guard(agent));
-
-        transitions = new List<Transition>();
         Transition transitionToAlertEnemySpotted = new Transition();
 
         transitionToAlertEnemySpotted.Condition = agent.getTransitions().getEnemyTargetFound;
@@ -42,7 +40,6 @@ public class IdleState : SuperState
     }
     public override void ExitState()
     {
-        agent.getTransitions().amHit = false;
     }
 
 }

@@ -53,6 +53,7 @@ public class HSMAgent : baseAI
     void HitByShot()
     {
         getTransitions().amHit = true;
+        getTransitions().enemyTargetFound = true;
     }
 
 }

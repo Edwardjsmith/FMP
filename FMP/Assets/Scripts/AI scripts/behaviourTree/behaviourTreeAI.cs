@@ -22,9 +22,6 @@ public class behaviourTreeAI : baseAI
     Sequence doorBlock;
 
     Point[] patrolPoints;
-
-    Thread btTree;
-
     public TextMesh treePosition;
 
     public override void Start()
@@ -50,10 +47,7 @@ public class behaviourTreeAI : baseAI
 
         dealWithPlayer.addChild(0, playerInRange);
 
-        GameObject[] play = new GameObject[1] { Player };
-        
-
-        playerInRange.addChild(0, new checkRay(this, player,  play, getData().attackDistance));
+        playerInRange.addChild(0, new checkDistance(this, Player, getData().attackDistance));
         playerInRange.addChild(1, new Attack(this, Player));
 
         dealWithPlayer.addChild(1, doorBlock);
@@ -65,6 +59,7 @@ public class behaviourTreeAI : baseAI
 
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);
+        treePosition = null;
     }
 
     void executeTree()
@@ -77,7 +72,7 @@ public class behaviourTreeAI : baseAI
         root.evaluateTask(treePosition);
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         executeTree();
     }

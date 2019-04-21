@@ -2926,7 +2926,7 @@ MonoBehaviour:
   speed: 0
   attackDistance: 20
   doorOpenRange: 0
-  safeDistance: 15
+  safeDistance: 5
   enemyTarget: {fileID: 0}
   coverTarget: {x: 0, y: 0, z: 0}
   doorTarget: {fileID: 0}
@@ -2958,7 +2958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   otherAgents:
     serializedVersion: 2
-    m_Bits: 2560
+    m_Bits: 2048
   cover:
     serializedVersion: 2
     m_Bits: 1024
@@ -3007,6 +3007,7 @@ MonoBehaviour:
     m_Bits: 2048
   parent: {fileID: 1240624648586756}
   reloading: 0
+  crosshair: {fileID: 0}
 --- !u!114 &114833675699488396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3164,7 +3165,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
-  m_Acceleration: 8
+  m_Acceleration: 10
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0
@@ -3174,7 +3175,7 @@ NavMeshAgent:
   m_Height: 2
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_ObstacleAvoidanceType: 3
 --- !u!198 &198322111148869588
 ParticleSystem:
   m_ObjectHideFlags: 1

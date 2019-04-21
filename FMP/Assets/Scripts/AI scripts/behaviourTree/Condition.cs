@@ -38,6 +38,34 @@ public class Condition : Task
     }
 }
 
+public class checkDistance : Condition
+{
+    GameObject target;
+    float distance;
+
+    public checkDistance(baseAI bot, GameObject target, float distance) : base(bot)
+    {
+        this.target = target;
+        this.distance = distance;
+    }
+
+    public override taskState checkCondition()
+    {
+        if(Vector3.Distance(bot.transform.position, target.transform.position) <= distance)
+        {
+            Debug.Log("Player in range");
+            Succeed();
+            return state;
+        }
+        else
+        {
+            Debug.Log("Player not in range");
+            Fail();
+            return state;
+        }
+    }
+}
+
 public class checkRay : Condition
 {
     LayerMask layer;
@@ -96,7 +124,7 @@ public class TargetSpotted : Condition
             foreach (GameObject go in bot.getSenses().getTarget(layer))
             {
                 Succeed();
-                Debug.Log(layer);
+                Debug.Log(go);
                 return state;
             }
             Fail();

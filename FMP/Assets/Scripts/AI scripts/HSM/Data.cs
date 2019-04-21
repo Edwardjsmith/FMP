@@ -36,7 +36,7 @@ public class Data : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         findCover = GameObject.FindGameObjectsWithTag("Cover");
         cover = findCover.ToList();
-
+        Debug.Log(cover.Count);
         speed = walkSpeed;
     }
 

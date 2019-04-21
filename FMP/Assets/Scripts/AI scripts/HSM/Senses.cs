@@ -81,21 +81,21 @@ public class Senses : MonoBehaviour
         {
             if(col.gameObject != gameObject)
             {
-                //if(verifyTarget(col.gameObject))
+                if(verifyTarget(col.gameObject))
                 {
                     verifiedTargets.Add(col.gameObject);
                 }
             }
         }
-        if (GetComponent<HSMAgent>())
+        if (hsm)
         {
             if (verifiedTargets.Count > 0)
             {
-                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = true;
+                hsmagent.getTransitions().enemyTargetFound = true;
             }
             else
             {
-                agent.GetComponent<HSMAgent>().getTransitions().enemyTargetFound = false;
+                hsmagent.getTransitions().enemyTargetFound = false;
             }
         }
 

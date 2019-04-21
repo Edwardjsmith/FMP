@@ -41,7 +41,7 @@ public class Action : Task
 
 public class Attack : Action
 {
-    float timer = 3.0f;
+    float timer = 0.0f;
     GameObject target;
     public Attack(baseAI bot, GameObject target) : base(bot)
     {
@@ -51,15 +51,15 @@ public class Attack : Action
     public override taskState performAction()
     {
         Debug.Log("Checking attack");
-        timer += Time.deltaTime;
-        if (Vector3.Distance(bot.transform.position, target.transform.position) < bot.getData().attackDistance)
+        timer -= Time.deltaTime;
+        if (Vector3.Distance(bot.transform.position, target.transform.position) <= bot.getData().attackDistance)
         {
             bot.getAnim().Play("Attack");
 
             Run(); 
             if(timer <= 0)
             {
-                timer = 3.0f;
+                timer = 0.0f;
                 Succeed();
             }
             timer -= Time.deltaTime;

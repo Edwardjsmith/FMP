@@ -1,10 +1,14 @@
 ﻿
 using UnityEngine;
 
-public class FPSBody : gameEntity {
-
+public class FPSBody : gameEntity
+{
     public float movementSpeed = 10;
     CharacterController controller;
+
+    public enum type { FPS, Other};
+    public type Type;
+
 	// Use this for initialization
 	public override void Start ()
     {
@@ -18,15 +22,17 @@ public class FPSBody : gameEntity {
         float horizInput = Input.GetAxis("Horizontal") * movementSpeed;
         float vertInput = Input.GetAxis("Vertical") * movementSpeed;
 
-        getAnim().SetFloat("velX", horizInput);
-        getAnim().SetFloat("velY", vertInput);
-
         Vector3 forwardMovement = transform.forward * vertInput;
         Vector3 rightMovement = transform.right * horizInput;
 
         controller.SimpleMove(forwardMovement + rightMovement);
 
-        FPSInput();
+        if (Type == type.FPS)
+        {
+            getAnim().SetFloat("velX", horizInput);
+            getAnim().SetFloat("velY", vertInput);
+            FPSInput();
+        }
     }
 
     void FPSInput()

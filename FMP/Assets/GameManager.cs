@@ -6,11 +6,18 @@ public class GameManager : MonoBehaviour
     public Canvas pauseMenu;
     public static bool mainMenu = true;
     bool paused = false;
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+
+    private void Awake()
     {
+        Instantiate(pauseMenu);
         DontDestroyOnLoad(this);
-        DontDestroyOnLoad(pauseMenu);
+        pauseMenu.gameObject.SetActive(false);
+        
+    }
+    void Start ()
+    {
+        
 	}
 	
 	// Update is called once per frame
@@ -18,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         if(!mainMenu)
         {
-            if(Input.GetKey(KeyCode.Escape))
+            if(Input.GetKeyDown(KeyCode.Escape))
             {
                 paused = !paused;
 
@@ -26,11 +33,13 @@ public class GameManager : MonoBehaviour
                 {
                     pauseMenu.gameObject.SetActive(true);
                     Time.timeScale = 0;
+                    Cursor.lockState = CursorLockMode.Confined;
                 }
                 else
                 {
                     pauseMenu.gameObject.SetActive(false);
                     Time.timeScale = 1;
+                    Cursor.lockState = CursorLockMode.Locked;
                 }
             }
         }
@@ -39,7 +48,9 @@ public class GameManager : MonoBehaviour
     public void returnToMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
         pauseMenu.gameObject.SetActive(false);
+        mainMenu = true;
     }
 
     public void endGame()
