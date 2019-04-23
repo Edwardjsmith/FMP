@@ -54,13 +54,13 @@ public class testTacticalPlayerScript : MonoBehaviour
         }
         else
         {
-            Vector3 pathPosition = new Vector3(followPath.x, transform.position.y, followPath.z);
+            /*Vector3 pathPosition = new Vector3(followPath.x, transform.position.y, followPath.z);
             Vector3 targetDirection = pathPosition - transform.position;
             targetDirection = targetDirection.normalized;
 
             transform.rotation = Quaternion.Slerp(transform.rotation,
                                                     Quaternion.LookRotation(targetDirection),
-                                                     maxTurnSpeed * Time.deltaTime);
+                                                     maxTurnSpeed * Time.deltaTime);*/
 
             transform.position += transform.forward * Time.deltaTime * maxMoveSpeed;
         }

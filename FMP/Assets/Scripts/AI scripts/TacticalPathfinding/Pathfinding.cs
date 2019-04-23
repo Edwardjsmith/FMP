@@ -103,6 +103,7 @@ public class Pathfinding : MonoBehaviour
 
             Node startNode = grid.nodeFromWorldPoint(startPos);
             Node targetNode = grid.nodeFromWorldPoint(targetPos);
+            //targetNode.walkable = true;
 
             List<Node> openSet = new List<Node>();
             HashSet<Node> closedSet = new HashSet<Node>();
@@ -188,7 +189,7 @@ public class Pathfinding : MonoBehaviour
         {
             newTarget = targetPositions[Random.Range(0, targetPositions.Count)];
 
-        } while (newTarget == target && !grid.nodeFromWorldPoint(newTarget).walkable);
+        } while (!grid.nodeFromWorldPoint(newTarget).walkable || newTarget == target);
 
         target = newTarget;
     }
