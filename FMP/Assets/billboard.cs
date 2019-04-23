@@ -34,14 +34,15 @@ public class billboard : MonoBehaviour
 
                 foreach (goapAction node in agent.currentActions)
                 {
-                    if (count < agent.currentActions.Count)
+                    if (count < agent.currentActions.Count - 1)
                     {
                         goapPlan += node.actionName + " -> ";
                         count++;
                     }
-                    else
+                    else if(count == agent.currentActions.Count - 1)
                     {
-
+                        goapPlan += " " + node.actionName;
+                        count++;
                         break;
                     }
                 }
@@ -49,7 +50,6 @@ public class billboard : MonoBehaviour
             else
             {
                 count = 0;
-                goapPlan = "Planning...";
             }
 
             text.text = goapPlan;

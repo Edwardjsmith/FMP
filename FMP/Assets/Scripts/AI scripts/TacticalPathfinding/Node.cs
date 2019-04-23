@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class Node  : IHeapItem<Node> 
+public class Node
 {
 
     public bool walkable;
@@ -10,15 +10,12 @@ public class Node  : IHeapItem<Node>
     public int gridX;
     public int gridY;
 
-    Vector3 pos;
-
     public int gCost;
     public int hCost;
     public float tacticalCost = 0;
 
     public Node parent;
 
-    int heapIndex;
     public bool enemyLineOfSight = false;
     public int tacticalModifier = 1000;
 
@@ -42,29 +39,5 @@ public class Node  : IHeapItem<Node>
     public int fCost()
     {
         return gCost + hCost + (int)tacticalCost;
-    }
-
-    int IHeapItem<Node>.heapIndex
-    {
-        get
-        {
-            return heapIndex;
-        }
-
-        set
-        {
-            heapIndex = value;
-        }
-    }
-
-    public int CompareTo(Node nodeToCompare)
-    {
-        int compare = fCost().CompareTo(nodeToCompare.fCost());
-
-        if(compare == 0)
-        {
-            compare = hCost.CompareTo(nodeToCompare.hCost);
-        }
-        return -compare;
     }
 }

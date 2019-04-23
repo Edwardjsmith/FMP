@@ -1,6 +1,5 @@
 ﻿
 using UnityEngine;
-using System.Threading;
 using System.Collections.Generic;
 
 public class testTacticalPlayerScript : MonoBehaviour
@@ -11,8 +10,6 @@ public class testTacticalPlayerScript : MonoBehaviour
     public int currentPathPoint = 0;
     float maxTurnSpeed = 5;
     float maxMoveSpeed = 5;
-
-    Thread pathfindingThread;
 
     public bool canMove = false;
     Animator anim;
@@ -27,12 +24,6 @@ public class testTacticalPlayerScript : MonoBehaviour
 	// Update is called once per frame
 	void LateUpdate ()
     {
-        if (!pathFinding.threadCreated)
-        {
-            pathFinding.threadCreated = true;
-            pathfindingThread = new Thread(new ThreadStart(pathFinding.calculatePath));
-            pathfindingThread.Start();
-        }
         Movement();
     }
 
@@ -81,15 +72,8 @@ public class testTacticalPlayerScript : MonoBehaviour
         {
             canMove = false;
             currentPathPoint = 0;
-
-            Vector3 newTarget;
-            do
-            {
-                newTarget = pathFinding.targetPositions[Random.Range(0, pathFinding.targetPositions.Count - 1)];
-
-            } while (newTarget == pathFinding.target);
-
-            pathFinding.target = newTarget;
+            pathFinding.plotPath();
+           
         }
     }
 }

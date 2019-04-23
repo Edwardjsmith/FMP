@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using System.Threading;
 
 public class Pathfinding : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Pathfinding : MonoBehaviour
     Vector3 playerPos;
 
     public bool createNewPath = true;
+    bool threadRunning = true;
 
     Color red;
     Color blue;
@@ -25,6 +27,7 @@ public class Pathfinding : MonoBehaviour
     Color clear;
     float transparency = 0.1f;
     bool hideMetrics = false;
+    Thread pathfindingThread;
 
     private void Start()
     {
@@ -36,16 +39,17 @@ public class Pathfinding : MonoBehaviour
 
         foreach(GameObject go in targetObj)
         {
-            go.transform.position = new Vector3(go.transform.position.x, transform.position.y, go.transform.position.z);
             targetPositions.Add(go.transform.position);
         }
 
-        target = targetPositions[Random.Range(0, targetPositions.Count - 1)];
+        plotPath();
 
         red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
         blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
         yellow = new Color(Color.yellow.r, Color.yellow.g, Color.yellow.b, transparency);
 
+        pathfindingThread = new Thread(new ThreadStart(calculatePath));
+        pathfindingThread.Start();
     }
 
     private void Update()
@@ -92,7 +96,7 @@ public class Pathfinding : MonoBehaviour
 
     public void calculatePath()
     {
-        while (true)
+        while (threadRunning)
         {
             Vector3 startPos = playerPos;
             Vector3 targetPos = target;
@@ -175,5 +179,23 @@ public class Pathfinding : MonoBehaviour
         float distY = a.gridY - b.gridY;
 
         return (int)Mathf.Sqrt((distX * distX) + (distY * distY));
+    }
+
+    public void plotPath()
+    {
+        Vector3 newTarget;
+        do
+        {
+            newTarget = targetPositions[Random.Range(0, targetPositions.Count)];
+
+        } while (newTarget == target && !grid.nodeFromWorldPoint(newTarget).walkable);
+
+        target = newTarget;
+    }
+
+    private void OnDisable()
+    {
+        threadRunning = false;
+        pathfindingThread.Join();
     }
 }

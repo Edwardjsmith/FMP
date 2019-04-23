@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 public class goapPlanner
@@ -115,19 +114,27 @@ public class goapPlanner
 
     goapNode getNext(goapAgent agent, List<goapAction> actions)
     {
-
-        List<goapNode> next = new List<goapNode>();
-
         foreach (goapAction action in actions)
         {
             foreach (KeyValuePair<string, bool> preEffect in action.getPreEffects())
             {
                 foreach (KeyValuePair<string, bool> worldState in agent.getWorldState())
                 {
-                    if (preEffect.Equals(worldState))
+                    if(preEffect.Equals(worldState))
                     {
                         agent.setWorldState(action.getEffects());
                         return new goapNode(action.getEffects(), action);
+                    }
+                    else
+                    {
+                        foreach(KeyValuePair<string, bool> precondition in action.getPreconditions())
+                        {
+                            if(worldState.Equals(precondition))
+                            {
+                                agent.setWorldState(action.getEffects());
+                                return new goapNode(action.getEffects(), action);
+                            }
+                        }
                     }
                 }
             }

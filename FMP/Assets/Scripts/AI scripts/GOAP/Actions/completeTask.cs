@@ -7,7 +7,7 @@ public class completeTask : goapAction
         addPrecondition("hasWood", true);
         //addEffect("hasWood", false);
         addEffect("taskComplete", true);
-        addPreEffect("hasWood", true);
+        //addPreEffect("hasWood", true);
     }
     private void Start()
     {

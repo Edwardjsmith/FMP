@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using System.Collections;
+
 
 public class Grid : MonoBehaviour
 {
@@ -17,7 +17,7 @@ public class Grid : MonoBehaviour
     public LayerMask enemy;
     public LayerMask wall;
 
-    int xPos, zPos;
+    float xPos, zPos;
 
 
     private void Start()
@@ -94,7 +94,7 @@ public class Grid : MonoBehaviour
                 if (h.tag == "enemy")
                 {
                     RaycastHit hitInfo;
-                    if (Physics.Linecast(n.worldPos, h.transform.position, out hitInfo, wall))
+                    if (Physics.Linecast(n.worldPos, h.transform.position, out hitInfo))
                     {
                         if (hitInfo.transform.tag != "unwalkable")
                         {
@@ -114,8 +114,8 @@ public class Grid : MonoBehaviour
     }
     void createGrid()
     {
-        xPos = (int)transform.position.x;
-        zPos = (int)transform.position.z;
+        xPos = transform.position.x;
+        zPos = transform.position.z;
         worldGrid = new Node[gridSizeX, gridSizeY];
 
         worldBottomLeft = transform.position - Vector3.right * gridWorldSize.x / 2 //Gives bottom left corner of world
