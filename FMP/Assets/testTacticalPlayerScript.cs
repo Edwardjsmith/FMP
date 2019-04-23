@@ -8,7 +8,7 @@ public class testTacticalPlayerScript : MonoBehaviour
     Pathfinding pathFinding;
     Vector3 followPath;
     public int currentPathPoint = 0;
-    float maxTurnSpeed = 5;
+    float maxTurnSpeed = 30;
     float maxMoveSpeed = 5;
 
     public bool canMove = false;
@@ -54,14 +54,6 @@ public class testTacticalPlayerScript : MonoBehaviour
         }
         else
         {
-            /*Vector3 pathPosition = new Vector3(followPath.x, transform.position.y, followPath.z);
-            Vector3 targetDirection = pathPosition - transform.position;
-            targetDirection = targetDirection.normalized;
-
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                                                    Quaternion.LookRotation(targetDirection),
-                                                     maxTurnSpeed * Time.deltaTime);*/
-
             transform.position += transform.forward * Time.deltaTime * maxMoveSpeed;
         }
     }
