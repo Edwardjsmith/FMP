@@ -10,6 +10,8 @@ public class openDoor : MonoBehaviour {
 
     Vector3 away;
     LayerMask doorLayer;
+
+    float doorTimer = 0;
     private void Start()
     {
         closedRot = transform.localRotation;
@@ -18,6 +20,7 @@ public class openDoor : MonoBehaviour {
 
     private void Update()
     {
+        doorTimer -= Time.deltaTime;
         if (!isOpen)
         {
             gameObject.layer = doorLayer;
@@ -42,7 +45,11 @@ public class openDoor : MonoBehaviour {
 
     public void OpenDoor(Vector3 rotateFrom)
     {
-        away = rotateFrom;
-        isOpen = !isOpen;
+        if (doorTimer <= 0)
+        {
+            away = rotateFrom;
+            isOpen = !isOpen;
+            doorTimer = 2.0f;
+        }
     }
 }
