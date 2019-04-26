@@ -6,8 +6,12 @@ public class FPSBody : gameEntity
     public float movementSpeed = 10;
     CharacterController controller;
 
-    public enum type { FPS, Other};
+    float openDistance = 5.0f;
+
+    public enum type { FPS, Horror, Other};
     public type Type;
+
+    public LayerMask rayLayer;
 
 	// Use this for initialization
 	public override void Start ()
@@ -33,8 +37,26 @@ public class FPSBody : gameEntity
             getAnim().SetFloat("velY", vertInput);
             FPSInput();
         }
+        else if(Type == type.Horror)
+        {
+            horrorInput();
+        }
     }
 
+    void horrorInput()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.GetChild(0).transform.position, transform.GetChild(0).transform.forward * openDistance, out hit, rayLayer))
+        {
+            if(hit.collider.tag == "door")
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    hit.collider.gameObject.SendMessage("OpenDoor");
+                }
+            }
+        }
+    }
     void FPSInput()
     {
         if (GetWeapon() != null)

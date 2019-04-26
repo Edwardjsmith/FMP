@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 namespace BehaviourTree
 {
-    public class Task
+    public class Task 
     {
         public enum taskState
         {
@@ -20,17 +19,43 @@ namespace BehaviourTree
         public List<Task> childTasks;
         protected baseAI bot;
 
-        public Task(baseAI bot, Vector3 pos, bool trueOrFalse)
+        public string name;
+        public Vector2 uiPos;
+
+        public Task(baseAI bot, Vector3 pos, bool trueOrFalse, List<Task> tasks, string name, Vector2 uiPos)
         {
+            this.uiPos = uiPos;
+            this.name = name;
+            tasks.Add(this);
             this.bot = bot;
             childTasks = new List<Task>();
         }
 
-        public Task(baseAI bot)
+        public Task(baseAI bot, List<Task> tasks, string name, Vector2 uiPos)
         {
+            this.uiPos = uiPos;
+            this.name = name;
+            tasks.Add(this);
             this.bot = bot;
             childTasks = new List<Task>();
         }
+
+        public Task(baseAI bot, Vector3 pos, bool trueOrFalse, List<Task> tasks, string name)
+        {
+            this.name = name;
+            tasks.Add(this);
+            this.bot = bot;
+            childTasks = new List<Task>();
+        }
+
+        public Task(baseAI bot, List<Task> tasks, string name)
+        {
+            this.name = name;
+            tasks.Add(this);
+            this.bot = bot;
+            childTasks = new List<Task>();
+        }
+
 
         public virtual void Start()
         {
@@ -76,6 +101,22 @@ namespace BehaviourTree
             childTasks.Insert(index, task);
         }
 
+        public void calculateChildUIPos()
+        {
+            for (int i = 0; i < childTasks.Count; i++)
+            {
+                float offsetX = -50;
+                float offsetY = -50;
+
+                for (int j = 0; j < i; j++)
+                {
+                    offsetX += 100;
+                }
+
+                childTasks[i].uiPos = new Vector2(uiPos.x + offsetX, uiPos.y + offsetY);
+            }
+        }
+
         public virtual taskState evaluateTask(TextMesh currentComposite)
         {
             return state;
@@ -90,9 +131,13 @@ namespace BehaviourTree
 
     class Selector : Task
     {
-        public Selector(baseAI bot, string name) : base(bot)
+        public Selector(baseAI bot, string name, List<Task> tasks, Vector2 uiPos) : base(bot, tasks, name, uiPos)
         {
             
+        }
+        public Selector(baseAI bot, string name, List<Task> tasks) : base(bot, tasks, name)
+        {
+
         }
 
         public override taskState evaluateTask(TextMesh currentComposite)
@@ -128,10 +173,12 @@ namespace BehaviourTree
     public class Sequence : Task
     {
         bool childRunning = false;
-        string name;
-        public Sequence(baseAI bot, string name) : base(bot)
+        public Sequence(baseAI bot, string name, List<Task> tasks, Vector2 uiPos) : base(bot, tasks, name, uiPos)
         {
-            this.name = name;
+        }
+
+        public Sequence(baseAI bot, string name, List<Task> tasks) : base(bot, tasks, name)
+        {
         }
 
         public override taskState evaluateTask(TextMesh currentComposite)

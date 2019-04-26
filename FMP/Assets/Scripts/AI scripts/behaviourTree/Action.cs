@@ -1,10 +1,10 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTree;
 public class Action : Task
 {
-    public Action(baseAI bot) : base(bot)
+    public Action(baseAI bot, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         
     }
@@ -43,7 +43,7 @@ public class Attack : Action
 {
     float timer = 0.0f;
     GameObject target;
-    public Attack(baseAI bot, GameObject target) : base(bot)
+    public Attack(baseAI bot, GameObject target, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.target = target;
     }
@@ -77,7 +77,7 @@ public class Attack : Action
 
 public class OpenDoor : Action
 {
-    public OpenDoor(baseAI bot) : base(bot)
+    public OpenDoor(baseAI bot, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         
     }
@@ -107,7 +107,7 @@ public class Move : Action
 {
     protected float distanceLeeway;
     GameObject target;
-    public Move(baseAI bot, GameObject target) : base(bot)
+    public Move(baseAI bot, GameObject target, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         distanceLeeway = 5.0f;
         this.target = target;
@@ -135,7 +135,7 @@ public class RandomMove : Action
     protected float distanceLeeway;
     Point[] seed;
 
-    public RandomMove(baseAI bot, Point[] seed) : base(bot)
+    public RandomMove(baseAI bot, Point[] seed, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         distanceLeeway = 2.0f;
         this.seed = seed;

@@ -1,10 +1,12 @@
 ﻿
 using UnityEngine;
 using BehaviourTree;
+using System.Collections.Generic;
+
 public class Condition : Task
 {
 
-    public Condition(baseAI bot) : base(bot)
+    public Condition(baseAI bot, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         
     }
@@ -43,7 +45,7 @@ public class checkDistance : Condition
     GameObject target;
     float distance;
 
-    public checkDistance(baseAI bot, GameObject target, float distance) : base(bot)
+    public checkDistance(baseAI bot, GameObject target, float distance, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.target = target;
         this.distance = distance;
@@ -71,7 +73,7 @@ public class checkRay : Condition
     LayerMask layer;
     GameObject[] targets;
     float distance;
-    public checkRay(baseAI bot, LayerMask layer, GameObject[] targets, float distance) : base(bot)
+    public checkRay(baseAI bot, LayerMask layer, GameObject[] targets, float distance, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.layer = layer;
         this.targets = targets;
@@ -111,7 +113,7 @@ public class TargetSpotted : Condition
 {
     LayerMask layer;
     GameObject target;
-    public TargetSpotted(baseAI bot, LayerMask layer, GameObject target) : base(bot)
+    public TargetSpotted(baseAI bot, LayerMask layer, GameObject target, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.layer = layer;
         this.target = target;
@@ -141,7 +143,7 @@ public class TargetSpotted : Condition
 public class isDoorOpen : Condition
 {
     openDoor target;
-    public isDoorOpen(baseAI bot, openDoor target) : base(bot)
+    public isDoorOpen(baseAI bot, openDoor target, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.target = target;
     }
@@ -173,7 +175,7 @@ public class isDoorOpen : Condition
 public class TargetInRange : Condition
 {
     GameObject target;
-    public TargetInRange(baseAI bot, GameObject target) : base(bot)
+    public TargetInRange(baseAI bot, GameObject target, List<Task> tasks, string name) : base(bot, tasks, name)
     {
         this.target = target;
     }

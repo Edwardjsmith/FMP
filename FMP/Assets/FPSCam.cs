@@ -5,10 +5,14 @@ public class FPSCam : MonoBehaviour
     float mouseSensitivity = 100.0f;
     float xAxisClamp = 0;
     Transform playerBody;
+
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     // Use this for initialization
     public void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         playerBody = transform.parent;
     }
 
@@ -47,4 +51,6 @@ public class FPSCam : MonoBehaviour
         eulerRotation.x = value;
         transform.eulerAngles = eulerRotation;
     }
+
+
 }

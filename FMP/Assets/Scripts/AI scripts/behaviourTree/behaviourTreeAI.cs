@@ -1,8 +1,8 @@
 ﻿
 using UnityEngine;
 using BehaviourTree;
-using System.Threading;
-
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class behaviourTreeAI : baseAI
 {
@@ -24,43 +24,82 @@ public class behaviourTreeAI : baseAI
     Point[] patrolPoints;
     public TextMesh treePosition;
 
+
+    public Canvas uiMetrics;
+    public Button uiNode;
+    public Image line;
+
+
+    List<Task> uiTree;
+ 
+   
+
+    float childOffsetX, childOffsetY;
     public override void Start()
     {
         base.Start();
-
+        uiTree = new List<Task>();
         patrolPoints = FindObjectsOfType<Point>();
         anim = GetComponentInChildren<Animator>();
         doors = GameObject.FindGameObjectsWithTag("door");
 
-        root = new Selector(this, "Root");
-        playerSpotted = new Sequence(this, "Player spotted");
-        dealWithPlayer = new Selector(this, "");
-        playerInRange = new Sequence(this, "Checking player range");
-        doorBlock = new Sequence(this, "Door spotted");
+        root = new Selector(this, "Root", uiTree, new Vector2(400, 500));
+        playerSpotted = new Sequence(this, "Player spotted", uiTree);
+        dealWithPlayer = new Selector(this, "Deal with player", uiTree);
+        playerInRange = new Sequence(this, "Checking player range", uiTree);
+        doorBlock = new Sequence(this, "Door spotted", uiTree);
 
-        randomMove = new Selector(this, "Patrolling");
+        randomMove = new Selector(this, "Patrolling", uiTree);
         randomMove.addChild(0, doorBlock);
-        randomMove.addChild(1, new RandomMove(this, patrolPoints));
+        randomMove.addChild(1, new RandomMove(this, patrolPoints, uiTree, "Move randomly"));
 
-        playerSpotted.addChild(0, new TargetSpotted(this, player, Player));
+        playerSpotted.addChild(0, new TargetSpotted(this, player, Player, uiTree, "Is target Spotted?"));
         playerSpotted.addChild(1, dealWithPlayer);
 
         dealWithPlayer.addChild(0, playerInRange);
 
-        playerInRange.addChild(0, new checkDistance(this, Player, getData().attackDistance));
-        playerInRange.addChild(1, new Attack(this, Player));
+        playerInRange.addChild(0, new checkDistance(this, Player, getData().attackDistance, uiTree, "Check target distance"));
+        playerInRange.addChild(1, new Attack(this, Player, uiTree, "Attack!"));
 
         dealWithPlayer.addChild(1, doorBlock);
 
-        doorBlock.addChild(0, new checkRay(this, door, doors, getData().doorOpenRange));
-        doorBlock.addChild(1, new OpenDoor(this));
+        doorBlock.addChild(0, new checkRay(this, door, doors, getData().doorOpenRange, uiTree, "Check ray"));
+        doorBlock.addChild(1, new OpenDoor(this, uiTree, "Open door"));
 
-        dealWithPlayer.addChild(2, new Move(this, Player));
+        dealWithPlayer.addChild(2, new Move(this, Player, uiTree, "Move"));
 
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);
         treePosition = null;
+
+
+
+        foreach(Task node in uiTree)
+        {
+            Button nodeButton = Instantiate(uiNode);
+            RectTransform buttonTransform = nodeButton.GetComponent<RectTransform>();
+            nodeButton.GetComponentInChildren<Text>().text = node.name;
+            buttonTransform.SetParent(uiMetrics.transform);
+            buttonTransform.position = node.uiPos;
+
+            if (node.childTasks.Count > 0)
+            {
+                node.calculateChildUIPos();
+
+                foreach (Task child in node.childTasks)
+                {
+                    Image arrow = Instantiate(line, child.uiPos, Quaternion.identity);
+                    Vector2 difference = node.uiPos - child.uiPos;
+                    arrow.rectTransform.sizeDelta = new Vector2(difference.magnitude * 8, 100f);
+                    arrow.rectTransform.pivot = new Vector2(0, 0.5f);
+                    float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+                    arrow.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
+                    arrow.rectTransform.SetParent(uiMetrics.transform);
+                }
+            }
+        }
     }
+
 
     void executeTree()
     {
