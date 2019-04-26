@@ -81,6 +81,7 @@ public class behaviourTreeAI : baseAI
             nodeButton.GetComponentInChildren<Text>().text = node.name;
             buttonTransform.SetParent(uiMetrics.transform);
             buttonTransform.position = node.uiPos;
+            node.asignedNode = nodeButton;
 
             if (node.childTasks.Count > 0)
             {
@@ -103,16 +104,27 @@ public class behaviourTreeAI : baseAI
 
     void executeTree()
     {
-        if (root.currentState() == Task.taskState.NotSet)
-        {
-            root.reset();
-        }
-
         root.evaluateTask(treePosition);
     }
 
     private void Update()
     {
         executeTree();
+
+        foreach (Task node in uiTree)
+        {
+            if (node.isRunning())
+            {
+                var color = node.asignedNode.GetComponent<Button>().colors;
+                color.normalColor = Color.blue;
+                node.asignedNode.GetComponent<Button>().colors = color;
+            }
+            else
+            {
+                var color = node.asignedNode.GetComponent<Button>().colors;
+                color.normalColor = Color.grey;
+                node.asignedNode.GetComponent<Button>().colors = color;
+            }
+        }
     }
 }

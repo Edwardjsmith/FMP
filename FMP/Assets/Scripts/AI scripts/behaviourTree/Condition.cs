@@ -18,6 +18,7 @@ public class Condition : Task
 
     public override taskState evaluateTask(TextMesh currentComposite)
     {
+        reset();
         switch (checkCondition())
         {
             case taskState.Success:

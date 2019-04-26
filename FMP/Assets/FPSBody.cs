@@ -52,7 +52,7 @@ public class FPSBody : gameEntity
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    hit.collider.gameObject.SendMessage("OpenDoor");
+                    hit.collider.gameObject.SendMessage("OpenDoor", transform.position);
                 }
             }
         }

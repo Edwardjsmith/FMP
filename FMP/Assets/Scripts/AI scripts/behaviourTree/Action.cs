@@ -16,7 +16,7 @@ public class Action : Task
 
     public override taskState evaluateTask(TextMesh currentComposite)
     {
-        switch(performAction())
+        switch (performAction())
         {
             case taskState.Success:
                 state = taskState.Success;
@@ -88,7 +88,7 @@ public class OpenDoor : Action
         if (Vector3.Distance(bot.transform.position, bot.getData().doorTarget.transform.position) < bot.getData().doorOpenRange)
         {
             Debug.Log("Open!");
-            bot.getData().doorTarget.SendMessage("OpenDoor");
+            bot.getData().doorTarget.SendMessage("OpenDoor", bot.transform.position);
             bot.getData().doorTarget = null;
             Succeed();
             return state;
@@ -143,6 +143,7 @@ public class RandomMove : Action
 
     public override taskState performAction()
     {
+        
         Debug.Log("Random move" + " " + targetPos);
         Run();
         //bot.getAnim().Play("Walk");

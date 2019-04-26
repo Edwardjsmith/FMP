@@ -21,6 +21,8 @@ namespace BehaviourTree
 
         public string name;
         public Vector2 uiPos;
+        public Button asignedNode;
+
 
         public Task(baseAI bot, Vector3 pos, bool trueOrFalse, List<Task> tasks, string name, Vector2 uiPos)
         {
@@ -124,7 +126,7 @@ namespace BehaviourTree
 
         public virtual void reset()
         {
-            Run();
+            state = taskState.NotSet;
         }
     }
 
@@ -144,8 +146,10 @@ namespace BehaviourTree
         {
             //while (state == taskState.Running)
             {
+                reset();
                 foreach (Task t in childTasks)
                 {
+                    
                     t.evaluateTask(currentComposite);
                     switch (t.currentState())
                     {
@@ -157,10 +161,8 @@ namespace BehaviourTree
                         case taskState.Running:
                             state = taskState.Running;
                             return state;
-                            
-                            
                         default:
-                            continue;
+                            continue;    
                     }
                 }
                 state = taskState.Failure;
@@ -185,8 +187,10 @@ namespace BehaviourTree
         {
             //while(state != taskState.Failure)
             {
+                reset();
                 foreach (Task t in childTasks)
                 {
+                    t.reset();
                     t.evaluateTask(currentComposite);
                     switch (t.currentState())
                     {
