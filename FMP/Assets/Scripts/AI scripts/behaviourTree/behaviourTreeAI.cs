@@ -22,8 +22,6 @@ public class behaviourTreeAI : baseAI
     Sequence doorBlock;
 
     Point[] patrolPoints;
-    public TextMesh treePosition;
-
 
     public Canvas uiMetrics;
     public Button uiNode;
@@ -43,7 +41,7 @@ public class behaviourTreeAI : baseAI
         anim = GetComponentInChildren<Animator>();
         doors = GameObject.FindGameObjectsWithTag("door");
 
-        root = new Selector(this, "Root", uiTree, new Vector2(400, 500));
+        root = new Selector(this, "Root", uiTree, new Vector2(150, 600));
         playerSpotted = new Sequence(this, "Player spotted", uiTree);
         dealWithPlayer = new Selector(this, "Deal with player", uiTree);
         playerInRange = new Sequence(this, "Checking player range", uiTree);
@@ -70,14 +68,11 @@ public class behaviourTreeAI : baseAI
 
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);
-        treePosition = null;
-
-
 
         foreach(Task node in uiTree)
         {
             Button nodeButton = Instantiate(uiNode);
-            RectTransform buttonTransform = nodeButton.GetComponent<RectTransform>();
+            RectTransform buttonTransform = nodeButton.GetComponent<canvasCollision>().position;
             nodeButton.GetComponentInChildren<Text>().text = node.name;
             buttonTransform.SetParent(uiMetrics.transform);
             buttonTransform.position = node.uiPos;
@@ -91,7 +86,7 @@ public class behaviourTreeAI : baseAI
                 {
                     Image arrow = Instantiate(line, child.uiPos, Quaternion.identity);
                     Vector2 difference = node.uiPos - child.uiPos;
-                    arrow.rectTransform.sizeDelta = new Vector2(difference.magnitude * 8, 100f);
+                    arrow.rectTransform.sizeDelta = new Vector2(difference.magnitude * 6, 100f);
                     arrow.rectTransform.pivot = new Vector2(0, 0.5f);
                     float angle = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
                     arrow.rectTransform.rotation = Quaternion.Euler(0, 0, angle);
@@ -104,7 +99,8 @@ public class behaviourTreeAI : baseAI
 
     void executeTree()
     {
-        root.evaluateTask(treePosition);
+        root.reset();
+        root.evaluateTask();
     }
 
     private void Update()
@@ -113,10 +109,22 @@ public class behaviourTreeAI : baseAI
 
         foreach (Task node in uiTree)
         {
-            if (node.isRunning())
+            if (node.isSuccess())
+            {
+                var color = node.asignedNode.GetComponent<Button>().colors;
+                color.normalColor = Color.green;
+                node.asignedNode.GetComponent<Button>().colors = color;
+            }
+            else if(node.isRunning())
             {
                 var color = node.asignedNode.GetComponent<Button>().colors;
                 color.normalColor = Color.blue;
+                node.asignedNode.GetComponent<Button>().colors = color;
+            }
+            else if(node.isFailure())
+            {
+                var color = node.asignedNode.GetComponent<Button>().colors;
+                color.normalColor = Color.red;
                 node.asignedNode.GetComponent<Button>().colors = color;
             }
             else
@@ -125,6 +133,8 @@ public class behaviourTreeAI : baseAI
                 color.normalColor = Color.grey;
                 node.asignedNode.GetComponent<Button>().colors = color;
             }
+
+            node.reset();
         }
     }
 }

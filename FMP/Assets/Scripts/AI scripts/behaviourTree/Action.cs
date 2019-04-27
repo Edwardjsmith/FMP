@@ -14,7 +14,7 @@ public class Action : Task
         return state;
     }
 
-    public override taskState evaluateTask(TextMesh currentComposite)
+    public override taskState evaluateTask()
     {
         switch (performAction())
         {

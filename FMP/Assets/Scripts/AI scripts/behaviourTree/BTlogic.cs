@@ -114,12 +114,17 @@ namespace BehaviourTree
                 {
                     offsetX += 100;
                 }
-
+                    
                 childTasks[i].uiPos = new Vector2(uiPos.x + offsetX, uiPos.y + offsetY);
+
+                if (childTasks[i].name == "Check ray")
+                {
+                    childTasks[i].uiPos = new Vector2(childTasks[i].uiPos.x, childTasks[i].uiPos.y - 50);
+                }
             }
         }
 
-        public virtual taskState evaluateTask(TextMesh currentComposite)
+        public virtual taskState evaluateTask()
         {
             return state;
         }
@@ -142,15 +147,15 @@ namespace BehaviourTree
 
         }
 
-        public override taskState evaluateTask(TextMesh currentComposite)
+        public override taskState evaluateTask()
         {
             //while (state == taskState.Running)
             {
                 reset();
                 foreach (Task t in childTasks)
                 {
-                    
-                    t.evaluateTask(currentComposite);
+                    t.reset();
+                    t.evaluateTask();
                     switch (t.currentState())
                     {
                         case taskState.Failure:
@@ -183,7 +188,7 @@ namespace BehaviourTree
         {
         }
 
-        public override taskState evaluateTask(TextMesh currentComposite)
+        public override taskState evaluateTask()
         {
             //while(state != taskState.Failure)
             {
@@ -191,7 +196,7 @@ namespace BehaviourTree
                 foreach (Task t in childTasks)
                 {
                     t.reset();
-                    t.evaluateTask(currentComposite);
+                    t.evaluateTask();
                     switch (t.currentState())
                     {
                         case taskState.Failure:

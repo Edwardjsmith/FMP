@@ -16,7 +16,7 @@ public class Condition : Task
         return state;
     }
 
-    public override taskState evaluateTask(TextMesh currentComposite)
+    public override taskState evaluateTask()
     {
         reset();
         switch (checkCondition())
@@ -126,10 +126,18 @@ public class TargetSpotted : Condition
         {
             foreach (GameObject go in bot.getSenses().getTarget(layer))
             {
-                Succeed();
-                Debug.Log(go);
-                return state;
+                RaycastHit hitInfo;
+                if (Physics.Linecast(bot.transform.position, go.transform.position, out hitInfo))
+                {
+                    if (hitInfo.collider == go.GetComponent<Collider>())
+                    {
+                        Succeed();
+                        Debug.Log(go);
+                        return state;
+                    }
+                }
             }
+
             Fail();
             return state;
         }
