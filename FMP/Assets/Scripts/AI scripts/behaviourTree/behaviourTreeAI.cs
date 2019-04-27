@@ -72,7 +72,7 @@ public class behaviourTreeAI : baseAI
         foreach(Task node in uiTree)
         {
             Button nodeButton = Instantiate(uiNode);
-            RectTransform buttonTransform = nodeButton.GetComponent<canvasCollision>().position;
+            RectTransform buttonTransform = nodeButton.GetComponent<RectTransform>();
             nodeButton.GetComponentInChildren<Text>().text = node.name;
             buttonTransform.SetParent(uiMetrics.transform);
             buttonTransform.position = node.uiPos;
