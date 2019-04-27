@@ -38,7 +38,6 @@ public class behaviourTreeAI : baseAI
         base.Start();
         uiTree = new List<Task>();
         patrolPoints = FindObjectsOfType<Point>();
-        anim = GetComponentInChildren<Animator>();
         doors = GameObject.FindGameObjectsWithTag("door");
 
         root = new Selector(this, "Root", uiTree, new Vector2(150, 600));
@@ -73,6 +72,9 @@ public class behaviourTreeAI : baseAI
         {
             Button nodeButton = Instantiate(uiNode);
             RectTransform buttonTransform = nodeButton.GetComponent<RectTransform>();
+            buttonTransform.anchorMin = new Vector2(0, 1);
+            buttonTransform.anchorMax = new Vector2(0, 1);
+            buttonTransform.pivot = new Vector2(0.5F, 0.5F);
             nodeButton.GetComponentInChildren<Text>().text = node.name;
             buttonTransform.SetParent(uiMetrics.transform);
             buttonTransform.position = node.uiPos;
