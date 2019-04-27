@@ -69,7 +69,6 @@ public class weaponScript : MonoBehaviour
     {
         if (rateOfFire <= 0)
         {
-            Vector3 direction = Random.insideUnitCircle * scaleLimit;
             RaycastHit hitTarget;
             gunshot.Play();
             muzFLash.Play();

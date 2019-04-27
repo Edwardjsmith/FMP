@@ -7,7 +7,6 @@ public class playerScript : flockEntity
 
     Vector3 rotationTarget;
     Vector3 targetPos;
-    Vector3 awayTarget = Vector3.zero;
 
     bool turning = false;
     public bool avoidFloor = false;
@@ -48,11 +47,6 @@ public class playerScript : flockEntity
     public void setTurning(bool set)
     {
         turning = set;
-    }
-
-    public void setAwayTarget(Vector3 target)
-    {
-        awayTarget = target;
     }
 
     public void setAvoidFloor(bool set)

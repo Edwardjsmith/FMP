@@ -1492,6 +1492,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   Type: 0
+  rayLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!136 &874739057
 CapsuleCollider:
   m_ObjectHideFlags: 0

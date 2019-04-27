@@ -15,7 +15,7 @@ public class Pathfinding : MonoBehaviour
     public List<Vector3> targetPositions;
    
     public bool threadCreated = false;
-    testTacticalPlayerScript player;
+    tacticalAgent player;
     Vector3 playerPos;
 
     public bool createNewPath = true;
@@ -33,7 +33,7 @@ public class Pathfinding : MonoBehaviour
     {
         clear = new Color(0, 0, 0, 0);
         targetObj = GameObject.FindGameObjectsWithTag("point");
-        player = GetComponentInParent<testTacticalPlayerScript>();
+        player = GetComponentInParent<tacticalAgent>();
         playerPos = player.transform.position;
         targetPositions = new List<Vector3>();
 

@@ -2034,6 +2034,9 @@ MonoBehaviour:
   door:
     serializedVersion: 2
     m_Bits: 16384
+  uiMetrics: {fileID: 0}
+  uiNode: {fileID: 0}
+  line: {fileID: 0}
 --- !u!114 &114462579646042128
 MonoBehaviour:
   m_ObjectHideFlags: 1
