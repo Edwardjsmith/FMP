@@ -1,7 +1,6 @@
 ﻿
 using UnityEngine;
 using System.Collections.Generic;
-using System.Collections;
 using System.Threading;
 
 public class Pathfinding : MonoBehaviour
@@ -42,7 +41,7 @@ public class Pathfinding : MonoBehaviour
             targetPositions.Add(go.transform.position);
         }
 
-        plotPath();
+        plotTarget();
 
         red = new Color(Color.red.r, Color.red.g, Color.red.b, transparency);
         blue = new Color(Color.blue.r, Color.blue.g, Color.blue.b, transparency);
@@ -101,8 +100,8 @@ public class Pathfinding : MonoBehaviour
             Vector3 startPos = playerPos;
             Vector3 targetPos = target;
 
-            Node startNode = grid.nodeFromWorldPoint(startPos);
-            Node targetNode = grid.nodeFromWorldPoint(targetPos);
+            Node startNode = grid.getNodefromWorldPoint(startPos);
+            Node targetNode = grid.getNodefromWorldPoint(targetPos);
             //targetNode.walkable = true;
 
             List<Node> openSet = new List<Node>();
@@ -137,12 +136,12 @@ public class Pathfinding : MonoBehaviour
                         continue;
                     }
 
-                    int newMoveCostToNeighbour = currentNode.gCost + getDistance(currentNode, neighbour);
+                    int newMoveCostToNeighbour = currentNode.gCost + getDistanceToGoal(currentNode, neighbour);
 
                     if (newMoveCostToNeighbour < neighbour.gCost || !openSet.Contains(neighbour))
                     {
                         neighbour.gCost = newMoveCostToNeighbour;
-                        neighbour.hCost = getDistance(neighbour, targetNode);
+                        neighbour.hCost = getDistanceToGoal(neighbour, targetNode);
 
                         neighbour.parent = currentNode;
 
@@ -174,7 +173,7 @@ public class Pathfinding : MonoBehaviour
         player.canMove = true;
     }
 
-    int getDistance(Node a, Node b)
+    int getDistanceToGoal(Node a, Node b)
     {
         float distX = a.gridX - b.gridX;
         float distY = a.gridY - b.gridY;
@@ -182,14 +181,14 @@ public class Pathfinding : MonoBehaviour
         return (int)Mathf.Sqrt((distX * distX) + (distY * distY));
     }
 
-    public void plotPath()
+    public void plotTarget()
     {
         Vector3 newTarget;
         do
         {
             newTarget = targetPositions[Random.Range(0, targetPositions.Count)];
 
-        } while (!grid.nodeFromWorldPoint(newTarget).walkable || newTarget == target);
+        } while (!grid.getNodefromWorldPoint(newTarget).walkable || newTarget == target);
 
         target = newTarget;
     }

@@ -21,19 +21,8 @@ public class AlertState : SuperState
 
     public override void EnterState()
     {
-        if(agent.getTransitions().amHit)
-        {
-            agent.getTransitions().amHit = false;
-            currentState = States["FindCover"];
-            currentState.EnterState();
-        }
-        else
-        {
-            currentState = States["Player detected"];
-            currentState.EnterState();
-        }
-
-        //agent.getData().speed = agent.getData().walkSpeed;
+        currentState = States["FindCover"];
+        currentState.EnterState();
     }
     public override void Update()
     {

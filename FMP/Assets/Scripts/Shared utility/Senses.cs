@@ -152,7 +152,7 @@ public class Senses : MonoBehaviour
             float dist = Vector3.Distance(t.transform.position, currentPos);
             float enemyDist = Vector3.Distance(t.transform.position, agent.getData().enemyTarget.transform.position);
 
-            if (dist < minDist && enemyDist < currentDist)
+            if (dist < minDist && dist > agent.getData().safeDistance)
             {
                 tMin = t;
                 minDist = dist;
@@ -164,7 +164,7 @@ public class Senses : MonoBehaviour
 
     public void getCoverFlank(Vector3 position)
     {
-        agent.getData().coverTarget = GetFlankSuitableCover(agent.getSenses().getTarget(cover), position).transform.position;
+        agent.getData().coverTarget = GetFlankSuitableCover(agent.getData().getCover(), position).transform.position;
 
         Vector3 targetDir = agent.getData().enemyTarget.transform.position - agent.getData().coverTarget;
 

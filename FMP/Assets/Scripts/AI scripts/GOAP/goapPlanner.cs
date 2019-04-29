@@ -91,20 +91,20 @@ public class goapPlanner
                 }
             }
 
-            goapNode neighbour = getNext(agent, actions);
+            goapNode next = getNext(agent, actions);
             {
-                if (closedSet.Contains(neighbour))
+                if (closedSet.Contains(next))
                 {
                     continue;
                 }
 
                 int newCost = currentNode.runningCost() + 1;
 
-                if (!openSet.Contains(neighbour))
+                if (!openSet.Contains(next))
                 {
-                    neighbour.setCost(newCost);
-                    currentNode.parent = neighbour;
-                    openSet.Add(neighbour);
+                    next.setCost(newCost);
+                    currentNode.parent = next;
+                    openSet.Add(next);
                 }
             }
         }

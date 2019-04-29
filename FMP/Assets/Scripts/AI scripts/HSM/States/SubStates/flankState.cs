@@ -1,5 +1,4 @@
 ﻿
-using UnityEngine;
 
 public class flankState : State<HSMAgent>
 {
@@ -20,7 +19,7 @@ public class flankState : State<HSMAgent>
     public override void EnterState()
     {
         agent.getAnim().SetBool("transitionToCrouch", false);
-        agent.getSenses().getCoverFlank(agent.transform.position);
+        agent.getSenses().getCoverFlank(agent.getData().enemyTarget.transform.position);
     }
 
     public override void ExitState()
@@ -35,5 +34,7 @@ public class flankState : State<HSMAgent>
             agent.getTransitions().covered = true;
             agent.getAnim().SetBool("transitionToCrouch", true);
         }
+
+
     }
 }

@@ -73,6 +73,11 @@ public class flockController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        applyFlocking();
+    }
+
+    void applyFlocking()
+    {
         GameObject lastObj = null;
         averageSpeed = 0;
         averagePos = Vector3.zero;
@@ -87,7 +92,7 @@ public class flockController : MonoBehaviour
             lastObj = go;
         }
 
-        
+
         averagePos = averagePos / (flockAgents.Length - 1);
         averageSpeed = averageSpeed / (flockAgents.Length - 1);
         seperation = seperation / (flockAgents.Length - 1);

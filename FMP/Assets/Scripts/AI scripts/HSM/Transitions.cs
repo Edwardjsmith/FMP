@@ -8,8 +8,6 @@ public class Transitions : MonoBehaviour
 
     public bool amHit = false;
     public bool covered = false;
-
-    float coverTimer = 1.5f;
     HSMAgent agent;
 
     private void Start()
@@ -33,21 +31,7 @@ public class Transitions : MonoBehaviour
 
     public bool requireCover()
     {
-        if(isHit())
-        {
-            return true;
-        }
-        else
-        {
-            if(coverTimer <= 0)
-            {
-                coverTimer = 1.5f;
-                return true;
-            }
-            coverTimer -= Time.deltaTime;
-        }
-
-        return false;
+        return getEnemyTargetFound();
     }
 
     public bool isHit()

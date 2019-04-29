@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-public class playerScript : flockEntity
+public class flockPlayer : flockEntity
 {
     Animator anim;
 

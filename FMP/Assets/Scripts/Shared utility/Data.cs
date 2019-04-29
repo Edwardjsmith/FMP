@@ -14,10 +14,12 @@ public class Data : MonoBehaviour
     public float speed;
     public float attackDistance;
     public float doorOpenRange;
+    public float hearingRadius;
 
     public float safeDistance;
 
     public GameObject enemyTarget;
+
     public Vector3 coverTarget;
 
     public GameObject doorTarget;

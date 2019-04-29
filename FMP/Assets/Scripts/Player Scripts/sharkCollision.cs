@@ -2,7 +2,7 @@
 
 public class sharkCollision : MonoBehaviour {
 
-    playerScript player;
+    flockPlayer player;
     public LayerMask ground;
 
     Vector3 fHit;
@@ -12,10 +12,15 @@ public class sharkCollision : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        player = transform.parent.GetComponent<playerScript>();
+        player = transform.parent.GetComponent<flockPlayer>();
 	}
 
     private void Update()
+    {
+        checkFloor();
+    }
+
+    void checkFloor()
     {
         RaycastHit hit;
         if (Physics.Raycast(player.transform.position + transform.forward, -transform.up, out hit, ground))

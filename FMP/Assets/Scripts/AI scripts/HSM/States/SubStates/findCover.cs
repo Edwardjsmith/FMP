@@ -14,6 +14,7 @@ public class findCover : State<HSMAgent>
 
     public override void EnterState()
     {
+        agent.getTransitions().amHit = false;
         agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getSenses().getCover();
     }

@@ -95,6 +95,12 @@ public class fireFromCover : State<HSMAgent>
                 attack = true;
             }
         }
+
+        if (agent.getData().health <= 0)
+        {
+            flank = true;
+            agent.getData().health = 3;
+        }
     }
 
 }

@@ -40,7 +40,7 @@ public class Grid : MonoBehaviour
             return gridSizeX * gridSizeY;
         }
     }
-    public Node nodeFromWorldPoint(Vector3 worldPos)
+    public Node getNodefromWorldPoint(Vector3 worldPos)
     {
         float percentX = (worldPos.x - xPos) / gridWorldSize.x + 0.5f - (nodeRadius / gridWorldSize.x);
         float percentY = (worldPos.z - zPos) / gridWorldSize.y + 0.5f - (nodeRadius / gridWorldSize.y);
@@ -52,7 +52,6 @@ public class Grid : MonoBehaviour
         int y = Mathf.RoundToInt((gridSizeY - 1) * percentY);
 
         return worldGrid[x, y];
-
     }
 
     public List<Node> getNeighbours(Node n)
@@ -81,7 +80,7 @@ public class Grid : MonoBehaviour
         return neighbours;
     }
 
-    void calculateNodeFCost()
+    void calculateNodeTacticalCost()
     {
         foreach (Node n in worldGrid)
         {
@@ -110,7 +109,7 @@ public class Grid : MonoBehaviour
 
     private void Update()
     {
-        calculateNodeFCost();
+        calculateNodeTacticalCost();
     }
     void createGrid()
     {

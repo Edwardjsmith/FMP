@@ -4,7 +4,7 @@ using BehaviourTree;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class behaviourTreeAI : baseAI
+public class behaviourTreeAgent : baseAI
 {
     
     public GameObject Player;
@@ -27,11 +27,7 @@ public class behaviourTreeAI : baseAI
     public Button uiNode;
     public Image line;
 
-
     List<Task> uiTree;
- 
-   
-
     float childOffsetX, childOffsetY;
     public override void Start()
     {

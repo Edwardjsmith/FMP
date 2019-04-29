@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 public class agentActions : MonoBehaviour
@@ -87,5 +85,4 @@ public class agentActions : MonoBehaviour
     {
         return moveTo(agent.getData().coverTarget);
     }
-
 }

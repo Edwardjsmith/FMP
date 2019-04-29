@@ -15,11 +15,6 @@ public class IdleState : SuperState
         transitionToAlertEnemySpotted.targetState = "Alert";
         transitions.Add(transitionToAlertEnemySpotted);
 
-        Transition transitionToAlertHit = new Transition();
-        transitionToAlertHit.Condition = agent.getTransitions().isHit;
-        transitionToAlertHit.targetState = "Alert";
-        transitions.Add(transitionToAlertHit);
-
         initialState = States["Patrol"];
     
     }

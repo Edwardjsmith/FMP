@@ -18,7 +18,6 @@ public class Condition : Task
 
     public override taskState evaluateTask()
     {
-        reset();
         switch (checkCondition())
         {
             case taskState.Success:

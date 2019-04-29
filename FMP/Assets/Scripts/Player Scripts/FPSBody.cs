@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class FPSBody : gameEntity
 {
+    public delegate void SoundTrigger(Vector3 playerPos);
+    public static event SoundTrigger playerSound;
+
     public float movementSpeed = 10;
     CharacterController controller;
 
@@ -65,6 +68,8 @@ public class FPSBody : gameEntity
             {
                 getAnim().SetBool("transitionToShooting", true);
                 GetWeapon().Fire();
+                playerSound(transform.position);
+                
             }
             else if (GetWeapon().ammo <= 0)
             {

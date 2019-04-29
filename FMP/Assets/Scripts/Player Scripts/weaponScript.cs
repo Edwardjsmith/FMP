@@ -40,10 +40,10 @@ public class weaponScript : MonoBehaviour
         RaycastHit hitTarget;
         if (Physics.Raycast(parent.transform.position, parent.transform.forward, out hitTarget))
         {
-        if (crosshair != null)
-        {
-            crosshair.position = parentCam.WorldToScreenPoint(hitTarget.point);
-        }
+            if (crosshair != null)
+            {
+                crosshair.position = parentCam.WorldToScreenPoint(hitTarget.point);
+            }
             enemyInSight = hitTarget.collider.name == "Player" ? true : false;
         }
 	}

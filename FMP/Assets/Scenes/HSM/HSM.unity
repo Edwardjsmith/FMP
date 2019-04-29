@@ -1672,6 +1672,21 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e0d97982dafed6b409594e14105df8c2, type: 2}
+    - target: {fileID: 114181408544748828, guid: 2356dc5d0607f6648aa0c88a8339bb0a,
+        type: 2}
+      propertyPath: hearingRadius
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114181408544748828, guid: 2356dc5d0607f6648aa0c88a8339bb0a,
+        type: 2}
+      propertyPath: safeDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114181408544748828, guid: 2356dc5d0607f6648aa0c88a8339bb0a,
+        type: 2}
+      propertyPath: health
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2356dc5d0607f6648aa0c88a8339bb0a, type: 2}
   m_IsPrefabParent: 0

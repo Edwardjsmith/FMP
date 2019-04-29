@@ -6,6 +6,9 @@ public class baseAI : gameEntity {
     Senses senses;
     Data data;
     protected Animator anim;
+
+    
+
     // Use this for initialization
     public override void Start ()
     {
@@ -29,4 +32,7 @@ public class baseAI : gameEntity {
     {
         return data;
     }
+
 }
+
+

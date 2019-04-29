@@ -149,31 +149,25 @@ namespace BehaviourTree
 
         public override taskState evaluateTask()
         {
-            //while (state == taskState.Running)
+            foreach (Task t in childTasks)
             {
-                reset();
-                foreach (Task t in childTasks)
+                t.evaluateTask();
+                switch (t.currentState())
                 {
-                    t.reset();
-                    t.evaluateTask();
-                    switch (t.currentState())
-                    {
-                        case taskState.Failure:
-                            continue;
-                        case taskState.Success:
-                            state = taskState.Success;
-                            return state;
-                        case taskState.Running:
-                            state = taskState.Running;
-                            return state;
-                        default:
-                            continue;    
-                    }
+                    case taskState.Failure:
+                        continue;
+                    case taskState.Success:
+                        state = taskState.Success;
+                        return state;
+                    case taskState.Running:
+                        state = taskState.Running;
+                        return state;
+                    default:
+                        continue;
                 }
-                state = taskState.Failure;
-                return state;
             }
-            
+            state = taskState.Failure;
+            return state;
         }
     }
 
@@ -190,36 +184,32 @@ namespace BehaviourTree
 
         public override taskState evaluateTask()
         {
-            //while(state != taskState.Failure)
+            foreach (Task t in childTasks)
             {
-                reset();
-                foreach (Task t in childTasks)
+                t.evaluateTask();
+                switch (t.currentState())
                 {
-                    t.reset();
-                    t.evaluateTask();
-                    switch (t.currentState())
-                    {
-                        case taskState.Failure:
-                            Fail();
-                            return state;
+                    case taskState.Failure:
+                        Fail();
+                        return state;
 
-                        case taskState.Success:
-                            continue;
+                    case taskState.Success:
+                        continue;
 
-                        case taskState.Running:
-                            childRunning = true;
-                            continue;
+                    case taskState.Running:
+                        childRunning = true;
+                        continue;
 
-                        default:
-                            Succeed();
-                            return state;
+                    default:
+                        Succeed();
+                        return state;
 
-                    }
                 }
-
-                state = childRunning ? taskState.Running : taskState.Success;
-                return state;
             }
+
+            state = childRunning ? taskState.Running : taskState.Success;
+            return state;
+
         }
     }
 }

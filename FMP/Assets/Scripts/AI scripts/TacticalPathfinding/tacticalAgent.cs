@@ -64,7 +64,7 @@ public class tacticalAgent : MonoBehaviour
         {
             canMove = false;
             currentPathPoint = 0;
-            pathFinding.plotPath();
+            pathFinding.plotTarget();
            
         }
     }

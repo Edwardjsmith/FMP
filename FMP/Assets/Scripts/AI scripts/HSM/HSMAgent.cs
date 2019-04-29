@@ -15,8 +15,8 @@ public class HSMAgent : baseAI
     // Use this for initialization
     public override void Start ()
     {
+        FPSBody.playerSound += heardPlayer;
         base.Start();
-        anim = GetComponentInChildren<Animator>();
         stateTransitions = GetComponent<Transitions>();
         hsm = new HSM(this);
 	}
@@ -54,6 +54,15 @@ public class HSMAgent : baseAI
     {
         getTransitions().amHit = true;
         getTransitions().enemyTargetFound = true;
+        getData().health -= 1;
+    }
+
+    void heardPlayer(Vector3 pos)
+    {
+        if (Vector3.Distance(transform.position, pos) < getData().hearingRadius)
+        {
+            getTransitions().enemyTargetFound = true;
+        }
     }
 
 }

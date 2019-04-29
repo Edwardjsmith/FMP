@@ -2,7 +2,7 @@
 
 public class FPSCam : MonoBehaviour
 {
-    float mouseSensitivity = 100.0f;
+    float sensitivity = 100.0f;
     float xAxisClamp = 0;
     Transform playerBody;
 
@@ -23,8 +23,8 @@ public class FPSCam : MonoBehaviour
 
     void camRotation()
     {
-        float mouseX = -Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-        float mouseY = -Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseX = -Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+        float mouseY = -Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
         xAxisClamp += mouseY;
 

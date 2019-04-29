@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class flockBehaviour : flockEntity
 {
@@ -10,7 +8,7 @@ public class flockBehaviour : flockEntity
     Animator anim;
     public flockController controller;
     Vector3 rotationTarget;
-    Vector3 averagePos = Vector3.zero;
+    Vector3 relativePos = Vector3.zero;
 
     public float seperationDistance = 16.0f;
     // Use this for initialization
@@ -48,10 +46,10 @@ public class flockBehaviour : flockEntity
 
     void flock()
     {
-        averagePos = controller.averagePos + (targetPos - transform.position);
+        relativePos = controller.averagePos + (targetPos - transform.position);
         speed = 3.0f;
 
-        Vector3 direction = (averagePos + controller.seperation) - transform.position;
+        Vector3 direction = (relativePos + controller.seperation) - transform.position;
 
         if (direction != Vector3.zero)
         {
