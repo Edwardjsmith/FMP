@@ -2,6 +2,11 @@
 
 public class flankState : State<HSMAgent>
 {
+    bool returnToCover()
+    {
+        return cover;
+    }
+    bool cover = false;
     public flankState(HSMAgent bot) : base(bot)
     {
         Transition transitionToFireFromCover = new Transition();
@@ -11,7 +16,7 @@ public class flankState : State<HSMAgent>
         transitions.Add(transitionToFireFromCover);
 
         Transition transitionToFindCover = new Transition();
-        transitionToFindCover.Condition = agent.getTransitions().isHit;
+        transitionToFindCover.Condition = returnToCover;
         transitionToFindCover.targetState = "FindCover";
 
         transitions.Add(transitionToFindCover);
@@ -25,6 +30,7 @@ public class flankState : State<HSMAgent>
     public override void ExitState()
     {
         agent.getTransitions().covered = false;
+        cover = false;
     }
 
     public override void Update()
@@ -33,6 +39,14 @@ public class flankState : State<HSMAgent>
         {
             agent.getTransitions().covered = true;
             agent.getAnim().SetBool("transitionToCrouch", true);
+        }
+        else
+        {
+            if (agent.getData().health <= 0)
+            {
+                cover = true;
+                agent.getData().health = 3;
+            }
         }
 
 
