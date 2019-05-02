@@ -19,7 +19,6 @@ public class goapAgent : baseAI
     public HashSet<KeyValuePair<string, bool>> hasToolState;
     public HashSet<KeyValuePair<string, bool>> noToolState;
 
-
     public GameObject tool;
     // Use this for initialization
     public override void Start () 
@@ -79,4 +78,5 @@ public class goapAgent : baseAI
     {
         return goalstate;
     }
+
 }

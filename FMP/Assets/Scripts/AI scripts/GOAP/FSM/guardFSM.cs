@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 public class otherFSM
@@ -43,22 +43,22 @@ public class otherFSM
 
 public class otherIdle : State<stateMachineAI>
 {
-    bool transitionToAttack()
+    bool transitionToMove()
     {
-        return agent.target != null;
+        return agent.getTarget() != null;
     }
     public otherIdle(stateMachineAI bot) : base(bot)
     {
         transitions = new List<Transition>();
         Transition transitionToAction = new Transition();
 
-        transitionToAction.Condition = transitionToAttack;
-        transitionToAction.targetState = "Action";
+        transitionToAction.Condition = transitionToMove;
+        transitionToAction.targetState = "Move";
         transitions.Add(transitionToAction);
     }
     public override void EnterState()
     {
-        
+        agent.getAnim().Play("Idle");
     }
 
     public override void ExitState()
@@ -76,12 +76,19 @@ public class otherMove : State<stateMachineAI>
 {
     bool checkTargetNull()
     {
-        return agent.target == null;
+        return agent.getTarget() == null;
     }
 
     bool checkTargetArrive()
     {
-        return Vector3.Distance(agent.transform.position, agent.target.transform.position) < agent.getData().attackDistance;
+        if (agent.getTarget() != null)
+        {
+            return Vector3.Distance(agent.transform.position, agent.getTarget().transform.position) < agent.getData().attackDistance;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public otherMove(stateMachineAI bot) : base(bot)
@@ -112,7 +119,7 @@ public class otherMove : State<stateMachineAI>
 
     public override void Update()
     {
-        agent.getActions().moveTo(agent.target);
+        agent.getActions().moveTo(agent.getTarget());
     }
 }
 
@@ -120,12 +127,19 @@ public class otherAttack : State<stateMachineAI>
 {
     bool inRange()
     {
-        return Vector3.Distance(agent.transform.position, agent.target.transform.position) > agent.getData().attackDistance;
+        if (agent.getTarget() != null)
+        {
+            return Vector3.Distance(agent.transform.position, agent.getTarget().transform.position) > agent.getData().attackDistance;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     bool checkTarget()
     {
-        return agent.target != null;
+        return agent.goToIdle;
     }
     public otherAttack(stateMachineAI bot) : base(bot)
     {
@@ -144,17 +158,18 @@ public class otherAttack : State<stateMachineAI>
     }
     public override void EnterState()
     {
-        
+        agent.getData().GetAgent().isStopped = true;
+        agent.getAnim().Play("Attack");
     }
 
     public override void ExitState()
     {
-
+        agent.getData().GetAgent().isStopped = false;
+        agent.goToIdle = false;
     }
 
     public override void Update()
     {
-        agent.getAnim().Play("Attack");
         agent.attack();
     }
 }

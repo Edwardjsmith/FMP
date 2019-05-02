@@ -7,10 +7,7 @@ public class monsterFSMAI : stateMachineAI
 	// Use this for initialization
 	public override void Start ()
     {
-        anim = GetComponentInChildren<Animator>();
-        target = null;
         base.Start();
-
     }
 
 	
@@ -27,16 +24,20 @@ public class monsterFSMAI : stateMachineAI
 
     public void die()
     {
-        target = null;
         gameObject.SetActive(false);
     }
 
     public override void idle()
     {
-        
+        setTarget(getSenses().getTarget(targetLayer)[0]);
+
+        if (getTarget() != null)
+        {
+            getActions().moveTo(getTarget());
+        }
     }
     public override void attack()
     {
-       
+        getAnim().Play("Attack");
     }
 }

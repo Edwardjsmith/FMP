@@ -2524,6 +2524,7 @@ GameObject:
   - component: {fileID: 114367532732241596}
   - component: {fileID: 114325861137827880}
   - component: {fileID: 114074795790716256}
+  - component: {fileID: 114580859013027674}
   - component: {fileID: 136636872861754336}
   m_Layer: 0
   m_Name: WoodCutter
@@ -4205,7 +4206,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1850035588545084}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0.5, z: -20}
+  m_LocalPosition: {x: -10.83, y: 0.5, z: -35.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4243483780545434}
@@ -10197,7 +10198,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCounter: 0
-  reloading: 0
+--- !u!114 &114580859013027674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1850035588545084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d1aec2a05cc5d40891c375c67e59a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  target: {fileID: 0}
+  inRange: 0
+  actionName: 
 --- !u!114 &114596433686691196
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10215,11 +10230,14 @@ MonoBehaviour:
   speed: 0
   attackDistance: 0
   doorOpenRange: 0
+  hearingRadius: 0
   safeDistance: 0
   enemyTarget: {fileID: 0}
-  coverTarget: {fileID: 0}
+  coverTarget: {x: 0, y: 0, z: 0}
   doorTarget: {fileID: 0}
   potentialTarget: {fileID: 0}
+  runSpeed: 4
+  walkSpeed: 2
 --- !u!114 &114869327018734900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10231,6 +10249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d841f706a2c8a242b34451744931aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!136 &136636872861754336
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 114844730757921068}
   - component: {fileID: 114836881390763304}
   - component: {fileID: 114778431192205004}
+  - component: {fileID: 114810605513060272}
   - component: {fileID: 136466323251009372}
   m_Layer: 0
   m_Name: Miner
@@ -6082,7 +6083,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1086359312310348}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 0.5, z: -14}
+  m_LocalPosition: {x: 1.48, y: 0.5, z: -13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4963364726932884}
@@ -13058,7 +13059,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireCounter: 0
-  reloading: 0
 --- !u!114 &114327964080825866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13107,6 +13107,21 @@ MonoBehaviour:
   target: {fileID: 0}
   inRange: 0
   actionName: Mine ore
+--- !u!114 &114810605513060272
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1086359312310348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6d1aec2a05cc5d40891c375c67e59a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cost: 0
+  target: {fileID: 0}
+  inRange: 0
+  actionName: 
 --- !u!114 &114832208493209876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13118,6 +13133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d841f706a2c8a242b34451744931aee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Type: 0
 --- !u!114 &114836881390763304
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13165,11 +13181,14 @@ MonoBehaviour:
   speed: 0
   attackDistance: 0
   doorOpenRange: 0
+  hearingRadius: 0
   safeDistance: 0
   enemyTarget: {fileID: 0}
-  coverTarget: {fileID: 0}
+  coverTarget: {x: 0, y: 0, z: 0}
   doorTarget: {fileID: 0}
   potentialTarget: {fileID: 0}
+  runSpeed: 4
+  walkSpeed: 2
 --- !u!136 &136466323251009372
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -1,14 +1,10 @@
-﻿using UnityEngine;
-
-public class completeTask : goapAction
+﻿
+public class runAway : goapAction
 {
-    public completeTask() : base()
+    runAway() : base()
     {
-        addPrecondition("hasWood", true);
-        addEffect("taskComplete", true);
-    }
-    private void Start()
-    {
+        addEffect("Safe", true);
+        addPrecondition("Safe", false);
     }
     public override bool checkTarget(goapAgent agent)
     {
@@ -19,8 +15,6 @@ public class completeTask : goapAction
     {
         if (inRange)
         {
-            
-            agent.setWorldState(agent.hasToolState);
             return true;
         }
         else
@@ -33,6 +27,5 @@ public class completeTask : goapAction
     {
         return executeAction(agent);
     }
-
 
 }

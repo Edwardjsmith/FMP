@@ -22,16 +22,16 @@ public class performAction : goapAction
     public override bool executeAction(goapAgent agent)
     {
         cutTime -= Time.deltaTime;
-        if (inRange)
-        {
+
             agent.getAnim().Play("Attack");
             if (cutTime <= 0)
             {
+                cutTime = 8.0f;
                 if (Random.Range(0, 3) < 1)
                 {
                     agent.tool.SetActive(false);
                 }
-                cutTime = 8.0f;
+                
                 return true;
             }
             else
@@ -39,11 +39,6 @@ public class performAction : goapAction
                 return false;
             }
         }
-        else
-        {
-            return false;
-        }
-    }
 
     public override bool taskComplete(goapAgent agent)
     {
