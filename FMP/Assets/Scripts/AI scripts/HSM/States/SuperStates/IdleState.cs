@@ -30,7 +30,7 @@ public class IdleState : SuperState
 
     public override void EnterState()
     {
-        agent.getData().sightRange = 50;
+        agent.getData().sightRange = 25;
         agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getData().speed = agent.getData().walkSpeed;
     }

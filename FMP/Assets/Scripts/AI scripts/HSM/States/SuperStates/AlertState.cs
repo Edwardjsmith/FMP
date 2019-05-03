@@ -9,7 +9,14 @@ public class AlertState : SuperState
 
     bool returnEnemyFound()
     {
-        return enemyFound;
+        if(enemyFound || agent.getTransitions().isHit())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public AlertState(HSMAgent agent) : base(agent)
@@ -35,7 +42,7 @@ public class AlertState : SuperState
 
     public override void EnterState()
     {
-        agent.getData().sightRange = 75;
+        agent.getData().sightRange = 35;
         currentState = initialState;
     }
     public override void Update()
@@ -44,11 +51,11 @@ public class AlertState : SuperState
 
         if (agent.getSenses().getTarget(agent.getSenses().otherAgents).Count > 0)
         {
-            var potentialTarget = agent.getSenses().GetClosestObj(agent.getSenses().getTarget(agent.getSenses().otherAgents));
+            GameObject potentialTarget = agent.getSenses().GetClosestObj(agent.getSenses().getTarget(agent.getSenses().otherAgents));
             RaycastHit hitInfo;
             if (Physics.Linecast(agent.transform.position, potentialTarget.transform.position, out hitInfo))
             {
-                if (hitInfo.collider == potentialTarget.GetComponent<Collider>())
+                if (hitInfo.collider.gameObject == potentialTarget)
                 {
                     enemyFound = true;
                     agent.getData().enemyTarget = potentialTarget;
