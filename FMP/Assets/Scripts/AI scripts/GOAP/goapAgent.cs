@@ -25,7 +25,6 @@ public class goapAgent : baseAI
     {
         base.Start();
         tool.SetActive(false);
-        anim = GetComponentInChildren<Animator>();
         attachedActions = GetComponents<goapAction>();
         avaliableActions = attachedActions.ToList();
 

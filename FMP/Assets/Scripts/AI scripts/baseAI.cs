@@ -5,9 +5,6 @@ public class baseAI : gameEntity {
     agentActions actions;
     Senses senses;
     Data data;
-    protected Animator anim;
-
-    
 
     // Use this for initialization
     public override void Start ()

@@ -15,7 +15,6 @@ public class HSM
 
         States.Add("Idle", new IdleState(agent));
         States.Add("Alert", new AlertState(agent));
-        States.Add("Low health", new LowHealthState(agent));
         States.Add("Player spotted", new PlayerSpottedState(agent));
 
         Agent = agent;

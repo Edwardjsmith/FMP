@@ -10,6 +10,8 @@ public class Transitions : MonoBehaviour
     public bool covered = false;
     HSMAgent agent;
 
+    public bool playerHeard = false;
+    public bool noTarget = false;
     private void Start()
     {
         agent = GetComponent<HSMAgent>();
@@ -49,12 +51,36 @@ public class Transitions : MonoBehaviour
 
     public bool enemyLost()
     {
-        if (!enemyTargetFound)
+        if (agent.getSenses().getTarget(agent.getSenses().otherAgents).Count == 0)
         {
+            agent.getData().alertPosition = agent.getData().enemyTarget.transform.position;
             return true;
         }
 
         return false;
+    }
+
+    public void heardPlayer(Vector3 pos)
+    {
+        if (Vector3.Distance(transform.position, pos) < agent.getData().hearingRadius)
+        {
+            agent.getData().alertPosition = pos;
+            playerHeard = true;
+        }
+        else
+        {
+            playerHeard = false;
+        }
+    }
+
+    public bool getPlayerHeard()
+    {
+        return playerHeard;
+    }
+
+    public bool noTargetFound()
+    {
+        return noTarget;
     }
 
 }

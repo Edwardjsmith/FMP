@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class spawnMonster : MonoBehaviour {
 
-    public delegate void workersRun();
-    public static event workersRun run;
+    /*public delegate void workersRun();
+    public static event workersRun run;*/
     public monsterFSMAI monster;
 
     private void Start()

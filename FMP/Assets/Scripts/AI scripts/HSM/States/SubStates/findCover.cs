@@ -17,6 +17,7 @@ public class findCover : State<HSMAgent>
         agent.getTransitions().amHit = false;
         agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getSenses().getCover();
+        agent.getTransitions().covered = false;
     }
 
     public override void ExitState()

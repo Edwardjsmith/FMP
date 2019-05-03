@@ -1,19 +1,28 @@
 ﻿
-using System.Collections.Generic;
-
+using UnityEngine;
 
 public class IdleState : SuperState
 {
+    bool enemyFound = false;
 
+    bool returnEnemyFound()
+    {
+        return enemyFound;
+    }
     public IdleState(HSMAgent agent) : base(agent)
     {
         States.Add("Patrol", new Patrol(agent));
         States.Add("Guard", new Guard(agent));
-        Transition transitionToAlertEnemySpotted = new Transition();
+        Transition transitionToAlert = new Transition();
 
-        transitionToAlertEnemySpotted.Condition = agent.getTransitions().getEnemyTargetFound;
-        transitionToAlertEnemySpotted.targetState = "Alert";
-        transitions.Add(transitionToAlertEnemySpotted);
+        transitionToAlert.Condition = agent.getTransitions().getPlayerHeard;
+        transitionToAlert.targetState = "Alert";
+        transitions.Add(transitionToAlert);
+
+        Transition transitionToPlayerSpotted = new Transition();
+        transitionToPlayerSpotted.Condition = returnEnemyFound;
+        transitionToPlayerSpotted.targetState = "Player spotted";
+        transitions.Add(transitionToPlayerSpotted);
 
         initialState = States["Patrol"];
     
@@ -21,6 +30,7 @@ public class IdleState : SuperState
 
     public override void EnterState()
     {
+        agent.getData().sightRange = 50;
         agent.getAnim().SetBool("transitionToCrouch", false);
         agent.getData().speed = agent.getData().walkSpeed;
     }
@@ -30,11 +40,23 @@ public class IdleState : SuperState
 
         if (agent.getSenses().getTarget(agent.getSenses().otherAgents).Count > 0)
         {
-            agent.getData().enemyTarget = agent.getSenses().GetClosestObj(agent.getSenses().getTarget(agent.getSenses().otherAgents));
+            var potentialTarget = agent.getSenses().GetClosestObj(agent.getSenses().getTarget(agent.getSenses().otherAgents));
+            RaycastHit hitInfo;
+            if (Physics.Linecast(agent.transform.position, potentialTarget.transform.position, out hitInfo))
+            {
+                if (hitInfo.collider == potentialTarget.GetComponent<Collider>())
+                {
+                    enemyFound = true;
+                    agent.getData().enemyTarget = potentialTarget;
+                }
+            }
         }
     }
     public override void ExitState()
     {
+        enemyFound = false;
+        agent.getTransitions().playerHeard = false;
+        currentState.ExitState();
     }
 
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿
 public class SuperState : State<HSMAgent>
 {
     protected State<HSMAgent> initialState = null;
@@ -10,7 +7,6 @@ public class SuperState : State<HSMAgent>
     public SuperState(HSMAgent agent) : base(agent)
     {
         stateLevel = 0;
-        //initialState = Patrol.Instance(agent);
     }
 
     public string getCurrentSubState()

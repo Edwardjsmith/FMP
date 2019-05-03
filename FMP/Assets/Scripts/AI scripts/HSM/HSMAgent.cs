@@ -15,10 +15,10 @@ public class HSMAgent : baseAI
     // Use this for initialization
     public override void Start ()
     {
-        FPSBody.playerSound += heardPlayer;
         base.Start();
         stateTransitions = GetComponent<Transitions>();
         hsm = new HSM(this);
+        FPSBody.playerSound += stateTransitions.heardPlayer;
 	}
 	
 	// Update is called once per frame
@@ -27,8 +27,6 @@ public class HSMAgent : baseAI
         hsm.Update();
         subState.text = hsm.currentSubState().ToString();
         superState.text = hsm.currentSuperState().ToString();
-
-        
 	}
     private void LateUpdate()
     {
@@ -57,12 +55,6 @@ public class HSMAgent : baseAI
         getData().health -= 1;
     }
 
-    void heardPlayer(Vector3 pos)
-    {
-        if (Vector3.Distance(transform.position, pos) < getData().hearingRadius)
-        {
-            getTransitions().enemyTargetFound = true;
-        }
-    }
+  
 
 }

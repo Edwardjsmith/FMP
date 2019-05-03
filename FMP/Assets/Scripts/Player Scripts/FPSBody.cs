@@ -36,6 +36,7 @@ public class FPSBody : gameEntity
 
         if (Type == type.FPS)
         {
+            getAnim().SetBool("transitionToShooting", true);
             getAnim().SetFloat("velX", horizInput);
             getAnim().SetFloat("velY", vertInput);
             FPSInput();
@@ -64,16 +65,11 @@ public class FPSBody : gameEntity
     {
         if (GetWeapon() != null)
         {
-            if (Input.GetMouseButton(0) && GetWeapon().ammo > 0 && !GetWeapon().reloading)
+            if (Input.GetMouseButton(0))
             {
                 getAnim().SetBool("transitionToShooting", true);
                 GetWeapon().Fire();
                 playerSound(transform.position);
-                
-            }
-            else if (GetWeapon().ammo <= 0)
-            {
-                GetWeapon().reload(this);
             }
         }
     }

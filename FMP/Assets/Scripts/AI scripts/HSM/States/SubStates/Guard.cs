@@ -13,7 +13,6 @@ public class Guard : State<HSMAgent>
         transitionToPatrol.Condition = agent.getTransitions().TransitionToGuard;
         transitionToPatrol.targetState = "Patrol";
         transitions.Add(transitionToPatrol);
-
     }
 
 

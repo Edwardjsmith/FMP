@@ -5,6 +5,7 @@ public class FPSCam : MonoBehaviour
     float sensitivity = 100.0f;
     float xAxisClamp = 0;
     Transform playerBody;
+    bool bodyAttached = false;
 
     private void Awake()
     {
@@ -13,7 +14,11 @@ public class FPSCam : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
-        playerBody = transform.parent;
+        if (transform.parent != null)
+        {
+            playerBody = transform.parent;
+            bodyAttached = true;
+        }
     }
 
     private void Update()
@@ -42,7 +47,15 @@ public class FPSCam : MonoBehaviour
         }
 
         transform.Rotate(Vector3.left * mouseY);
-        playerBody.Rotate(Vector3.up * mouseX);
+
+        if (bodyAttached)
+        {
+            playerBody.Rotate(Vector3.up * mouseX);
+        }
+        else if(!bodyAttached)
+        {
+            transform.Rotate(Vector3.up * mouseX);
+        }
     }
 
     void ClampXAxis(float value)

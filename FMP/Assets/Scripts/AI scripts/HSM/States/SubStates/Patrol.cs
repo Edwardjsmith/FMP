@@ -24,7 +24,7 @@ public class Patrol : State<HSMAgent>
 
     public override void ExitState()
     {
-        agent.patrolTarget = null;
+        //agent.patrolTarget = null;
     }
 
     public override void Update()

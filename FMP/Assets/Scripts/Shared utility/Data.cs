@@ -21,6 +21,7 @@ public class Data : MonoBehaviour
     public GameObject enemyTarget;
 
     public Vector3 coverTarget;
+    public Vector3 alertPosition;
 
     public GameObject doorTarget;
 
