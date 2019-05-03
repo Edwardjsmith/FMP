@@ -38,6 +38,7 @@ public class flockController : MonoBehaviour
 
         flockAgents = new GameObject[flockPopulation];
 
+        //create flockers
         for(int i = 0; i < flockPopulation; i++)
         {
             Vector3 pos = new Vector3(Random.Range(transform.position.x - flockRange / 4, transform.position.x + flockRange / 4),
@@ -50,6 +51,7 @@ public class flockController : MonoBehaviour
 
         totalAgents = flockAgents.Concat(values.otherAI).ToArray();
 
+        //Set initial pos
         targetPos = new Vector3(Random.Range(-flockRange, flockRange),
                         Random.Range(-flockRange, flockRange),
                             Random.Range(-flockRange, flockRange));
@@ -58,7 +60,7 @@ public class flockController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        
+        //Change target after time elapses
         if (updateTimer <= 0 || Vector3.Distance(transform.position, targetPos) < 1)
         {
             targetPos = new Vector3(Random.Range(-flockRange, flockRange),
@@ -67,13 +69,17 @@ public class flockController : MonoBehaviour
             updateTimer = 10.0f;
         }
 
+        //Set position relative to first flocker
         transform.position = flockAgents[0].transform.position;
         updateTimer -= Time.deltaTime;
-	}
+
+        //Apply flocking
+        applyFlocking();
+    }
 
     private void FixedUpdate()
     {
-        applyFlocking();
+      
     }
 
     void applyFlocking()
@@ -83,6 +89,7 @@ public class flockController : MonoBehaviour
         averagePos = Vector3.zero;
         foreach (GameObject go in flockAgents)
         {
+            //Work out pos and speed of flock
             averagePos = (averagePos + go.transform.position) + (new Vector3((Random.value * 2) - 1, (Random.value * 2) - 1, (Random.value * 2) - 1) * Random.Range(1, 6));
             averageSpeed = averageSpeed + go.GetComponent<flockBehaviour>().speed;
             if (lastObj != null)
@@ -91,7 +98,6 @@ public class flockController : MonoBehaviour
             }
             lastObj = go;
         }
-
 
         averagePos = averagePos / (flockAgents.Length - 1);
         averageSpeed = averageSpeed / (flockAgents.Length - 1);

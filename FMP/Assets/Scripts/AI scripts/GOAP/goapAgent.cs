@@ -25,14 +25,17 @@ public class goapAgent : baseAI
     {
         base.Start();
         tool.SetActive(false);
+        //get attached actions
         attachedActions = GetComponents<goapAction>();
         avaliableActions = attachedActions.ToList();
 
+        //Extra states to allow for breakage of tool
         hasToolState = new HashSet<KeyValuePair<string, bool>>();
         hasToolState.Add(new KeyValuePair<string, bool>("hasAxe", true));
         noToolState = new HashSet<KeyValuePair<string, bool>>();
         noToolState.Add(new KeyValuePair<string, bool>("hasAxe", false));
 
+        //Set initial goal state
         goalstate = new HashSet<KeyValuePair<string, bool>>();
         goalstate.Add(new KeyValuePair<string, bool>("taskComplete", true));
         planner = new goapPlanner();

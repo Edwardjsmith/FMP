@@ -21,6 +21,7 @@ public class flockBehaviour : flockEntity
     // Update is called once per frame
     void Update()
     {
+        //Set target to controller target and apply roaming
         targetPos = controller.targetPos;
         anim.speed = speed / 3;
         roam();
@@ -28,14 +29,16 @@ public class flockBehaviour : flockEntity
 
     public void roam()
     {
+
         if (turning)
-        {
+        {   //Rotating away from target applied here
             transform.rotation = Quaternion.Slerp(transform.rotation,
                                                     Quaternion.LookRotation(rotationTarget),
                                                       rotationSpeed * Time.deltaTime);
         }
         else
         {
+            //Apply flocking at random intervals
             if (Random.Range(0, 5) < 1)
             {
                 flock();
@@ -46,9 +49,11 @@ public class flockBehaviour : flockEntity
 
     void flock()
     {
+        //get relative position to flock
         relativePos = controller.averagePos + (targetPos - transform.position);
         speed = 3.0f;
 
+        //Apply flocking
         Vector3 direction = (relativePos + controller.seperation) - transform.position;
 
         if (direction != Vector3.zero)
@@ -59,13 +64,12 @@ public class flockBehaviour : flockEntity
         }
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.tag != "flock")
         {
             rotationTarget = transform.position - other.gameObject.transform.position;
-            float scaredSpeed = speed * 2;
-            speed = scaredSpeed;
+            speed = 6.0f;
             rotationSpeed = 5;
             turning = true;
         }

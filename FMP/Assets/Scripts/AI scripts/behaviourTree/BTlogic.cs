@@ -102,7 +102,7 @@ namespace BehaviourTree
         {
             childTasks.Insert(index, task);
         }
-
+        //Calculate child ui pos relative to parent
         public void calculateChildUIPos()
         {
             for (int i = 0; i < childTasks.Count; i++)
@@ -123,7 +123,7 @@ namespace BehaviourTree
                 }
             }
         }
-
+        //Returns state of task when executed
         public virtual taskState evaluateTask()
         {
             return state;
@@ -147,6 +147,7 @@ namespace BehaviourTree
 
         }
 
+        //Loop through each child to find success
         public override taskState evaluateTask()
         {
             foreach (Task t in childTasks)
@@ -182,6 +183,7 @@ namespace BehaviourTree
         {
         }
 
+        //Run until failure of a child
         public override taskState evaluateTask()
         {
             foreach (Task t in childTasks)

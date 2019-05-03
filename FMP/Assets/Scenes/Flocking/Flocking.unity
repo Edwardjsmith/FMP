@@ -1574,6 +1574,24 @@ Transform:
   m_PrefabParentObject: {fileID: 4939994995494982, guid: 54359220e69febe4891aeadefd72eaae,
     type: 2}
   m_PrefabInternal: {fileID: 94010225}
+--- !u!1 &95427676 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000013873084852, guid: 13ef83dd7a123404aa2a4619e08c681c,
+    type: 2}
+  m_PrefabInternal: {fileID: 905888536}
+--- !u!136 &95427677
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 95427676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 10
+  m_Height: 40
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &98025471
 Prefab:
   m_ObjectHideFlags: 0
@@ -8984,7 +9002,7 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Convex: 1
-  m_CookingOptions: -1
+  m_CookingOptions: -2
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 9b39dfb57c1073947b03b146b2b7d4ca, type: 3}
 --- !u!4 &514314167 stripped
@@ -16367,7 +16385,8 @@ Prefab:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 65585146795192910, guid: 13ef83dd7a123404aa2a4619e08c681c, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 13ef83dd7a123404aa2a4619e08c681c, type: 2}
   m_IsPrefabParent: 0
 --- !u!20 &905888537 stripped

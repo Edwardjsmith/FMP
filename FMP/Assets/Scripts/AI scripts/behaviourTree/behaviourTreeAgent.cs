@@ -23,10 +23,10 @@ public class behaviourTreeAgent : baseAI
 
     Point[] patrolPoints;
 
+    //Metrics
     public Canvas uiMetrics;
     public Button uiNode;
     public Image line;
-
     List<Task> uiTree;
     float childOffsetX, childOffsetY;
     public override void Start()
@@ -64,6 +64,7 @@ public class behaviourTreeAgent : baseAI
         root.addChild(0, playerSpotted);
         root.addChild(1, randomMove);
 
+        //Build metrics
         foreach(Task node in uiTree)
         {
             Button nodeButton = Instantiate(uiNode);
@@ -97,6 +98,7 @@ public class behaviourTreeAgent : baseAI
 
     void executeTree()
     {
+        //Reset and execute tree
         root.reset();
         root.evaluateTask();
     }
@@ -105,6 +107,7 @@ public class behaviourTreeAgent : baseAI
     {
         executeTree();
 
+        //Change colour of UI based on state of each task
         foreach (Task node in uiTree)
         {
             if (node.isSuccess())

@@ -34,7 +34,7 @@ public class SuperState : State<HSMAgent>
 
         currentState.Update();
     }
-
+    //Check for transitions in subStates
     public void FixedUpdate()
     {
         foreach(Transition transition in currentState.transitions)

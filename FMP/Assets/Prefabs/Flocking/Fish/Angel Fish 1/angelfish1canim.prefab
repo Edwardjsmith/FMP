@@ -553,9 +553,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  goalPos: {x: 0, y: 0, z: 0}
+  targetPos: {x: 0, y: 0, z: 0}
   controller: {fileID: 114297513176988388, guid: 4df628a65d849054c8a7c96477a8e534,
     type: 2}
+  seperationDistance: 16
 --- !u!135 &135063489546845838
 SphereCollider:
   m_ObjectHideFlags: 1

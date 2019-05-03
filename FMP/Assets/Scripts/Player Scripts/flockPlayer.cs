@@ -28,6 +28,7 @@ public class flockPlayer : flockEntity
         transform.position += transform.forward * speed * Time.deltaTime;
         if (!turning && !avoidFloor)
         {
+            //While not avoiding boundaries, accept movement
             var y = Input.GetAxis("Horizontal") * turnSpeed * Time.deltaTime;
             var x = Input.GetAxis("Vertical") * turnSpeed * Time.deltaTime;
             var z = Input.GetAxis("Mouse X") * turnSpeed * Time.deltaTime;
@@ -36,6 +37,7 @@ public class flockPlayer : flockEntity
         }
         else if(turning)
         {
+            //Turn away from boundary
             Vector3 rotation = rotationTarget - transform.position;
 
             transform.rotation = Quaternion.Slerp(transform.rotation,

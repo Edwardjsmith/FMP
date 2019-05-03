@@ -11,6 +11,7 @@ public class FSM
 
     public FSM(goapAgent bot)
     {
+        //Set up states
         agent = bot;
         States = new SortedDictionary<string, State<goapAgent>>();
         States.Add("Idle", new FSMIdle(bot));
@@ -30,6 +31,7 @@ public class FSM
 
     public void LateUpdate()
     {
+        //Check transitions
         foreach (Transition transition in currentState.transitions) //Go through each transition to see if any have been triggered
         {
             if (transition.Condition.Invoke())
@@ -58,6 +60,7 @@ public class FSMIdle : State<goapAgent>
     }
     public override void EnterState()
     {
+        //if the worker has or hasn't got a tool, set the world state accordingly for the planner
         if(agent.hasTool())
         {
             agent.setWorldState(agent.hasToolState);
@@ -66,6 +69,7 @@ public class FSMIdle : State<goapAgent>
         {
             agent.setWorldState(agent.noToolState);
         }
+        //Get the plan on entry
 
         plan = agent.planner.plan(agent, agent.avaliableActions, agent.getWorldState(), agent.getGoal());
     }
@@ -81,6 +85,7 @@ public class FSMIdle : State<goapAgent>
     }
     public override void Update()
     {
+        //if plan successful, proceed
         if (plan != null)
         {
             Debug.Log("Plan created");
@@ -88,7 +93,7 @@ public class FSMIdle : State<goapAgent>
             hasPlan = true;
         }
         else
-        {
+        { //Else there's an issue
             Debug.Log("Plan could not be created. Try again");
         }
     }
@@ -182,12 +187,14 @@ public class FSMPerformAction : State<goapAgent>
     }
     public override void EnterState()
     {
+        //Check there is a plan
         if(agent.currentActions.Count == 0)
         {
             noPlan = true;
         }
         else
         {
+            //Set current action to first action in queue
             currentAction = agent.currentActions.Peek();
         }
     }
@@ -200,6 +207,7 @@ public class FSMPerformAction : State<goapAgent>
 
     public override void Update()
     {
+        //If the current task is complete, remove from queue and either set to next action or set transition out of state if no next action
         if(currentAction.taskComplete(agent))
         {
             agent.currentActions.Dequeue();

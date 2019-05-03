@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
-using UnityEngine;
 
 public class HSM
 {
@@ -11,6 +10,7 @@ public class HSM
 
     public HSM(HSMAgent agent)
     {
+        //create states
         States = new SortedDictionary<string, SuperState>();
 
         States.Add("Idle", new IdleState(agent));
@@ -34,6 +34,7 @@ public class HSM
 	// Update is called once per frame
 	public void Update ()
     {
+        //run current state
 		if(currentState != null)
         {
             currentState.Update();
@@ -42,6 +43,7 @@ public class HSM
 
     public void LateUpdate()
     {
+        //check for transitions in super states
         foreach (Transition transition in currentState.transitions) //Go through each transition to see if any have been triggered
         {
             if (transition.Condition.Invoke())
